@@ -45,7 +45,7 @@ export default function Home({ navigation }) {
     return (
         <View>
             <View style={styles.gallery}>{gallery}</View>
-            <Button title="Camera" onPress={() => navigation.navigate("Camera")}></Button>
+            <Button title="Test" onPress={() => navigation.navigate("Camera")}></Button>
 
         </View>
     )

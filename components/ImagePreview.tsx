@@ -8,44 +8,33 @@ import { isThisTypeNode } from 'typescript';
 const apiRoute = `http://${ip}:${port}/api/upload`
 
 export default function ImagePreview({ route }) {
-    const { uri } = route.params
+    const { photo } = route.params
 
     async function upload() {
-        console.log(uri);
+        console.log(photo.uri)
+        const data = new FormData()
+        data.append('file', photo)
 
-        const data = new FormData();
-        // data.append('name', 'avatar');
-        // data.append('fileData', {
-        //     uri: response.uri,
-        //     type: response.type,
-        //     name: response.fileName
-        // });
-
-        // const config = {
-        //     method: 'POST',
-        //     headers: {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'multipart/form-data',
-        //     },
-        //     body: fs.readFile(uri, 'utf8'),
-        // };
-
-        fs.readFile(uri, 'base64')
-            .then(file => {
-                console.log("client")
-                fetch(apiRoute, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ file: file })
-                });
-            })
+        fetch(apiRoute, {
+            method: 'POST',
+            headers: {
+                // Content-Type may need to be completely **omitted**
+                // or you may need something
+                "Content-Type": "application/JSON"
+            },
+            body: JSON.stringify({ data: photo })
+        }).then(
+            response => response.json() // if the response is a JSON object
+        ).then(
+            success => console.log(success) // Handle the success response object
+        ).catch(
+            error => console.log(error) // Handle the error response object
+        );
     }
 
     return (
         <View style={styles.container}>
-            <Image style={styles.container} source={{ uri: uri }} />
+            <Image style={styles.container} source={{ uri: photo.uri }} />
             <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
                 <TouchableOpacity onPress={upload} style={styles.button}>
                     <Text style={{ fontSize: 14 }}> Upload </Text>

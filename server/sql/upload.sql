@@ -1,0 +1,1 @@
+insert into weramble.images(uri, uploader, date) values (${uri}, ${uploader}, GETDATE());

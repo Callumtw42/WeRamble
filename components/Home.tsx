@@ -1,14 +1,28 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, Image, StyleSheet, Dimensions, Button } from "react-native";
+import { Text, View, Image, StyleSheet, Dimensions, Button, RefreshControl, TouchableOpacity } from "react-native";
+import { ScrollView } from 'react-native-gesture-handler';
 import { ip, port } from "../utils"
 
 const route = `http://${ip}:${port}/api/feed`
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+const wait = (timeout) => {
+    return new Promise(resolve => {
+        setTimeout(resolve, timeout);
+    });
+}
+
 export default function Home({ navigation }) {
 
     const [gallery, setGallery] = useState([])
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+
+        wait(2000).then(() => setRefreshing(false));
+    }, []);
 
     function displayImages(data) {
         const rows = [];
@@ -19,7 +33,7 @@ export default function Home({ navigation }) {
             for (let j = 0; j < 3; j++) {
                 let image = data[++i];
                 if (image) {
-                    images.push(<Image key={key++} source={{ uri: image.uri }} style={styles.thumbnail}  />)
+                    images.push(<Image key={key++} source={{ uri: image.uri }} style={styles.thumbnail} />)
                 }
             }
             let row =
@@ -40,13 +54,16 @@ export default function Home({ navigation }) {
             .catch(error => {
                 console.error(error)
             })
-    }, [])
+    }, [refreshing])
 
     return (
-        <View>
-            <View style={styles.gallery}>{gallery}</View>
-            <Button title="Camera" onPress={() => navigation.navigate("Camera")}></Button>
-
+        <View style={styles.container} >
+            <View style={styles.camButton}><Button title="Camera" onPress={() => navigation.navigate("Camera")}></Button></View>
+            <ScrollView style={styles.scrollView}
+                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+            >
+                <View style={styles.gallery}>{gallery}</View>
+            </ScrollView>
         </View>
     )
 }
@@ -57,6 +74,10 @@ const styles = StyleSheet.create({
         height: windowHeight / 6,
 
     },
+    container: {
+        display: 'flex',
+        flexDirection: 'column'
+    },
     galleryRow: {
         display: 'flex',
         flexDirection: 'row'
@@ -64,5 +85,10 @@ const styles = StyleSheet.create({
     gallery: {
         display: 'flex',
         flexDirection: 'column'
-    }
+    },
+    camButton: {
+    },
+    scrollView: {
+    },
+
 })

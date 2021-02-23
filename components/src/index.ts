@@ -37,7 +37,6 @@ const apolloServer = new ApolloServer({
 });
 
 const app = Express();
-app
 
 const RedisStore = connectRedis(session);
 

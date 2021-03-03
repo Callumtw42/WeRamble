@@ -4,6 +4,7 @@ import { ObjectType, Field, ID, Root } from "type-graphql";
 @ObjectType()
 @Entity()
 export class User extends BaseEntity {
+    
 
     @Field(() => ID)
     @PrimaryGeneratedColumn()
@@ -11,11 +12,7 @@ export class User extends BaseEntity {
 
     @Field()
     @Column()
-    firstName: string;
-
-    @Field()
-    @Column()
-    lastName: string;
+    userName: string;
 
     @Field()
     @Column("text", { unique: true })
@@ -24,7 +21,7 @@ export class User extends BaseEntity {
     @Field()
     name(@Root() parent: User): string {
         
-        return `${parent.firstName} ${parent.lastName}`;
+        return `${parent.userName}`;
     }
 
     @Column()
@@ -34,5 +31,4 @@ export class User extends BaseEntity {
     confirmed: boolean;
 
 }
-
 

@@ -7,11 +7,7 @@ export class input {
 
     @Field()
     @Length(1, 255) 
-    firstName: string;
-
-    @Field()
-    @Length(1, 255)
-    lastName: string;
+    userName: string;
 
     @Field()
     @IsEmail()
@@ -21,4 +17,3 @@ export class input {
     @Field()
     password: string;
 }
-

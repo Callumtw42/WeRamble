@@ -47,6 +47,11 @@ export default function Login({ navigation }) {
 
       return null;
     }
+
+    if(!user.confirmed) {
+
+      return null;
+    }
   }
 
   return (

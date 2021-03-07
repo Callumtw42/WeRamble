@@ -10,42 +10,70 @@ import {
 import {
     Colors,
 } from 'react-native/Libraries/NewAppScreen';
+import { Resolver, Query, Mutation, Arg, UseMiddleware } from "type-graphql";
+import bcrypt from "bcrypt.js";
+import {user} from "../../entity/user";
+import {input} from "../modules/register_check"
+import {auth} from "../middle/auth";
+import {log} from "../middle/log";
+import {sendEmail} from "../util/sendEmail";
+import {createUrl} from "../util/createUrl";
 
-export default function Registration({ navigation }) {
+@Resolver()
+export class RegisterResolver {
 
-    const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const route = `http://${ip}:${port}/api/register`
-//
-    function register() {
+    @UseMiddleware(auth, log)
+    @Mutation(() => user)
+    async register(@Arg("data")
+    {
+      email,
+      firstName,
+      lastName,
+      password
+    }: input): Promise<user> {
+     
+        const hashedPassword = await bcrypt.hash(password, 12);
 
-        fetch(`${route}/${email}/${username}/${password}`)
-            .then(res => res.text())
-            .catch(error => {
-                console.error(error)
-            })
-        navigation.navigate('Home');
-    }
+        const new_user = await user.create({
 
-    return (
+            firstName,
+            lastName,
+            email,
+            password: hashedPassword
+      }).save();
+
+
+      await sendEmail(email, await createUrl(user.id));
+     
+
+      return  (
         <View>
             <Text>E-Mail</Text>
-            <TextInput
-                onChangeText={(v) => setEmail(v)} />
-            <Text>Username</Text>
-            <TextInput
-                onChangeText={(v) => setUsername(v)} />
-            <Text>Pasword</Text>
-            <TextInput
-                onChangeText={(v) => setPassword(v)} />
             <Button
                 title="Register"
-                onPress={() => register()}
+                onPress={() => new_user}
             />
         </View>
-    )
+    );
+    } 
 }
+
+export default function change({ navigation }) {
+
+
+    return (
+
+        <View>
+            <Text>Move to login</Text>
+            <Button
+                title="login"
+                onPress={() => navigation.navigate('login')}
+            />
+        </View>
+    );
+    
+}
+
 
 const styles = StyleSheet.create({
     sectionTitle: {

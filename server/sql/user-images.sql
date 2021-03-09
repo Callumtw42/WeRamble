@@ -1,0 +1,1 @@
+select * from weramble.images where uploader = ${uploader};

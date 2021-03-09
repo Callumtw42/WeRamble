@@ -21,7 +21,8 @@ export default function Login({ navigation }) {
 
   function checkResponse(data) {
     if (data) {
-      navigation.navigate("Home");
+      global.username = username;
+      navigation.navigate("Feed");
     }
     else { setError("Invalid Details") }
   }
@@ -44,12 +45,12 @@ export default function Login({ navigation }) {
       <Text style={styles.sectionTitle} >Username</Text>
       <TextInput
         style={styles.input}
-        value={"demo"}
+        defaultValue={"demo"}
         onChangeText={(v) => setUsername(v)} />
       <Text style={styles.sectionTitle} > Password</Text>
       <TextInput
         style={styles.input}
-        value={"demo"}
+        defaultValue={"demo"}
         onChangeText={(v) => setPassword(v)} />
       <Text style={styles.smallText}
         onPress={() => navigation.navigate('Register')}

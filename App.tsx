@@ -17,8 +17,9 @@ import {
 import Login from "./components/Login"
 import Registration from "./components/Register"
 import Camera from "./components/Camera"
-import Home from "./components/Home"
+import Feed from "./components/Feed"
 import ImagePreview from "./components/ImagePreview"
+import Profile from "./components/Profile"
 
 
 const App: () => React$Node = () => {
@@ -30,9 +31,10 @@ const App: () => React$Node = () => {
           {/*Add screens below*/}
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Registration} />
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Feed" component={Feed} />
           <Stack.Screen name="Camera" component={Camera} />
           <Stack.Screen name="ImagePreview" component={ImagePreview} />
+          <Stack.Screen name="Profile" component={Profile} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

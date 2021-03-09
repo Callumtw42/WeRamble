@@ -49,6 +49,15 @@ app.get('/api/login/:username/:password', (req, res) => {
     queryDatabase(req, res, query);
 });
 
+//load user's images 
+app.get('/api/user-images/:uploader', (req, res) => {
+    const { uploader } = req.params;
+    console.log(req.params);
+    let query = readFile("sql/user-images.sql")
+        .replace("${uploader}", quote(uploader))
+    queryDatabase(req, res, query);
+});
+
 //upload
 app.post('/api/upload', jsonParser, (req, res) => {
     // console.log(req.body.file)

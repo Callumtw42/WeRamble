@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {ip, port} from "../utils"
+import { ip, port } from "../utils"
 import {
     Text,
     StyleSheet,
@@ -17,15 +17,15 @@ export default function Registration({ navigation }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const route = `http://${ip}:${port}/api/register`
-//
+    //
     function register() {
 
         fetch(`${route}/${email}/${username}/${password}`)
             .then(res => res.text())
             .catch(error => {
-                console.error(error)
+                console.error(error);
             })
-        navigation.navigate('Home');
+        navigation.navigate('Feed');
     }
 
     return (

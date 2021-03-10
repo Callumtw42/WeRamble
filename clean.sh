@@ -1,1 +1,1 @@
-./android/gradlew.bat clean
+./android/gradlew.bat

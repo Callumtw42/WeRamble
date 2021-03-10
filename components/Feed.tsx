@@ -12,11 +12,10 @@ const windowHeight = Dimensions.get('window').height;
 
 export default function Feed({ navigation }) {
 
-
     return (
         <View style={styles.container} >
             <MenuBar navigation={navigation} />
-            <ImageGrid route={route} />
+            <ImageGrid navigation={navigation} route={route} />
         </View>
     )
 }

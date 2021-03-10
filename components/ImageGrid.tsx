@@ -11,7 +11,7 @@ const wait = (timeout) => {
     });
 }
 
-export default function ImageGrid({ route }) {
+export default function ImageGrid({ route, navigation }) {
 
     const [gallery, setGallery] = useState([])
     const [refreshing, setRefreshing] = React.useState(false);
@@ -20,6 +20,11 @@ export default function ImageGrid({ route }) {
         setRefreshing(true);
         wait(2000).then(() => setRefreshing(false));
     }, []);
+
+    function viewImage(uri) {
+        console.log(uri)
+        navigation.navigate("ImageView", uri);
+    }
 
     function displayImages(data) {
         const rows = [];
@@ -30,7 +35,11 @@ export default function ImageGrid({ route }) {
             for (let j = 0; j < 3; j++) {
                 let image = data[++i];
                 if (image) {
-                    images.push(<Image key={key++} source={{ uri: image.uri }} style={styles.thumbnail} />)
+                    images.push(
+                        <TouchableOpacity key={key++} onPress={viewImage.bind(this, image.uri)}>
+                            <Image source={{ uri: image.uri }} style={styles.thumbnail} />
+                        </TouchableOpacity>
+                    )
                 }
             }
             let row =

@@ -11,7 +11,7 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
-  View, Text
+  View, Text, Dimensions
 } from 'react-native';
 
 import Login from "./components/Login"
@@ -21,7 +21,6 @@ import Feed from "./components/Feed"
 import ImagePreview from "./components/ImagePreview"
 import Profile from "./components/Profile"
 import ImageView from "./components/ImageView"
-
 
 const App: () => React$Node = () => {
   const Stack = createStackNavigator();

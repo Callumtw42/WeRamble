@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, Image, StyleSheet, Dimensions, Button, RefreshControl, TouchableOpacity } from "react-native";
+import { Text, View, Image, StyleSheet, Dimensions, Button, RefreshControl, TouchableOpacity} from "react-native";
 import { ScrollView } from 'react-native-gesture-handler';
 import { ip, port } from "../utils"
 

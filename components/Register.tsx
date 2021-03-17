@@ -67,7 +67,7 @@ export default function change({ navigation }) {
             <Text>Move to login</Text>
             <Button
                 title="login"
-                onPress={() => navigation.navigate('login')}
+                onPress={() => navigation.navigate('Login')}
             />
         </View>
     );

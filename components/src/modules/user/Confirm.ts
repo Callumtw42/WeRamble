@@ -5,7 +5,7 @@ import{User} from "../../entity/User";
 @Resolver()
 export class ConfirmUserResolver {
 
-    @Mutation(() => boolean) 
+    @Mutation(() => Boolean) 
     async confirmUser (@Arg("token") token: string): Promise<boolean> {
 
         const userId = await redis.get(token);

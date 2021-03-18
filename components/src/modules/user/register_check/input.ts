@@ -1,6 +1,6 @@
 import { Length, IsEmail } from "class-validator";
 import { Field, InputType } from "type-graphql";
-import { email_exist } from "./email_exist";
+import { email_exist } from "components/src/modules/user/register_check/email_exist";
 
 @InputType()
 export class input {

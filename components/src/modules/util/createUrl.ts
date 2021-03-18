@@ -1,6 +1,6 @@
 import { v4 } from "uuid";
 import { redis } from "../../redis";
-import { ip, port } from "../../../util"
+const { port, ip } = require("../utils.js")
 
 export const createUrl = async (userId: number) => {
 

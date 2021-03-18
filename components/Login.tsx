@@ -12,8 +12,9 @@ import {
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
-import bcrypt from "bcrypt.js";
-import {user} from "../../entity/user";
+import bcrypt from "bcryptjs";
+import {User} from "components/src/entity/User.ts";
+
 
 
 export default function Login({ navigation }) {
@@ -39,18 +40,19 @@ export default function Login({ navigation }) {
         .catch(error => {
           console.error(error)
         })
-    }
 
-    const valid = bcrypt.compare(password, user.password);
+        const user = User.findOne({ where: { username }});
+        const valid = bcrypt.compare(password, user.password);
+        
+        if(!valid) {
 
-    if(!valid) {
-
-      return null;
-    }
-
-    if(!user.confirmed) {
-
-      return null;
+          return null;
+        }
+    
+        if(!user.confirmed) {
+    
+          return null;
+        }
     }
   }
 

@@ -1,28 +1,32 @@
-import nodemailer from "nodemailer";
+const nodemailer = require('nodemailer');
+const { port, ip } = require("../utils.js")
 
-export async function sendEmail(email: string, url: string) {
+var transporter = nodemailer.createTransport('SMTP', {
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: true, // use SSL
+    auth: {
+        user: 'werambleservices@gmail.com',
+        pass: '0089fxcy?'
+    }
+});
 
-    const account = await nodemailer.createTestAccount();
+var mailOptions = {
+    from: 'werambleservices@gmail.com',
+    to: 'fraser.squash@gmail.com',
+    subject: 'Sending Email using Node.js',
+    text: 'That was easy!'
+};
+module.exports = {
+    sendVerificationEmail: () => {
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
 
-    const transporter = nodemailer.transporter({
-
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: true, // use SSL
-        auth: {
-         user: 'account.user',
-         pass: 'account.pass'
-        }   
-    });
-
-    const mailOptions = {
-
-        from: '"Fred Foo 👻" <foo@example.com>', // sender address
-        to: email, // list of receivers
-        subject: "Hello ✔", // Subject line
-        text: "Hello world?", // plain text body
-        html: `<a href="${url}">${url}</a>` // html body
     }
 
-    const info = await transporter.sendEmail(mailOptions);
 }

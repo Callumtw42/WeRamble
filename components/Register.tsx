@@ -13,7 +13,7 @@ import {
 import { Resolver, Query, Mutation, Arg, UseMiddleware } from "type-graphql";
 import bcrypt from "bcryptjs";
 import {User} from "../../entity/User";
-import {input} from "components/src/modules/user/register_check"
+import {input} from "components/src/modules/user/register_check/input"
 import {auth} from "components/src/modules/middle/auth";
 import {log} from "components/src/modules/middle/log";
 import {sendEmail} from "components/src/modules/util/sendEmail";

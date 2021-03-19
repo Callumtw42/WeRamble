@@ -1,14 +1,30 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, Image, StyleSheet, Dimensions, Button } from "react-native";
+import { Text, View, Image, StyleSheet, Dimensions, Button, RefreshControl, TouchableOpacity} from "react-native";
+import { ScrollView } from 'react-native-gesture-handler';
 import { ip, port } from "../utils"
 
-const route = `http://${ip}:${port}/api/feed`
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+const wait = (timeout) => {
+    return new Promise(resolve => {
+        setTimeout(resolve, timeout);
+    });
+}
 
-export default function Home({ navigation }) {
+export default function ImageGrid({ route, navigation }) {
 
     const [gallery, setGallery] = useState([])
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => setRefreshing(false));
+    }, []);
+
+    function viewImage(uri) {
+        console.log(uri)
+        navigation.navigate("ImageView", uri);
+    }
 
     function displayImages(data) {
         const rows = [];
@@ -19,7 +35,11 @@ export default function Home({ navigation }) {
             for (let j = 0; j < 3; j++) {
                 let image = data[++i];
                 if (image) {
-                    images.push(<Image key={key++} source={{ uri: image.uri }} style={styles.thumbnail}  />)
+                    images.push(
+                        <TouchableOpacity key={key++} onPress={viewImage.bind(this, image.uri)}>
+                            <Image source={{ uri: image.uri }} style={styles.thumbnail} />
+                        </TouchableOpacity>
+                    )
                 }
             }
             let row =
@@ -40,14 +60,12 @@ export default function Home({ navigation }) {
             .catch(error => {
                 console.error(error)
             })
-    }, [])
+    }, [refreshing])
 
     return (
-        <View>
+        <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} >
             <View style={styles.gallery}>{gallery}</View>
-            <Button title="Camera" onPress={() => navigation.navigate("Camera")}></Button>
-
-        </View>
+        </ScrollView>
     )
 }
 

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "android": "concurrently \"react-native start\" \"npx react-native run-android\" \"npx react-native log-android\"",
+    "start": "react-native start",
     "ios": "concurrently \"react-native start\" \"npx react-native run-ios\" \"npx react-native log-ios\"",
     "test": "jest",
     "lint": "eslint .",
@@ -35,6 +36,7 @@
     "react-native-camera": "^3.40.5",
     "react-native-fs": "^2.16.6",
     "react-native-gesture-handler": "^1.9.0",
+    "react-native-image-picker": "^3.1.4",
     "react-native-reanimated": "^1.13.2",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.16.1",

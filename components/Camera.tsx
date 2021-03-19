@@ -20,9 +20,9 @@ export default function Camera({ navigation }) {
 
     async function takePicture(camera) {
         const options = { quality: 0.5, base64: true };
-        const data = await camera.takePictureAsync(options);
+        const photo = await camera.takePictureAsync(options);
         //  eslint-disable-next-line
-        navigation.navigate('ImagePreview', { uri: data.uri })
+        navigation.navigate('ImagePreview', { photo: photo })
     };
 
     return (

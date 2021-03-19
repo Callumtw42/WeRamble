@@ -8,6 +8,7 @@ const fs = require('fs');
 const { BlobServiceClient, ContainerClient } = require('@azure/storage-blob');
 const { v1: uuid } = require('uuid');
 var bodyParser = require('body-parser')
+var ReadableData = require('stream').Readable;
 const readFile = (file) => { return fs.readFileSync(path.resolve(__dirname, file), { encoding: "UTF-8" }) };
 
 const app = express();
@@ -48,10 +49,32 @@ app.get('/api/login/:username/:password', (req, res) => {
     queryDatabase(req, res, query);
 });
 
+//load user's images 
+app.get('/api/user-images/:uploader', (req, res) => {
+    const { uploader } = req.params;
+    console.log(req.params);
+    let query = readFile("sql/user-images.sql")
+        .replace("${uploader}", quote(uploader))
+    queryDatabase(req, res, query);
+});
+
 //upload
 app.post('/api/upload', jsonParser, (req, res) => {
     // console.log(req.body.file)
-    const file = req.body.file
+    const { data } = req.body
+    const base64 = data.base64;
+    const imageBufferData = Buffer.from(base64, 'base64');
+
+    // Create a unique name for the blob
+    const blobName = Date.now().toString() + '.jpg';
+
+    var streamObj = new ReadableData();
+
+    streamObj.push(imageBufferData);
+    streamObj.push(null);
+    streamObj.pipe(fs.createWriteStream(blobName));
+    console.log(streamObj);
+
     // Create the BlobServiceClient object which will be used to create a container client
     const blobServiceClient = BlobServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTION_STRING);
 
@@ -64,24 +87,21 @@ app.post('/api/upload', jsonParser, (req, res) => {
     // Get a reference to a container
     const containerClient = blobServiceClient.getContainerClient(containerName);
 
-    // Create the container
-    // const createContainerResponse = containerClient.create();
-    // console.log("Container was created successfully. requestId: ", createContainerResponse.requestId);
-    let test = JSON.stringify("IM FROM API")
-    // Create a unique name for the blob
-    const blobName = 'test.jpg';
-
     // Get a block blob client
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
 
     console.log('\nUploading to Azure storage as blob:\n\t', blobName);
 
     // Upload data to the blob
-    const data = file;
-    const uploadBlobResponse = blockBlobClient.upload(data, data.length);
+    const uploadBlobResponse = blockBlobClient.upload(imageBufferData, imageBufferData.length);
     console.log("Blob was uploaded successfully. requestId: ", uploadBlobResponse.requestId);
-    res.json(test)
-    // queryDatabase(req, res, query);
+
+    console.log(Date.now().toString());
+    const uri = `https://weramble.blob.core.windows.net/images/${blobName}`
+    let query = readFile("sql/upload.sql")
+        .replace("${uri}", quote(uri))
+        .replace("${uploader}", quote("demo"))
+    queryDatabase(req, res, query);
 });
 
 //listen

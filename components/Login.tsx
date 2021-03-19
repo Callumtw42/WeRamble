@@ -62,12 +62,12 @@ export default function Login({ navigation }) {
       <Text style={styles.sectionTitle} >Username</Text>
       <TextInput
         style={styles.input}
-        value={"demo"}
+        defaultValue={"demo"}
         onChangeText={(v) => setUsername(v)} />
       <Text style={styles.sectionTitle} > Password</Text>
       <TextInput
         style={styles.input}
-        value={"demo"}
+        defaultValue={"demo"}
         onChangeText={(v) => setPassword(v)} />
       <Text style={styles.smallText}
         onPress={() => navigation.navigate('Register')}

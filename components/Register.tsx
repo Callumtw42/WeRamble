@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {ip, port} from "../utils"
+import { ip, port } from "../utils"
 import {
     Text,
     StyleSheet,
@@ -23,6 +23,7 @@ import "reactjs-popup/dist/index.css";
 
 @Resolver()
 export class RegisterResolver {
+
 
     @UseMiddleware(auth, log)
     @Mutation(() => User)

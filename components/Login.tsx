@@ -13,7 +13,7 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 import bcrypt from "bcryptjs";
-import {User} from "components/src/entity/User.ts";
+import {User} from "components/src/entity/User";
 
 
 

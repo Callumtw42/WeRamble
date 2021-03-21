@@ -44,6 +44,7 @@
     "react-native-windows": "^0.63.0-0",
     "reactjs-popup": "^2.0.4",
     "tedious": "^9.2.1",
+    "type-graphql": "^1.1.1",
     "typeorm": "^0.2.31",
     "typescript": "^3.7.5",
     "unimodules": "^1.0.0",

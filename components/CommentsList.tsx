@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         width: windowWidth,
         height: windowHeight * (1 / 3),
         margin: 5,
-        zIndex: 100
+        zIndex: 100,
     },
     username: {
         fontWeight: 'bold'

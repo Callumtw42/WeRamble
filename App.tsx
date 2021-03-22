@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 
 import Login from "./components/Login"
-import Registration from "./components/Register"
+// import Registration from "./components/Register"
 import Camera from "./components/Camera"
 import Feed from "./components/Feed"
 import ImagePreview from "./components/ImagePreview"
@@ -30,7 +30,7 @@ const App: () => React$Node = () => {
         <Stack.Navigator initialRouteName="Login">
           {/*Add screens below*/}
           <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Register" component={Registration} />
+          {/* <Stack.Screen name="Register" component={Registration} /> */}
           <Stack.Screen name="Feed" component={Feed} />
           <Stack.Screen name="Camera" component={Camera} />
           <Stack.Screen name="ImagePreview" component={ImagePreview} />

@@ -11,7 +11,6 @@ export default function ImagePreview({ route }) {
     const { photo } = route.params
 
     async function upload() {
-        console.log(photo.uri)
         const data = new FormData()
         data.append('file', photo)
 

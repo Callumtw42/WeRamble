@@ -1,3 +1,4 @@
+import { globalAgent } from 'node:http';
 import React, { useState } from 'react'
 import { Dimensions, View, TextInput, StyleSheet, Image, Text, TouchableOpacity } from 'react-native'
 import { ip, port } from '../utils'
@@ -5,34 +6,36 @@ import CommentsList from "./CommentsList"
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+const route = `http://${ip}:${port}/api/postcomment`
 
-function CommentBox({ commenting, uri }) {
+function CommentBox({ commenting, image }) {
 
-    const [comment, setComment] = useState(false);
-    const route = `http://${ip}:${port}/api/${comment}/${global.username}/${uri}`
+    const [comment, setComment] = useState("");
+    const config = {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/JSON"
+        },
+        body: JSON.stringify({ comment: comment, user: global.username, post: image.id })
+    }
 
     function send() {
-        fetch(`${route}`)
+        fetch(route, config)
             .then(res => res.json())
-            .then(data => {
-                // if (data) {
-                //     displayImages(data)
-                // }
-            })
             .catch(error => {
                 console.error(error)
             })
     }
 
     const sendButton =
-        <TouchableOpacity style={styles.button} onPress={() => send}>
+        <TouchableOpacity key={0} style={styles.button} onPress={send}>
             <Image style={styles.sendIcon} source={require('../assets/send.png')}></Image>
         </TouchableOpacity>
-    const box = <TextInput style={styles.textInput} onChange={(value) => setComment.bind(this, value)}></TextInput>
+    const box = <TextInput key={1} style={styles.textInput} onChangeText={(v) => setComment(v)}></TextInput>
     return commenting ? <View style={styles.row}>{[box, sendButton]}</View> : <View></View>
 }
 
-export default function CommentSection({ uri }) {
+export default function CommentSection({ image }) {
 
     const [commenting, setCommenting] = useState(false);
 
@@ -41,8 +44,8 @@ export default function CommentSection({ uri }) {
             <TouchableOpacity style={styles.button} onPress={() => setCommenting(!commenting)}>
                 <Image style={styles.commentIcon} source={require('../assets/comment.png')}></Image>
             </TouchableOpacity>
-            <CommentBox commenting={commenting} uri={uri} />
-            <CommentsList />
+            <CommentBox commenting={commenting} image={image} />
+            <CommentsList image={image} />
         </View>
     )
 }

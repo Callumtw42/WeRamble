@@ -8,12 +8,11 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export default function ImageView({ route }) {
-    const uri = route.params;
-    console.log(uri);
+    const image = route.params;
     return (
         <ScrollView style={styles.container}>
-            <Image source={{ uri: uri }} style={styles.image} />
-            <CommentSection uri={uri} />
+            <Image source={{ uri: image.uri }} style={styles.image} />
+            <CommentSection image={image} />
         </ScrollView >
     )
 }

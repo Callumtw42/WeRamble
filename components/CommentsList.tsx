@@ -1,5 +1,6 @@
-import React from 'react'
 import { StyleSheet, View, Text, ScrollView, Image, Dimensions } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { ip, port } from '../utils'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -11,12 +12,31 @@ const data = [
     { user: "Joe", comment: "blah blah blah blah blah blah" },
 ]
 
-export default function CommentsList() {
 
-    const gallery = data.map((comment, index) => {
+export default function CommentsList({ image }) {
+
+    const [comments, setComments] = useState([]);
+
+    useEffect(() => {
+        // console.log(image);
+        const route = `http://${ip}:${port}/api/getcomments/${image.id}`
+        fetch(route)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data) {
+                    setComments(data);
+                }
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }, [])
+
+    const gallery = comments.map((comment, index) => {
         return (
             <View key={index} >
-                <Text style={styles.username}>{comment.user + ":"}</Text>
+                <Text style={styles.username}>{comment.uploader + ":"}</Text>
                 <Text>{comment.comment}</Text>
             </View >
         )

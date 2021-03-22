@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "android": "concurrently \"react-native start\" \"npx react-native run-android\" \"npx react-native log-android\"",
+    "android-log": "concurrently \"npx react-native run-android\" \"npx react-native log-android\"",
     "start": "react-native start",
     "ios": "concurrently \"react-native start\" \"npx react-native run-ios\" \"npx react-native log-ios\"",
     "test": "jest",

@@ -46,7 +46,6 @@ module.exports = {
         );
 
         request.on("row", columns => {
-            console.log(columns.length);
             let chunk = {};
             columns.forEach(column => {
                 let key = column.metadata.colName

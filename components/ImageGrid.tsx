@@ -21,9 +21,8 @@ export default function ImageGrid({ route, navigation }) {
         wait(2000).then(() => setRefreshing(false));
     }, []);
 
-    function viewImage(uri) {
-        console.log(uri)
-        navigation.navigate("ImageView", uri);
+    function viewImage(image) {
+        navigation.navigate("ImageView", image);
     }
 
     function displayImages(data) {
@@ -36,7 +35,7 @@ export default function ImageGrid({ route, navigation }) {
                 let image = data[++i];
                 if (image) {
                     images.push(
-                        <TouchableOpacity key={key++} onPress={viewImage.bind(this, image.uri)}>
+                        <TouchableOpacity key={key++} onPress={viewImage.bind(this, image)}>
                             <Image source={{ uri: image.uri }} style={styles.thumbnail} />
                         </TouchableOpacity>
                     )

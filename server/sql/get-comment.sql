@@ -1,0 +1,1 @@
+select * from weramble.comments where post = ${post};

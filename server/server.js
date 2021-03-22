@@ -58,6 +58,25 @@ app.get('/api/user-images/:uploader', (req, res) => {
     queryDatabase(req, res, query);
 });
 
+//post comment
+app.post('/api/postcomment', (req, res) => {
+    const { comment, user, post } = req.body;
+    console.log(req.body);
+    let query = readFile("sql/post-comment.sql")
+        .replace("${comment}", quote(comment))
+        .replace("${uploader}", quote(user))
+        .replace("${post}", quote(post))
+    queryDatabase(req, res, query);
+});
+
+//get comments
+app.get('/api/getcomments/:imageid', (req, res) => {
+    const imageid = req.params.imageid;
+    let query = readFile("sql/get-comment.sql")
+        .replace("${post}", quote(imageid))
+    queryDatabase(req, res, query);
+});
+
 //upload
 app.post('/api/upload', jsonParser, (req, res) => {
     // console.log(req.body.file)

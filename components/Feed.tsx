@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Text, View, Image, StyleSheet, Dimensions, Button, RefreshControl, TouchableOpacity } from "react-native";
 import { ScrollView } from 'react-native-gesture-handler';
-import { ip, port } from "../utils"
+import {host} from "../utils"
 import ImageGrid from "./ImageGrid"
 import MenuBar from "./MenuBar"
 
-const route = `http://${ip}:${port}/api/feed`
+const route = `${host}/api/feed`
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 

@@ -1,13 +1,13 @@
 import { globalAgent } from 'node:http';
 import React, { useState } from 'react'
 import { Dimensions, View, TextInput, StyleSheet, Image, Text, TouchableOpacity } from 'react-native'
-import { ip, port } from '../utils'
+import {host } from '../utils'
 import CommentsList from "./CommentsList"
 import Like from './Like';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-const route = `http://${ip}:${port}/api/postcomment`
+const route = `${host}/api/postcomment`
 
 function CommentBox({ commenting, image }) {
 

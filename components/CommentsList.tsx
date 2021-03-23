@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text, ScrollView, Image, Dimensions } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { ip, port } from '../utils'
+import {host} from '../utils'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -19,7 +19,7 @@ export default function CommentsList({ image }) {
 
     useEffect(() => {
         // console.log(image);
-        const route = `http://${ip}:${port}/api/getcomments/${image.id}`
+        const route = `${host}/api/getcomments/${image.id}`
         fetch(route)
             .then(res => res.json())
             .then(data => {

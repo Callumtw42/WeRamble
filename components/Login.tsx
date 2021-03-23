@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { ip, port } from "../utils"
+import {host} from "../utils"
 import {
   Text,
   StyleSheet,
@@ -21,7 +21,7 @@ export default function Login({ navigation }) {
   const [username, setUsername] = useState("demo");
   const [password, setPassword] = useState("demo");
   const [error, setError] = useState("");
-  const route = `http://${ip}:${port}/api/login`
+  const route = `${host}/api/login`
 
   function checkResponse(data) {
     if (data) {

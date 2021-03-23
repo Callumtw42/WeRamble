@@ -1,12 +1,13 @@
 import { globalAgent } from 'node:http';
 import React, { useState } from 'react'
 import { Dimensions, View, TextInput, StyleSheet, Image, Text, TouchableOpacity } from 'react-native'
-import { ip, port } from '../utils'
+import {host } from '../utils'
 import CommentsList from "./CommentsList"
+import Like from './Like';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-const route = `http://${ip}:${port}/api/postcomment`
+const route = `${host}/api/postcomment`
 
 function CommentBox({ commenting, image }) {
 
@@ -41,9 +42,12 @@ export default function CommentSection({ image }) {
 
     return (
         <View>
-            <TouchableOpacity style={styles.button} onPress={() => setCommenting(!commenting)}>
-                <Image style={styles.commentIcon} source={require('../assets/comment.png')}></Image>
-            </TouchableOpacity>
+            <View style={styles.buttons}>
+                <TouchableOpacity style={styles.button} onPress={() => setCommenting(!commenting)}>
+                    <Image style={styles.commentIcon} source={require('../assets/comment.png')}></Image>
+                </TouchableOpacity>
+                <Like />
+            </View>
             <CommentBox commenting={commenting} image={image} />
             <CommentsList image={image} />
         </View>
@@ -55,9 +59,9 @@ const styles = StyleSheet.create({
         width: windowWidth,
         height: windowHeight * (2 / 3),
     },
-    container: {
+    buttons: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'row'
     },
     commentIcon: {
         width: windowWidth * (1 / 12),
@@ -67,7 +71,6 @@ const styles = StyleSheet.create({
     sendIcon: {
         width: windowWidth * (1 / 10),
         height: windowHeight * (1 / 20),
-        margin: 5
     },
     button: {
         width: windowWidth * (1 / 12),
@@ -75,9 +78,12 @@ const styles = StyleSheet.create({
     row: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
+        borderStyle: 'solid',
+        borderColor: 'black',
+        borderWidth: 1
     },
     textInput: {
-        width: windowWidth * 11 / 12
+        width: windowWidth * 11 / 12,
     }
 })

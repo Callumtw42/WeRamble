@@ -2,11 +2,11 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import MenuBar from './MenuBar'
 import ImageGrid from './ImageGrid'
-import { port, ip } from '../utils'
+import {host} from '../utils'
 
 export default function Profile({ navigation }) {
     const username = global.username;
-    const route = `http://${ip}:${port}/api/user-images/${username}`;
+    const route = `${host}/api/user-images/${username}`;
     return (
         <View style={styles.container}>
             <MenuBar navigation={navigation} />

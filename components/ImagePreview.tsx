@@ -1,11 +1,10 @@
 import fs from 'react-native-fs';
 import React from 'react'
-import { ip, port, request } from '../utils'
+import {host} from '../utils'
 import { View, Image, TouchableOpacity, StyleSheet, Dimensions, Text, ImageBase } from 'react-native'
 import { isThisTypeNode } from 'typescript';
 
-// const apiRoute = `http://${ip}:${port}/api/upload`
-const apiRoute = `http://${ip}:${port}/api/upload`
+const apiRoute = `${host}/api/upload`
 
 export default function ImagePreview({ route }) {
     const { photo } = route.params

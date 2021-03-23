@@ -1,7 +1,5 @@
 const { queryDatabase } = require("./azure.js");
 const { sendVerificationEmail } = require("./emailer.js")
-const { port } = require("../utils.js")
-const { quote } = require("../utils.js");
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -18,6 +16,9 @@ var jsonParser = bodyParser.json()
 
 const AZURE_STORAGE_CONNECTION_STRING = 'DefaultEndpointsProtocol=https;AccountName=weramble;AccountKey=vTiBSla5pbWA0zxj3YTbAhjtDQcs2SPJ/XgKB44TjMPnKmBbW1CcX853ZGzduApqU58TjIAy9WKDbQ5HyBrgMA==;EndpointSuffix=core.windows.net'
 
+const quote = (string) => {
+    return `'${string}'`
+}
 //test
 app.get('/api/test', (req, res) => {
     let query = `select * from weramble.test`;
@@ -124,7 +125,7 @@ app.post('/api/upload', jsonParser, (req, res) => {
 });
 
 //listen
-app.listen(port, (err) => {
+app.listen(8080, (err) => {
     if (err) throw err;
-    else console.log(`Server started on port ${port}`);
+    else console.log(`Server started on port 8080`);
 });

@@ -1,7 +1,16 @@
+//set this to false if you want to use remote server
+const LOCAL = false;
+//if your using local server, set this to your computer's ip address
+const ip = "172.29.32.1";
+
+const localhost = `https://${ip}:8080`;
+const remotehost = "https://werambleserver.azurewebsites.net";
+const host = LOCAL ? localhost : remotehost;
+
 module.exports = {
     //Global Variables
-    ip: "192.168.1.96", //Change this to match your computer's IP 
-    port: "80",
+    port: "8080",
+    host: `${host}`,
 
     //Useful functions
     quote: (string) => {

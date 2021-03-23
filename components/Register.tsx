@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import { ip, port } from "../utils"
 import {
+     
      Text,
      StyleSheet,
-    View,
-    TextInput,
-    Button
+     View,
+     TextInput,
+     Button
 } from 'react-native';
 import {
-    Colors,
+     
+     Colors,
 } from 'react-native/Libraries/NewAppScreen';
+
 export default function Registration({ navigation }) {
-    const [email, setEmail] = useState("");
+     const [email, setEmail] = useState("");
      const [username, setUsername] = useState("");
      const [password, setPassword] = useState("");
      const route = `http://${ip}:${port}/api/register`

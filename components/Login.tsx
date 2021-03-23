@@ -1,55 +1,111 @@
 import React, { useState, useEffect } from 'react'
-import { ip, port } from "../utils"
+import {host} from "../utils"
 import {
-     Text,
-     StyleSheet,
-      View,
-      TextInput,
-      Button
+  Text,
+  StyleSheet,
+  View,
+  TextInput,
+  Button,
+  Alert,
+  Image
 } from 'react-native';
 import {
-    Colors,
+  Colors,
 } from 'react-native/Libraries/NewAppScreen';
+// import bcrypt from "bcryptjs";
+// import {User} from "components/src/entity/User";
 
-export default function Registration({ navigation }) {
-  
-      const [email, setEmail] = useState("");
-      const [username, setUsername] = useState("");
-      const [password, setPassword] = useState("");
-      const route = `http://${ip}:${port}/api/register`
 
-     function register() {
 
-         fetch(`${route}/${email}/${username}/${password}`)
-             .then(res => res.text())
-             .catch(error => {
-                  console.error(error);
-                })
-            navigation.navigate('Feed');
-     }
+export default function Login({ navigation }) {
+  const [username, setUsername] = useState("demo");
+  const [password, setPassword] = useState("demo");
+  const [error, setError] = useState("");
+  const route = `${host}/api/login`
 
-     return (
-        <View>
-            <Text>E-Mail</Text>
-            <TextInput
-                onChangeText={(v) => setEmail(v)} />
-            <Text>Username</Text>
-            <TextInput
-                onChangeText={(v) => setUsername(v)} />
-            <Text>Pasword</Text>
-            <TextInput
-                onChangeText={(v) => setPassword(v)} />
-            <Button
-                title="Register"
-                onPress={() => register()}
-            />
-        </View>
-    )
+  function checkResponse(data) {
+    if (data) {
+      global.username = username;
+      navigation.navigate("Feed");
+    }
+    else { setError("Invalid Details") }
+  }
+
+  function login() {
+    if (username.length > 0 && password.length > 0) {
+      fetch(`${route}/${username}/${password}`)
+        .then(res => res.json())
+        .then(data => {
+          checkResponse(data)
+        })
+        .catch(error => {
+          console.error(error)
+        })
+
+        // const user = User.findOne({ where: { username }});
+        // const valid = bcrypt.compare(password, user.password);
+
+        // if(!valid) {
+
+        //   return null;
+        // }
+
+        // if(!user.confirmed) {
+
+        //   return null;
+        // }
+    }
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.sectionTitle} >Username</Text>
+      <TextInput
+        style={styles.input}
+        defaultValue={"demo"}
+        onChangeText={(v) => setUsername(v)} />
+      <Text style={styles.sectionTitle} > Password</Text>
+      <TextInput
+        style={styles.input}
+        defaultValue={"demo"}
+        onChangeText={(v) => setPassword(v)} />
+      <Text style={styles.smallText}
+        onPress={() => navigation.navigate('Register')}
+      >New User? Register here</Text>
+      <Button
+        title="Login"
+        onPress={() => login()}
+      />
+      <Text
+        style={styles.sectionTitle}
+      > {error}</Text>
+    </View>
+  )
 }
+
 const styles = StyleSheet.create({
-    sectionTitle: {
-        fontSize: 24,
-        fontWeight: '600',
-        color: Colors.black,
-    },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: Colors.black,
+    textAlign: "center",
+  },
+  tinylogo: {
+    width: 250,
+    height: 200,
+  },
+  smallText: {
+    textAlign: "center",
+  },
+  input: {
+    borderColor: Colors.black,
+    borderWidth: 1,
+    width: "80%",
+    alignSelf: 'center'
+  },
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  }
 });

@@ -44,14 +44,14 @@ export default function Login({ navigation }) {
 
         // const user = User.findOne({ where: { username }});
         // const valid = bcrypt.compare(password, user.password);
-        
+
         // if(!valid) {
 
         //   return null;
         // }
-    
+
         // if(!user.confirmed) {
-    
+
         //   return null;
         // }
     }

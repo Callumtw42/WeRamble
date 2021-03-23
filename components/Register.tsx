@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { ip, port } from "../utils"
 import {
-    Text,
-    StyleSheet,
+     Text,
+     StyleSheet,
     View,
     TextInput,
     Button
@@ -10,82 +10,40 @@ import {
 import {
     Colors,
 } from 'react-native/Libraries/NewAppScreen';
-import { Resolver, Query, Mutation, Arg, UseMiddleware } from "type-graphql";
-import bcrypt from "bcryptjs";
-import {User} from "../../entity/User";
-import {input} from "components/src/modules/user/register_check/input"
-import {auth} from "components/src/modules/middle/auth";
-import {log} from "components/src/modules/middle/log";
-import {sendEmail} from "components/src/modules/util/sendEmail";
-import {createUrl} from "components/src/modules/util/createUrl";
-import Popup from "reactjs-popup";
-import "reactjs-popup/dist/index.css";
+export default function Registration({ navigation }) {
+    const [email, setEmail] = useState("");
+     const [username, setUsername] = useState("");
+     const [password, setPassword] = useState("");
+     const route = `http://${ip}:${port}/api/register`
 
-@Resolver()
-export class RegisterResolver {
+     function register() {
 
+         fetch(`${route}/${email}/${username}/${password}`)
+             .then(res => res.text())
+             .catch(error => {
+                  console.error(error);
+                })
+            navigation.navigate('Feed');
+     }
 
-    @UseMiddleware(auth, log)
-    @Mutation(() => User)
-    async register(@Arg("data")
-    {
-      email,
-      firstName,
-      lastName,
-      password
-    }: input): Promise<User> {
-     
-        const hashedPassword = await bcrypt.hash(password, 12);
-
-        const new_user = await User.create({
-
-            firstName,
-            lastName,
-            email,
-            password: hashedPassword
-      }).save();
-
-
-      await sendEmail(email, await createUrl(User.id));
-      
-      return  (
+     return (
         <View>
             <Text>E-Mail</Text>
+            <TextInput
+                onChangeText={(v) => setEmail(v)} />
+            <Text>Username</Text>
+            <TextInput
+                onChangeText={(v) => setUsername(v)} />
+            <Text>Pasword</Text>
+            <TextInput
+                onChangeText={(v) => setPassword(v)} />
             <Button
                 title="Register"
-                onPress={() => new_user}
+                onPress={() => register()}
             />
         </View>
-    );
-    } 
+    )
 }
-
-<Popup
-trigger={open => (
-  <button className="button">Move to Login - {open ? 'Opened' : 'Closed'}</button>
-)}
-position="right center"
-closeOnDocumentClick
->
-<span> You have been sent an email to confirm your email address. Please click the link before trying to log in!! </span>
-</Popup>;
-
-export default function change({ navigation }) {
-
-    return (
-
-        <View>
-            <Text>Login</Text>
-            <Button
-                title="login"
-                onPress={() => navigation.navigate('Login')}
-            />
-        </View>
-    );
-    
-}
-
-
 const styles = StyleSheet.create({
     sectionTitle: {
         fontSize: 24,

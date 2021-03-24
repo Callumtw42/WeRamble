@@ -1,12 +1,12 @@
-import React from 'react'
-import { View, Text, ScrollView, Image, Dimensions, StyleSheet, Button } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import CommentsList from './CommentsList'
-import CommentSection from './CommentSection'
+import React from 'react';
+import { Dimensions, Image, ScrollView, StyleSheet } from 'react-native';
+
+import CommentSection from './CommentSection';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+/** Displays a single image post in a large format */
 export default function ImageView({ route }) {
     const image = route.params;
     return (

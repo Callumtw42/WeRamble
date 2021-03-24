@@ -1,9 +1,11 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import MenuBar from './MenuBar'
-import ImageGrid from './ImageGrid'
-import {host} from '../utils'
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 
+import { host } from '../utils';
+import ImageGrid from './ImageGrid';
+import MenuBar from './MenuBar';
+
+/** Retrieves users uploads and displays them in a user feed*/
 export default function Profile({ navigation }) {
     const username = global.username;
     const route = `${host}/api/user-images/${username}`;

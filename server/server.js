@@ -26,11 +26,11 @@ app.get('/api/test', (req, res) => {
 });
 
 //register
-app.get('/api/register/:email/:username/:password', (req, res) => {
-    const { email, username, password } = req.params;
+app.post('/api/register', (req, res) => {
+    const { email, username, password } = req.body;
     let query = `insert into weramble.users(username, password, email) values ('${username}', '${password}', '${email}');`;
     queryDatabase(req, res, query);
-    sendVerificationEmail();
+    // sendVerificationEmail();
 });
 
 //feed
@@ -105,7 +105,7 @@ app.post('/api/like', (req, res) => {
 
 //upload
 app.post('/api/upload', jsonParser, (req, res) => {
-    const { data } = req.body
+    const { data, uploader } = req.body
     const base64 = data.base64;
     const imageBufferData = Buffer.from(base64, 'base64');
 
@@ -144,12 +144,16 @@ app.post('/api/upload', jsonParser, (req, res) => {
     const uri = `https://weramble.blob.core.windows.net/images/${blobName}`
     let query = readFile("sql/upload.sql")
         .replace("${uri}", quote(uri))
-        .replace("${uploader}", quote("demo"))
+        .replace("${uploader}", quote(uploader))
+        console.log(query)
     queryDatabase(req, res, query);
 });
 
 //listen
 app.listen(8080, (err) => {
     if (err) throw err;
-    else console.log(`Server started on port 8080`);
+    else {
+        console.log(`Server started on port 8080`);
+        console.log("Please log into app to Connect to db")
+    }
 });

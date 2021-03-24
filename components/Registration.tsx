@@ -1,31 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import {host} from "../utils"
-import {
+import React, { useEffect, useState } from 'react';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-    Text,
-    StyleSheet,
-    View,
-    TextInput,
-    Button
-} from 'react-native';
-import {
-    Colors,
-} from 'react-native/Libraries/NewAppScreen';
+import { host, post } from '../utils';
 
+/** Entire registration page for adding new accounts*/
 export default function Registration({ navigation }) {
-     const [email, setEmail] = useState("");
-     const [username, setUsername] = useState("");
-     const [password, setPassword] = useState("");
-     const route = `http://${host}/api/register`
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const route = `${host}/api/register`
 
     function register() {
-
-        fetch(`${route}/${email}/${username}/${password}`)
-            .then(res => res.text())
-            .catch(error => {
-                console.error(error);
-            })
-        navigation.navigate('Feed');
+        post(route, {
+            email: email,
+            password: password,
+            username: username
+        }, () => { })
     }
 
     return (

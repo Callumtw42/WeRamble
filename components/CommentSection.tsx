@@ -1,32 +1,29 @@
-import { globalAgent } from 'node:http';
-import React, { useState, useEffect } from 'react'
-import { Dimensions, View, TextInput, StyleSheet, Image, Text, TouchableOpacity } from 'react-native'
-import { host } from '../utils'
-import CommentsList from "./CommentsList"
+import React, { useEffect, useState } from 'react';
+import { Dimensions, Image, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+
+import { get, host, post } from '../utils';
+import CommentsList from './CommentsList';
 import Like from './Like';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const route = `${host}/api/postcomment`
 
-function CommentBox({ commenting, image, fetchComments }) {
+/**Input box for writing comments */
+function CommentBox({ commenting, image, getComments: getComments, setCommenting }) {
 
     const [comment, setComment] = useState("");
-    const config = {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/JSON"
-        },
-        body: JSON.stringify({ comment: comment, user: global.username, post: image.id })
-    }
-
     function send() {
-        fetch(route, config)
-            .then(res => res.json())
-            .catch(error => {
-                console.error(error)
+        if (comment.length > 0) {
+            post(route, {
+                comment: comment,
+                user: global.username,
+                post: image.id
+            }, (d) => {
+                getComments();
+                setCommenting(false)
             })
-        fetchComments();
+        }
     }
 
     const sendButton =
@@ -37,30 +34,18 @@ function CommentBox({ commenting, image, fetchComments }) {
     return commenting ? <View style={styles.row}>{[box, sendButton]}</View> : <View></View>
 }
 
+/**Contains the comments list, likes and comment button*/
 export default function CommentSection({ image }) {
 
     const [commenting, setCommenting] = useState(false);
     const [comments, setComments] = useState([]);
+    const route = `${host}/api/getcomments/${image.id}`;
 
-    function fetchComments() {
-        // console.log(image);
-        const route = `${host}/api/getcomments/${image.id}`
-        fetch(route)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                if (data) {
-                    setComments(data);
-                }
-            })
-            .catch(error => {
-                console.error(error)
-            })
+    function getComments() {
+        get(route, setComments);
     }
-    useEffect(() => {
-        fetchComments();
-    }, [])
 
+    useEffect(getComments, []);
 
     return (
         <View>
@@ -70,8 +55,8 @@ export default function CommentSection({ image }) {
                 </TouchableOpacity>
                 <Like image={image} />
             </View>
-            <CommentBox commenting={commenting} image={image} fetchComments={fetchComments} />
-            <CommentsList image={image} comments={comments} />
+            <CommentBox commenting={commenting} image={image} getComments={getComments} setCommenting={setCommenting} />
+            <CommentsList comments={comments} />
         </View>
     )
 }

@@ -1,6 +1,6 @@
 'use strict';
 import React, { PureComponent, useState } from 'react';
-import { AppRegistry, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 
 const PendingView = () => (
@@ -16,6 +16,7 @@ const PendingView = () => (
     </View>
 );
 
+/** Open's phone camera */
 export default function Camera({ navigation }) {
 
     async function takePicture(camera) {

@@ -17,53 +17,50 @@ const config = {
     }
 };
 
-const connection = new Connection(config);
-
-// Attempt to connect and execute queries if connection goes through
-connection.on("connect", err => {
-    if (err) {
-        console.error(err.message);
-    } else {
-        console.log("Azure SQL Connected...");
-    }
-});
-
 module.exports = {
 
     queryDatabase: (req, res, query) => {
-        let results = [];
-        console.log("Reading rows from the Table...");
-        // Read all rows from table
-        const request = new Request(
-            query,
-            (err, rowCount) => {
-                if (err) {
-                    console.error(err.message);
-                } else {
-                    console.log(`${rowCount} row(s) returned`);
-                }
+        const conn = new Connection(config);
+
+        // Attempt to connect and execute queries if connection goes through
+        conn.on("connect", err => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                let results = [];
+                console.log("Reading rows from the Table...");
+                // Read all rows from table
+                const request = new Request(
+                    query,
+                    (err, rowCount) => {
+                        if (err) {
+                            console.error(err.message);
+                        } else {
+                            console.log(`${rowCount} row(s) returned`);
+                        }
+                    }
+                );
+
+                request.on("row", columns => {
+                    let chunk = {};
+                    columns.forEach(column => {
+                        let key = column.metadata.colName
+                        let value = column.value
+                        chunk[key] = value;
+                    });
+                    results.push(chunk);
+                    console.log(chunk)
+                });
+
+                request.on("requestCompleted", columns => {
+                    if (results.length > 0)
+                        res.json(results);
+                    else res.json([]);
+                });
+
+                conn.execSql(request);
             }
-        );
-
-        request.on("row", columns => {
-            let chunk = {};
-            columns.forEach(column => {
-                let key = column.metadata.colName
-                let value = column.value
-                // console.log("%s\t%s", key, value);
-                chunk[key] = value;
-            });
-            results.push(chunk);
-            console.log(chunk)
         });
-
-        request.on("requestCompleted", columns => {
-            if (results.length > 0)
-                res.json(results);
-            else res.json(false);
-        });
-
-        connection.execSql(request);
     }
 }
 

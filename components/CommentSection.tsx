@@ -1,7 +1,7 @@
 import { globalAgent } from 'node:http';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Dimensions, View, TextInput, StyleSheet, Image, Text, TouchableOpacity } from 'react-native'
-import {host } from '../utils'
+import { host } from '../utils'
 import CommentsList from "./CommentsList"
 import Like from './Like';
 
@@ -9,7 +9,7 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const route = `${host}/api/postcomment`
 
-function CommentBox({ commenting, image }) {
+function CommentBox({ commenting, image, fetchComments }) {
 
     const [comment, setComment] = useState("");
     const config = {
@@ -26,6 +26,7 @@ function CommentBox({ commenting, image }) {
             .catch(error => {
                 console.error(error)
             })
+        fetchComments();
     }
 
     const sendButton =
@@ -39,6 +40,27 @@ function CommentBox({ commenting, image }) {
 export default function CommentSection({ image }) {
 
     const [commenting, setCommenting] = useState(false);
+    const [comments, setComments] = useState([]);
+
+    function fetchComments() {
+        // console.log(image);
+        const route = `${host}/api/getcomments/${image.id}`
+        fetch(route)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data) {
+                    setComments(data);
+                }
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
+    useEffect(() => {
+        fetchComments();
+    }, [])
+
 
     return (
         <View>
@@ -48,8 +70,8 @@ export default function CommentSection({ image }) {
                 </TouchableOpacity>
                 <Like />
             </View>
-            <CommentBox commenting={commenting} image={image} />
-            <CommentsList image={image} />
+            <CommentBox commenting={commenting} image={image} fetchComments={fetchComments} />
+            <CommentsList image={image} comments={comments} />
         </View>
     )
 }

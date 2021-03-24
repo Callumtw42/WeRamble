@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import {host} from "../utils"
 import {
-     
-     Text,
-     StyleSheet,
-     View,
-     TextInput,
-     Button
+
+    Text,
+    StyleSheet,
+    View,
+    TextInput,
+    Button
 } from 'react-native';
 import {
-     
-     Colors,
+    Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
 export default function Registration({ navigation }) {
@@ -19,17 +18,17 @@ export default function Registration({ navigation }) {
      const [password, setPassword] = useState("");
      const route = `http://${host}/api/register`
 
-     function register() {
+    function register() {
 
-         fetch(`${route}/${email}/${username}/${password}`)
-             .then(res => res.text())
-             .catch(error => {
-                  console.error(error);
-                })
-            navigation.navigate('Feed');
-     }
+        fetch(`${route}/${email}/${username}/${password}`)
+            .then(res => res.text())
+            .catch(error => {
+                console.error(error);
+            })
+        navigation.navigate('Feed');
+    }
 
-     return (
+    return (
         <View>
             <Text>E-Mail</Text>
             <TextInput

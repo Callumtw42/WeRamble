@@ -78,6 +78,26 @@ app.get('/api/getcomments/:imageid', (req, res) => {
     queryDatabase(req, res, query);
 });
 
+//getlikes
+app.get('/api/getlikes/:imageid', (req, res) => {
+    const imageid = req.params.imageid;
+    console.log("getLikes: " + imageid)
+    let query = readFile("sql/get-likes.sql")
+        .replace("${post}", quote(imageid))
+    queryDatabase(req, res, query);
+});
+
+//like
+app.post('/api/like/', (req, res) => {
+    console.log("like: " + req.body)
+    const { imageid, user, like } = req.body
+    let query = readFile("sql/like.sql")
+        .replace("${post}", quote(imageid))
+        .replace("${user}", quote(user))
+        .replace("${like}", quote(like))
+    queryDatabase(req, res, query);
+});
+
 //upload
 app.post('/api/upload', jsonParser, (req, res) => {
     // console.log(req.body.file)

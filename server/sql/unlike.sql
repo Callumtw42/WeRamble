@@ -1,0 +1,1 @@
+delete from weramble.likes where username = ${username} and post = ${post};

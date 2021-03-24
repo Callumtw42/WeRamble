@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { ip, port } from "../utils"
+import {host} from "../utils"
 import {
 
     Text,
@@ -13,10 +13,10 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 export default function Registration({ navigation }) {
-    const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const route = `http://${ip}:${port}/api/register`
+     const [email, setEmail] = useState("");
+     const [username, setUsername] = useState("");
+     const [password, setPassword] = useState("");
+     const route = `http://${host}/api/register`
 
     function register() {
 

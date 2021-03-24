@@ -1,35 +1,34 @@
 import React, { useState, useEffect } from 'react'
 import { ip, port } from "../utils"
 import {
-     
-     Text,
-     StyleSheet,
-     View,
-     TextInput,
-     Button
+
+    Text,
+    StyleSheet,
+    View,
+    TextInput,
+    Button
 } from 'react-native';
 import {
-     
-     Colors,
+    Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
 export default function Registration({ navigation }) {
-     const [email, setEmail] = useState("");
-     const [username, setUsername] = useState("");
-     const [password, setPassword] = useState("");
-     const route = `http://${ip}:${port}/api/register`
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const route = `http://${ip}:${port}/api/register`
 
-     function register() {
+    function register() {
 
-         fetch(`${route}/${email}/${username}/${password}`)
-             .then(res => res.text())
-             .catch(error => {
-                  console.error(error);
-                })
-            navigation.navigate('Feed');
-     }
+        fetch(`${route}/${email}/${username}/${password}`)
+            .then(res => res.text())
+            .catch(error => {
+                console.error(error);
+            })
+        navigation.navigate('Feed');
+    }
 
-     return (
+    return (
         <View>
             <Text>E-Mail</Text>
             <TextInput

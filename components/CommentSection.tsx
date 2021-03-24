@@ -68,7 +68,7 @@ export default function CommentSection({ image }) {
                 <TouchableOpacity style={styles.button} onPress={() => setCommenting(!commenting)}>
                     <Image style={styles.commentIcon} source={require('../assets/comment.png')}></Image>
                 </TouchableOpacity>
-                <Like />
+                <Like image={image} />
             </View>
             <CommentBox commenting={commenting} image={image} fetchComments={fetchComments} />
             <CommentsList image={image} comments={comments} />

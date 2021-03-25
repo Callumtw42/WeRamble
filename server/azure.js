@@ -5,14 +5,14 @@ const { Connection, Request } = require("tedious");
 const config = {
     authentication: {
         options: {
-            userName: "callum", // update me
-            password: "0089fxcy?" // update me
+            userName: "callum", 
+            password: "0089fxcy?" 
         },
         type: "default"
     },
-    server: "weramble.database.windows.net", // update me
+    server: "weramble.database.windows.net", 
     options: {
-        database: "weramble", //update me
+        database: "weramble", 
         encrypt: true
     }
 };

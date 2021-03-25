@@ -8,6 +8,7 @@ export default function MenuBar({ navigation }) {
                 <Button title="Feed" onPress={() => navigation.navigate("Feed")}></Button>
                 <Button title="Camera" onPress={() => navigation.navigate("Camera")}></Button>
                 <Button title="Profile" onPress={() => navigation.navigate("Profile")}></Button>
+                <Button title="Competition" onPress={() => navigation.navigate("Competition")}></Button>
             </View>
         </View>
     )

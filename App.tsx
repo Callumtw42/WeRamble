@@ -19,7 +19,8 @@ import Registration from "./components/Registration"
 import Camera from "./components/Camera"
 import Feed from "./components/Feed"
 import ImagePreview from "./components/ImagePreview"
-import Profile from "./components/Profile"
+// import Profile from "./components/Profile"
+import LiProfile from "./components/LiProfile" 
 import ImageView from "./components/ImageView"
 import Competition from './components/Competition';
 
@@ -35,9 +36,9 @@ const App: () => React$Node = () => {
           <Stack.Screen name="Feed" component={Feed} />
           <Stack.Screen name="Camera" component={Camera} />
           <Stack.Screen name="ImagePreview" component={ImagePreview} />
-          <Stack.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="Profile" component={LiProfile} />
           <Stack.Screen name="ImageView" component={ImageView} />
-          <Stack.Screen name="Competition" component={Competition}/>
+          <Stack.Screen name="Competition" component={Competition} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

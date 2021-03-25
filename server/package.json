@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "node ./server",
-    "start": "node server.js"
+    "start": "node server.js",
+    "server": "npx nodemon ./server/server"
   },
   "dependencies": {
     "@azure/storage-blob": "^12.3.0",

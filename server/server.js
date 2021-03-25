@@ -103,6 +103,31 @@ app.post('/api/like', (req, res) => {
     queryDatabase(req, res, query);
 });
 
+//competitions
+app.get('/api/competitions', (req, res) => {
+    const dummy = {
+        image: 'https://weramble.blob.core.windows.net/images/bird.jpg',
+        host: "CALLUM",
+        name: "Bird Hunt",
+        description: "Find the rare bird",
+    }
+    const dummyArr = [dummy, dummy, dummy]
+    const query = readFile('sql/get-competitions.sql')
+    queryDatabase(req, res, query);
+});
+
+app.post('/api/post-competition', (req, res) => {
+    console.log("POSTING COMPETITION")
+    const { name, hostUser, description, image } = req.body;
+    const query = readFile('sql/post-competition.sql')
+        .replace('${hostUser}', quote(hostUser))
+        .replace('${name}', quote(name))
+        .replace('${description}', quote(description))
+        .replace('${image}', quote(image))
+    console.log(query);
+    queryDatabase(req, res, query);
+});
+
 //upload
 app.post('/api/upload', jsonParser, (req, res) => {
     const { data, uploader } = req.body
@@ -145,7 +170,7 @@ app.post('/api/upload', jsonParser, (req, res) => {
     let query = readFile("sql/upload.sql")
         .replace("${uri}", quote(uri))
         .replace("${uploader}", quote(uploader))
-        console.log(query)
+    console.log(query)
     queryDatabase(req, res, query);
 });
 

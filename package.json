@@ -9,7 +9,7 @@
     "ios": "concurrently \"react-native start\" \"npx react-native run-ios\" \"npx react-native log-ios\"",
     "test": "jest",
     "lint": "eslint .",
-    "server": "node ./server/server"
+    "server": "npx nodemon ./server/server"
   },
   "dependencies": {
     "@azure/storage-blob": "^12.3.0",
@@ -31,6 +31,7 @@
     "express-session": "^1.17.1",
     "ioredis": "^4.24.2",
     "mysql": "^2.18.1",
+    "nodemon": "^2.0.7",
     "react": "^16.13.1",
     "react-dom": "^17.0.1",
     "react-native": "0.63.4",

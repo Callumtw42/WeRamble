@@ -3,6 +3,7 @@ import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 import { host, post } from '../utils';
+import { sendEmail } from "./sendEmail";
 
 /** Entire registration page for adding new accounts*/
 export default function Registration({ navigation }) {
@@ -17,6 +18,10 @@ export default function Registration({ navigation }) {
             password: password,
             username: username
         }, () => { })
+
+        //let mailer = new sendEmail();
+
+        navigation.navigate("Login");
     }
 
     return (

@@ -1,5 +1,5 @@
 const { queryDatabase } = require("./azure.js");
-const { sendVerificationEmail } = require("./emailer.js")
+// const { sendVerificationEmail } = require("./emailer.js")
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -8,6 +8,7 @@ const { v1: uuid } = require('uuid');
 var bodyParser = require('body-parser')
 var ReadableData = require('stream').Readable;
 const readFile = (file) => { return fs.readFileSync(path.resolve(__dirname, file), { encoding: "UTF-8" }) };
+const { sendEmail } = require('./sendEmail')
 
 const app = express();
 app.use(bodyParser({ limit: '50mb' }));
@@ -28,9 +29,10 @@ app.get('/api/test', (req, res) => {
 //register
 app.post('/api/register', (req, res) => {
     const { email, username, password } = req.body;
+    console.log(req.body);
     let query = `insert into weramble.users(username, password, email) values ('${username}', '${password}', '${email}');`;
     queryDatabase(req, res, query);
-    // sendVerificationEmail();
+    sendEmail(email);
 });
 
 //feed
@@ -145,7 +147,7 @@ app.post('/api/upload', jsonParser, (req, res) => {
     let query = readFile("sql/upload.sql")
         .replace("${uri}", quote(uri))
         .replace("${uploader}", quote(uploader))
-        console.log(query)
+    console.log(query)
     queryDatabase(req, res, query);
 });
 

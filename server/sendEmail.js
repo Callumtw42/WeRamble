@@ -17,19 +17,19 @@ module.exports = {
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: '', // TODO: your gmail account
-                pass: '' // TODO: your gmail password
+                user: 'weramble2021@gmail.com', // TODO: your gmail account
+                pass: '0089fxcy?' // TODO: your gmail password
             }
         });
 
         // Step 2
         let mailOptions = {
-            from: 'callumtw42@gmail.com', // TODO: email sender
+            from: 'weramble2021@gmail.com', // TODO: email sender
             to: email, // TODO: email receiver
             subject: 'WeRamble Account',
             text: 'Account Confirmation!!',
             html: `<h1>Email Confirmation</h1>
-          <h2>Hello fraser</h2>
+          <h2>Hello new User</h2>
           <p>Thank you for subscribing. Please confirm your email by clicking on the following link</p>
           <p>Once you have clicked the link please reopen the app and log in</p>
           <a href=http://localhost:8081/confirm/${token}> Click here</a>

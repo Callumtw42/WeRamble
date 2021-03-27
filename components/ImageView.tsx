@@ -10,7 +10,7 @@ const windowHeight = Dimensions.get('window').height;
 export default function ImageView({ route }) {
     const image = route.params;
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
             <Image source={{ uri: image.uri }} style={styles.image} />
             <CommentSection image={image} />
         </ScrollView >

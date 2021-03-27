@@ -5,45 +5,69 @@
  * @format
  * @flow strict-local
  */
-
-import React, { useState, useEffect } from 'react';
-import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import {
-  View, Text, Dimensions
-} from 'react-native';
+import * as React from 'react';
+import Main from './components/Main';
+import Test from './components/Test';
 
-import Login from "./components/Login"
-import Registration from "./components/Registration"
-import Camera from "./components/Camera"
-import Feed from "./components/Feed"
-import ImagePreview from "./components/ImagePreview"
-// import Profile from "./components/Profile"
-import LiProfile from "./components/LiProfile" 
-import ImageView from "./components/ImageView"
-import Competition from './components/Competition';
-
-const App: () => React$Node = () => {
-  const Stack = createStackNavigator();
+export default function App() {
   return (
-    <>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
-          {/*Add screens below*/}
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Registration" component={Registration} />
-          <Stack.Screen name="Feed" component={Feed} />
-          <Stack.Screen name="Camera" component={Camera} />
-          <Stack.Screen name="ImagePreview" component={ImagePreview} />
-          <Stack.Screen name="Profile" component={LiProfile} />
-          <Stack.Screen name="ImageView" component={ImageView} />
-          <Stack.Screen name="Competition" component={Competition} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </>
+    <Main/>
   );
-};
+}
+/*
+ return (
+    <NavigationContainer>
+    <Stack.Navigator initialRouteName='Login'>
+      <Tab.Screen name="Feed" component={Feed} options={{
+        tabBarIcon:({color})=>(
+        <MaterialCommunityIcons name="home" 
+        color = {color} 
+        size={26}/> ) }}/>
+      <Tab.Screen name="Camera" component={Camera} options={{
+        tabBarIcon:({color})=>(
+        <MaterialCommunityIcons name="camera" 
+        color = {color} 
+        size={26}/> ) }}  />
+      <Tab.Screen name="Profile" component={LiProfile} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Registration" component={Registration} />
+      <Stack.Screen name="ImagePreview" component={ImagePreview} />
+      <Stack.Screen name="ImageView" component={ImageView} />
+      <Stack.Screen name="Competition" component={Competition} />
+    </Stack.Navigator>
+    </NavigationContainer>
+  );
+  */
+ /* return (
+    <NavigationContainer>
+    <Stack.Navigator initialRouteName='Login'>
+      <Tab.Screen name="Feed" component={Feed} options={{
+        tabBarIcon:({color})=>(
+        <MaterialCommunityIcons name="home" 
+        color = {color} 
+        size={26}/> ) }}/>
+      <Tab.Screen name="Camera" component={Camera} options={{
+        tabBarIcon:({color})=>(
+        <MaterialCommunityIcons name="camera" 
+        color = {color} 
+        size={26}/> ) }}  />
+      <Tab.Screen name="Profile" component={LiProfile} />
+    </Stack.Navigator>
+    </NavigationContainer>
+  );*/
 
-
-export default App;
+/*
+  return(
+    <NavigationContainer>
+    <Tab.Navigator >
+    <Tab.Screen name="Feed" component={Feed} />
+    <Tab.Screen name="Camera" component={Camera} />
+    <Tab.Screen name="ImagePreview" component={ImagePreview} />
+    <Tab.Screen name="Profile" component={LiProfile} />
+    <Tab.Screen name="ImageView" component={ImageView} />
+    <Tab.Screen name="Competition" component={Competition} />
+    </Tab.Navigator>
+  </NavigationContainer>
+);
+*/

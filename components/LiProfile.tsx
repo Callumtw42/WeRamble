@@ -3,8 +3,9 @@ import { Text, View, StyleSheet, SafeAreaView, Image, Button, Alert } from 'reac
 import ImageGrid from './ImageGrid';
 import Posts from './Posts';
 import { host } from "../utils"
+import { ScrollView } from 'react-native-gesture-handler';
 //use those vars to link datebase,
-const number = 5000
+const number = 0
 const Signature = "hello word！！"
 const randomNumber1 = Math.random() * number
 const randomNumber2 = Math.random() * number
@@ -16,11 +17,13 @@ export default function LiProfile({ navigation }) {
     return (
 
         <SafeAreaView style={styles.background}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{width:"100%", height:"100%"}}>
             <View style={styles.topbar}>
                 <Text style={styles.usernames}>{username} </Text>
 
                 <Image style={styles.camera}
-                    source={require("../assets/like-on.png")}>
+                    source={require("../assets/camera.png")}
+                  >
                 </Image>
             </View>
             <View style={styles.barline} />
@@ -77,7 +80,7 @@ export default function LiProfile({ navigation }) {
             </View>
 
 
-
+            </ScrollView>
         </SafeAreaView>
     );
 }
@@ -95,7 +98,7 @@ const styles = StyleSheet.create({
     usernames: {
         textAlign: "left",
         justifyContent: "flex-start",
-        top: 20,
+        top: 10,
         left: 10,
         fontSize: 25,
     },
@@ -109,40 +112,41 @@ const styles = StyleSheet.create({
     },
     barline: {
         backgroundColor: '#bdbdbd',
-        height: 0.5,
+        height: 1,
         width: "100%",
-        top: 3,
+        top:5,
     },
     informbar: {
         flexDirection: "row",
-        height: "18%",
+        height: "15%",
     },
     editpButton: {
 
     },
     userpost: {
-        top: 5,
+        top: 1,
         justifyContent: 'space-evenly',
         flexDirection: "row",
-        height: "25%",
+        height: "40%",
     },
     userpost1: {
-        top: 10,
+        top: 1,
         flexDirection: "row",
-        height: "25%",
+        height: "19%",
     },
     userheadimage: {
         marginRight: 10,
         alignItems: 'center',
         justifyContent: 'center',
-        width: "23%",
-        height: "60%",
-        backgroundColor: '#f76260',
+        width: 70,
+        height: 70,
+        backgroundColor:'#f76260',
         borderRadius: 500,
         top: 20,
         left: 20,
     },
     username: {
+        //top:1,
         left: 30,
         bottom: 40,
         fontSize: 18,

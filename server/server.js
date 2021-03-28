@@ -23,7 +23,7 @@ const quote = (string) => {
 //test
 app.get('/api/test', (req, res) => {
     let query = `select * from weramble.test`;
-    queryDatabase(req, res, query);
+    queryDatabase(req, res, query); 
 });
 
 //register

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View, Image} from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 import { get, host } from '../utils';
@@ -28,6 +28,10 @@ export default function Login({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Image 
+        style={styles.logo}
+        source={require("../assets/WeRamble.png")}
+      />
       <Text style={styles.sectionTitle} >Username</Text>
       <TextInput
         style={styles.input}
@@ -42,6 +46,8 @@ export default function Login({ navigation }) {
         onPress={() => navigation.navigate('Registration')}
       >New User? Register here</Text>
       <Button
+        style={styles.loginButton}
+        color='#0066ff'
         title="Login"
         onPress={() => authenticate()}
       />
@@ -59,10 +65,10 @@ const styles = StyleSheet.create({
     color: Colors.black,
     textAlign: "center",
   },
-  tinylogo: {
-    width: 250,
-    height: 200,
-  },
+  //tinylogo: {
+    //width: 250,
+    //height: 200,
+  //},
   smallText: {
     textAlign: "center",
   },
@@ -70,11 +76,25 @@ const styles = StyleSheet.create({
     borderColor: Colors.black,
     borderWidth: 1,
     width: "80%",
-    alignSelf: 'center'
+    alignSelf: 'center',
+    color: 'black',
+    backgroundColor: 'white'
   },
   container: {
+    paddingTop: 10,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    backgroundColor: '#33ccff'
+  },
+  loginButton: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  logo: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    width: 300,
+    height: 200
   }
 });

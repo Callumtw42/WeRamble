@@ -56,6 +56,7 @@ module.exports = {
                     if (results.length > 0)
                         res.json(results);
                     else res.json([]);
+                    conn.close();
                 });
 
                 conn.execSql(request);

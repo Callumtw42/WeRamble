@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { Text, View, Image, StyleSheet, Dimensions, Button, RefreshControl, TouchableOpacity} from "react-native";
+import React, { useEffect, useState } from 'react';
+import { Dimensions, Image, RefreshControl, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { ip, port } from "../utils"
+
+import { get } from '../utils';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -11,6 +12,7 @@ const wait = (timeout) => {
     });
 }
 
+/**retrieves images from the database and displays them in a grid */
 export default function ImageGrid({ route, navigation }) {
 
     const [gallery, setGallery] = useState([])
@@ -49,16 +51,7 @@ export default function ImageGrid({ route, navigation }) {
     }
 
     useEffect(() => {
-        fetch(`${route}`)
-            .then(res => res.json())
-            .then(data => {
-                if (data) {
-                    displayImages(data)
-                }
-            })
-            .catch(error => {
-                console.error(error)
-            })
+        get(route, displayImages)
     }, [refreshing])
 
     return (

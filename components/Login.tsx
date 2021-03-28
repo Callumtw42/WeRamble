@@ -1,29 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import {host} from "../utils"
-import {
-  Text,
-  StyleSheet,
-  View,
-  TextInput,
-  Button,
-  Alert,
-  Image
-} from 'react-native';
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
-// import bcrypt from "bcryptjs";
-// import {User} from "components/src/entity/User";
+import React, { useEffect, useState } from 'react';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+
+import { get, host } from '../utils';
 
 
-
+/** The entire login page */
 export default function Login({ navigation }) {
   const [username, setUsername] = useState("demo");
   const [password, setPassword] = useState("demo");
   const [error, setError] = useState("");
-  const route = `${host}/api/login`
+  const route = `${host}/api/login/${username}/${password}`
 
-  function checkResponse(data) {
+  function login(data) {
     if (data) {
       global.username = username;
       navigation.navigate("Feed");
@@ -31,29 +20,9 @@ export default function Login({ navigation }) {
     else { setError("Invalid Details") }
   }
 
-  function login() {
+  function authenticate() {
     if (username.length > 0 && password.length > 0) {
-      fetch(`${route}/${username}/${password}`)
-        .then(res => res.json())
-        .then(data => {
-          checkResponse(data)
-        })
-        .catch(error => {
-          console.error(error)
-        })
-
-        // const user = User.findOne({ where: { username }});
-        // const valid = bcrypt.compare(password, user.password);
-
-        // if(!valid) {
-
-        //   return null;
-        // }
-
-        // if(!user.confirmed) {
-
-        //   return null;
-        // }
+      get(route, (d) => login(d))
     }
   }
 
@@ -70,11 +39,11 @@ export default function Login({ navigation }) {
         defaultValue={"demo"}
         onChangeText={(v) => setPassword(v)} />
       <Text style={styles.smallText}
-        onPress={() => navigation.navigate('Register')}
+        onPress={() => navigation.navigate('Registration')}
       >New User? Register here</Text>
       <Button
         title="Login"
-        onPress={() => login()}
+        onPress={() => authenticate()}
       />
       <Text
         style={styles.sectionTitle}

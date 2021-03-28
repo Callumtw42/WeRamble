@@ -1,33 +1,16 @@
-import fs from 'react-native-fs';
-import React from 'react'
-import {host} from '../utils'
-import { View, Image, TouchableOpacity, StyleSheet, Dimensions, Text, ImageBase } from 'react-native'
-import { isThisTypeNode } from 'typescript';
+import React from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import { host, post } from '../utils';
 
 const apiRoute = `${host}/api/upload`
 
+/**Displays the image captured immediately after taking a picture */
 export default function ImagePreview({ route }) {
     const { photo } = route.params
 
     async function upload() {
-        const data = new FormData()
-        data.append('file', photo)
-
-        fetch(apiRoute, {
-            method: 'POST',
-            headers: {
-                // Content-Type may need to be completely **omitted**
-                // or you may need something
-                "Content-Type": "application/JSON"
-            },
-            body: JSON.stringify({ data: photo })
-        }).then(
-            response => response.json() // if the response is a JSON object
-        ).then(
-            success => console.log(success) // Handle the success response object
-        ).catch(
-            error => console.log(error) // Handle the error response object
-        );
+        post(apiRoute, { data: photo, uploader: global.username }, () => { })
     }
 
     return (

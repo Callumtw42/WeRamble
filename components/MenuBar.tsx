@@ -1,6 +1,7 @@
-import React from 'react'
-import { Button, View, Text, StyleSheet } from 'react-native'
+import React from 'react';
+import { Button, StyleSheet, View } from 'react-native';
 
+/** Navigation buttons to different pages from the feed*/
 export default function MenuBar({ navigation }) {
     return (
         <View>

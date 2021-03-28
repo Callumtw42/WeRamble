@@ -1,20 +1,48 @@
-import React, { useState } from 'react'
-import { Dimensions, View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
+import React, { useEffect, useState } from 'react';
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import { get, host, post } from '../utils';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export default function Like() {
-    const [like, setLike] = useState(false)
+/**The like button */
+export default function Like({ image }) {
+    const [liked, setLiked] = useState(false);
+    const [likes, setLikes] = useState(0);
     const likeOn = <Image style={styles.icon} source={require("../assets/like-on.png")} ></Image>
     const likeOff = <Image style={styles.icon} source={require("../assets/like-off.png")} ></Image>
-    function toggleLike() {
-        setLike(!like)
+    const likeRoute = `${host}/api/like`
+    const getLikesRoute = `${host}/api/getlikes/${image.id}/${global.username}`
+
+    useEffect(() => {
+        getLikes();
+    }, [])
+
+    async function postLike() {
+        post(likeRoute, {
+            imageid: image.id,
+            user: global.username,
+            like: !liked
+        }, getLikes)
     }
+
+    async function getLikes() {
+        get(getLikesRoute, (d) => {
+            if (d.length > 0) {
+                const data = d[0];
+                setLikes(data.likes);
+                setLiked(data.liked > 0 ? true : false);
+            }
+        })
+    }
+
     return (
         <View>
-            <TouchableOpacity style={styles.button} onPress={toggleLike}>
-                {like ? likeOn : likeOff}
+            <TouchableOpacity style={styles.button} onPress={postLike}>
+                {liked ? likeOn : likeOff}
             </TouchableOpacity>
+            <Text>{likes}</Text>
         </View>
     )
 }

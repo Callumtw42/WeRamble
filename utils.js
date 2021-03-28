@@ -1,9 +1,9 @@
 //set this to false if you want to use remote server
-const LOCAL = false;
+const LOCAL = true;
 //if your using local server, set this to your computer's ip address
 const ip = "172.29.32.1";
 
-const localhost = `https://${ip}:8080`;
+const localhost = `http://${ip}:8080`;
 const remotehost = "https://werambleserver.azurewebsites.net";
 const host = LOCAL ? localhost : remotehost;
 
@@ -25,5 +25,27 @@ module.exports = {
         })
         .catch(error => {
             console.error(error)
+        }),
+    post(url, body, callback) {
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/JSON"
+            },
+            body: JSON.stringify(body)
         })
+            .then(res => res.json())
+            .then(d => callback(d))
+            .catch(error => {
+                console.error(error);
+            });
+    },
+    get(url, callback) {
+        fetch(url)
+            .then(res => res.json())
+            .then((d) => { callback(d) })
+            .catch(error => {
+                console.error(error);
+            });
+    }
 }

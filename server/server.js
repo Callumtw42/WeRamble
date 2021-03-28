@@ -1,5 +1,5 @@
 const { queryDatabase } = require("./azure.js");
-const { sendVerificationEmail } = require("./emailer.js")
+// const { sendVerificationEmail } = require("./emailer.js")
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -8,6 +8,7 @@ const { v1: uuid } = require('uuid');
 var bodyParser = require('body-parser')
 var ReadableData = require('stream').Readable;
 const readFile = (file) => { return fs.readFileSync(path.resolve(__dirname, file), { encoding: "UTF-8" }) };
+const { sendEmail } = require('./sendEmail')
 
 const app = express();
 app.use(bodyParser({ limit: '50mb' }));
@@ -26,11 +27,12 @@ app.get('/api/test', (req, res) => {
 });
 
 //register
-app.get('/api/register/:email/:username/:password', (req, res) => {
-    const { email, username, password } = req.params;
+app.post('/api/register', (req, res) => {
+    const { email, username, password } = req.body;
+    console.log(req.body);
     let query = `insert into weramble.users(username, password, email) values ('${username}', '${password}', '${email}');`;
     queryDatabase(req, res, query);
-    sendVerificationEmail();
+    sendEmail(email);
 });
 
 //feed
@@ -53,7 +55,6 @@ app.get('/api/login/:username/:password', (req, res) => {
 //load user's images 
 app.get('/api/user-images/:uploader', (req, res) => {
     const { uploader } = req.params;
-    console.log(req.params);
     let query = readFile("sql/user-images.sql")
         .replace("${uploader}", quote(uploader))
     queryDatabase(req, res, query);
@@ -78,10 +79,35 @@ app.get('/api/getcomments/:imageid', (req, res) => {
     queryDatabase(req, res, query);
 });
 
+//getlikes
+app.get('/api/getlikes/:imageid/:user', (req, res) => {
+    const { imageid, user } = req.params;
+    console.log("getLikes: " + imageid);
+    let query = readFile("sql/get-likes.sql")
+        .replace("${post}", quote(imageid))
+        .replace("${post}", quote(imageid))
+        .replace("${username}", quote(user))
+    queryDatabase(req, res, query);
+});
+
+//like
+app.post('/api/like', (req, res) => {
+    console.log("like: " + req.body.like)
+    const { imageid, user, like } = req.body
+    query = like
+        ? readFile("sql/like.sql")
+            .replace("${user}", quote(user))
+            .replace("${post}", quote(imageid))
+        : readFile("sql/unlike.sql")
+            .replace("${username}", quote(user))
+            .replace("${post}", quote(imageid))
+    console.log(query);
+    queryDatabase(req, res, query);
+});
+
 //upload
 app.post('/api/upload', jsonParser, (req, res) => {
-    // console.log(req.body.file)
-    const { data } = req.body
+    const { data, uploader } = req.body
     const base64 = data.base64;
     const imageBufferData = Buffer.from(base64, 'base64');
 
@@ -120,12 +146,16 @@ app.post('/api/upload', jsonParser, (req, res) => {
     const uri = `https://weramble.blob.core.windows.net/images/${blobName}`
     let query = readFile("sql/upload.sql")
         .replace("${uri}", quote(uri))
-        .replace("${uploader}", quote("demo"))
+        .replace("${uploader}", quote(uploader))
+    console.log(query)
     queryDatabase(req, res, query);
 });
 
 //listen
 app.listen(8080, (err) => {
     if (err) throw err;
-    else console.log(`Server started on port 8080`);
+    else {
+        console.log(`Server started on port 8080`);
+        console.log("Please log into app to Connect to db")
+    }
 });

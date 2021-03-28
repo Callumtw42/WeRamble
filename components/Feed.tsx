@@ -16,8 +16,8 @@ const windowHeight = Dimensions.get('window').height;
     return (
         <View style={styles.container} > 
           <MenuBar navigation={navigation} />
-             {/* <ImageGrid navigation={navigation} route={route} />  */}
-             <NavTab></NavTab>
+             { <ImageGrid navigation={navigation} route={route} />  }
+
 
         </View>
     )

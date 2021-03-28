@@ -9,7 +9,7 @@
     "ios": "concurrently \"react-native start\" \"npx react-native run-ios\" \"npx react-native log-ios\"",
     "test": "jest",
     "lint": "eslint .",
-    "server": "node ./server/server"
+    "server": "cd server & npx nodemon ./server"
   },
   "dependencies": {
     "@azure/storage-blob": "^12.3.0",
@@ -32,13 +32,14 @@
     "ioredis": "^4.24.2",
     "mysql": "^2.18.1",
     "nodemailer": "^6.5.0",
+    "nodemon": "^2.0.7",
     "react": "^16.13.1",
     "react-dom": "^17.0.1",
     "react-native": "0.63.4",
     "react-native-camera": "^3.40.5",
     "react-native-fs": "^2.16.6",
     "react-native-gesture-handler": "^1.9.0",
-    "react-native-image-picker": "^3.1.4",
+    "react-native-image-picker": "^3.3.2",
     "react-native-reanimated": "^1.13.2",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.16.1",

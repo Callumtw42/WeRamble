@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React, { useState, useEffect } from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
@@ -21,6 +13,8 @@ import Feed from "./components/Feed"
 import ImagePreview from "./components/ImagePreview"
 import Profile from "./components/Profile"
 import ImageView from "./components/ImageView"
+import Competitions from './components/Competitions';
+import NewCompetition from './components/NewCompetion';
 
 const App: () => React$Node = () => {
   const Stack = createStackNavigator();
@@ -36,6 +30,8 @@ const App: () => React$Node = () => {
           <Stack.Screen name="ImagePreview" component={ImagePreview} />
           <Stack.Screen name="Profile" component={Profile} />
           <Stack.Screen name="ImageView" component={ImageView} />
+          <Stack.Screen name="Competitions" component={Competitions} />
+          <Stack.Screen name="NewCompetition" component={NewCompetition} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

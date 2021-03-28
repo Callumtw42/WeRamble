@@ -1,0 +1,1 @@
+insert into weramble.competitions(hostUser, name, description, image) values(${hostUser}, ${name}, ${description}, ${image});

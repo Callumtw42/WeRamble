@@ -23,7 +23,7 @@ const quote = (string) => {
 //test
 app.get('/api/test', (req, res) => {
     let query = `select * from weramble.test`;
-    queryDatabase(req, res, query);
+    queryDatabase(req, res, query); 
 });
 
 //register
@@ -43,6 +43,7 @@ app.get('/api/feed', (req, res) => {
 
 //login
 app.get('/api/login/:username/:password', (req, res) => {
+    console.log("LOGIN")
     const { username, password } = req.params;
 
     let query = readFile("sql/login.sql")
@@ -50,8 +51,8 @@ app.get('/api/login/:username/:password', (req, res) => {
         .replace("${email}", quote(username))
         .replace("${password}", quote(password))
     queryDatabase(req, res, query);
-});
-
+}); 
+ 
 //load user's images 
 app.get('/api/user-images/:uploader', (req, res) => {
     const { uploader } = req.params;
@@ -101,6 +102,31 @@ app.post('/api/like', (req, res) => {
         : readFile("sql/unlike.sql")
             .replace("${username}", quote(user))
             .replace("${post}", quote(imageid))
+    console.log(query);
+    queryDatabase(req, res, query);
+});
+
+//competitions
+app.get('/api/competitions', (req, res) => {
+    const dummy = {
+        image: 'https://weramble.blob.core.windows.net/images/bird.jpg',
+        host: "CALLUM",
+        name: "Bird Hunt",
+        description: "Find the rare bird",
+    }
+    const dummyArr = [dummy, dummy, dummy]
+    const query = readFile('sql/get-competitions.sql')
+    queryDatabase(req, res, query);
+});
+
+app.post('/api/post-competition', (req, res) => {
+    console.log("POSTING COMPETITION")
+    const { name, hostUser, description, image } = req.body;
+    const query = readFile('sql/post-competition.sql')
+        .replace('${hostUser}', quote(hostUser))
+        .replace('${name}', quote(name))
+        .replace('${description}', quote(description))
+        .replace('${image}', quote(image))
     console.log(query);
     queryDatabase(req, res, query);
 });

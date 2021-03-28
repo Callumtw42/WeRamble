@@ -1,8 +1,5 @@
 const { queryDatabase } = require("./azure.js");
-<<<<<<< HEAD
-=======
 // const { sendVerificationEmail } = require("./emailer.js")
->>>>>>> a59fbe8e8cc6433000713edb8c6043052f802419
 const express = require('express');
 const path = require('path');
 const fs = require('fs');

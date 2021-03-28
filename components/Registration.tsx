@@ -17,6 +17,9 @@ export default function Registration({ navigation }) {
             password: password,
             username: username
         }, () => { })
+
+
+        navigation.navigate("Login");
     }
 
     return (

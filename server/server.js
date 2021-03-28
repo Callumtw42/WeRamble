@@ -1,4 +1,8 @@
 const { queryDatabase } = require("./azure.js");
+<<<<<<< HEAD
+=======
+// const { sendVerificationEmail } = require("./emailer.js")
+>>>>>>> a59fbe8e8cc6433000713edb8c6043052f802419
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -7,6 +11,7 @@ const { v1: uuid } = require('uuid');
 var bodyParser = require('body-parser')
 var ReadableData = require('stream').Readable;
 const readFile = (file) => { return fs.readFileSync(path.resolve(__dirname, file), { encoding: "UTF-8" }) };
+const { sendEmail } = require('./sendEmail')
 
 const app = express();
 app.use(bodyParser({ limit: '50mb' }));
@@ -27,9 +32,10 @@ app.get('/api/test', (req, res) => {
 //register
 app.post('/api/register', (req, res) => {
     const { email, username, password } = req.body;
+    console.log(req.body);
     let query = `insert into weramble.users(username, password, email) values ('${username}', '${password}', '${email}');`;
     queryDatabase(req, res, query);
-    // sendVerificationEmail();
+    sendEmail(email);
 });
 
 //feed

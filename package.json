@@ -31,7 +31,11 @@
     "express-session": "^1.17.1",
     "ioredis": "^4.24.2",
     "mysql": "^2.18.1",
+<<<<<<< HEAD
     "nodemon": "^2.0.7",
+=======
+    "nodemailer": "^6.5.0",
+>>>>>>> a59fbe8e8cc6433000713edb8c6043052f802419
     "react": "^16.13.1",
     "react-dom": "^17.0.1",
     "react-native": "0.63.4",
@@ -54,7 +58,8 @@
     "unimodules-camera-interface": "^5.4.0",
     "unimodules-face-detector-interface": "^5.4.0",
     "unimodules-file-system-interface": "^5.4.0",
-    "unimodules-permissions-interface": "^5.4.0"
+    "unimodules-permissions-interface": "^5.4.0",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

@@ -1,5 +1,4 @@
 const { queryDatabase } = require("./azure.js");
-const { sendVerificationEmail } = require("./emailer.js")
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -41,6 +40,7 @@ app.get('/api/feed', (req, res) => {
 
 //login
 app.get('/api/login/:username/:password', (req, res) => {
+    console.log("LOGIN")
     const { username, password } = req.params;
 
     let query = readFile("sql/login.sql")
@@ -48,8 +48,8 @@ app.get('/api/login/:username/:password', (req, res) => {
         .replace("${email}", quote(username))
         .replace("${password}", quote(password))
     queryDatabase(req, res, query);
-});
-
+}); 
+ 
 //load user's images 
 app.get('/api/user-images/:uploader', (req, res) => {
     const { uploader } = req.params;

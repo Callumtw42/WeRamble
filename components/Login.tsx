@@ -20,6 +20,9 @@ export default function Login({ navigation }) {
   }
 
   function authenticate() {
+    console.log(username)
+    console.log(password)
+    console.log(route)
     if (username.length > 0 && password.length > 0) {
       get(route, (d) => login(d))
     }

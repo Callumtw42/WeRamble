@@ -4,6 +4,7 @@ import { View, Text, Button } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import { theme } from '../theme'
 import { host, post } from '../utils'
+import { launchImageLibrary } from 'react-native-image-picker'
 const dummyImage = 'https://weramble.blob.core.windows.net/images/bird.jpg'
 
 export default function NewCompetion() {
@@ -17,6 +18,11 @@ export default function NewCompetion() {
             post(route, { name: name, hostUser: global.username, image: dummyImage, description: description }, () => { })
     }
 
+    function pickImage() {
+        launchImageLibrary({ mediaType: 'photo' }, (d) => { console.log(d) })
+    }
+
+
     return (
         <View>
             <Text>Competition Name</Text>
@@ -27,6 +33,7 @@ export default function NewCompetion() {
             <View style={theme.borderbox}>
                 <TextInput onChangeText={(v) => { setDescription(v) }}></TextInput>
             </View>
+            <Button onPress={pickImage} title={"Pick Image"}></Button>
             <Button onPress={postCompetition} title={"Post Competition"}></Button>
         </View>
     )

@@ -1,8 +1,14 @@
-import React from 'react';
 import { Button, StyleSheet, View } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React,{ Component } from 'react';
+import Feed from './Feed';
+import Camera from './Camera';
+import { TableInheritance } from 'typeorm';
+
+const Tab=createBottomTabNavigator();
 
 /** Navigation buttons to different pages from the feed*/
-export default function MenuBar({ navigation }) {
+export default function MenuBar ({ navigation }) {
     return (
         <View>
             <View style={styles.buttons}>
@@ -14,6 +20,7 @@ export default function MenuBar({ navigation }) {
         </View>
     )
 }
+
 
 const styles = StyleSheet.create({
     container: {

@@ -71,9 +71,6 @@ export default function Posts() {
 
     const distance = Math.abs(roundIndex - index);
 
-    // Prevent one pixel triggering setIndex in the middle
-    // of the transition. With this we have to scroll a bit
-    // more to trigger the index change.
     const isNoMansLand = 0.4 < distance;
 
     if (roundIndex !== indexRef.current && !isNoMansLand) {

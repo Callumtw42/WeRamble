@@ -49,7 +49,7 @@ export default function Like({ image }) {
 
 const styles = StyleSheet.create({
     icon: {
-        width: windowWidth * (1 / 10),
+        width: windowWidth * (1 / 9),
         height: windowHeight * (1 / 22),
         margin: 2
     },

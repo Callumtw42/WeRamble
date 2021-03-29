@@ -6,6 +6,41 @@ import { get, host } from '../utils';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+const dummy = [
+    {
+        name: "Competition Name",
+        hostUser: "User Name",
+        description: "Here is a description of the competition",
+        image: "https://weramble.blob.core.windows.net/images/tiger.jpg"
+    },
+
+    {
+        name: "Competition Name",
+        hostUser: "User Name",
+        description: "Here is a description of the competition",
+        image: "https://weramble.blob.core.windows.net/images/tiger.jpg"
+    },
+
+    {
+        name: "Competition Name",
+        hostUser: "User Name",
+        description: "Here is a description of the competition",
+        image: "https://weramble.blob.core.windows.net/images/tiger.jpg"
+    },
+    {
+        name: "Competition Name",
+        hostUser: "User Name",
+        description: "Here is a description of the competition",
+        image: "https://weramble.blob.core.windows.net/images/tiger.jpg"
+    },
+    {
+        name: "Competition Name",
+        hostUser: "User Name",
+        description: "Here is a description of the competition",
+        image: "https://weramble.blob.core.windows.net/images/tiger.jpg"
+    }
+]
+
 export default function Competitions({ navigation }) {
     const [competitions, setCompetitions] = useState([]);
     const route = `${host}/api/competitions`
@@ -17,7 +52,7 @@ export default function Competitions({ navigation }) {
 
     function renderCompetitions(data) {
         setCompetitions(
-            data.map((competition, index) => {
+            dummy.map((competition, index) => {
                 const { name, hostUser, image, description } = competition;
                 return (
                     <View style={styles.borderbox} key={index}>

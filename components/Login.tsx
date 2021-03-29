@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Image,StyleSheet, Text, TextInput, View } from 'react-native';
+import { Dimensions, Button, Image,StyleSheet, Text, TextInput, View } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { get, host } from '../utils';
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 /** The entire login page */
 export default function Login({ navigation }) {
@@ -33,6 +35,10 @@ export default function Login({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Image
+        style={styles.logo}
+        source={require("../assets/WeRamble.png")}
+      />
       <Text style={styles.sectionTitle} >Username</Text>
       <TextInput
         style={styles.input}
@@ -67,10 +73,10 @@ const styles = StyleSheet.create({
     color: Colors.black,
     textAlign: "center",
   },
-  tinylogo: {
-    width: 250,
-    height: 200,
-  },
+  //tinylogo: {
+  //width: 250,
+  //height: 200,
+  //},
   smallText: {
     textAlign: "center",
   },
@@ -89,8 +95,23 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   container: {
+    //paddingTop: 10,
+    paddingBottom: 100,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    backgroundColor: '#33ccff',
+    height: windowHeight,
+    width: windowWidth
+  },
+  loginButton: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  logo: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    width: 300,
+    height: 200
   }
 });

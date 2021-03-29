@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   View, Text, Dimensions
 } from 'react-native';
@@ -17,9 +18,10 @@ import Competitions from './components/Competitions';
 import NewCompetition from './components/NewCompetion';
 //profile
 import LiProfile from './components/LiProfile';
-
-const App: () => React$Node = () => {
   const Stack = createStackNavigator();
+  const Tab = createBottomTabNavigator();
+const App: () => React$Node = () => {
+
   return (
     <>
       <NavigationContainer>
@@ -36,10 +38,17 @@ const App: () => React$Node = () => {
           <Stack.Screen name="NewCompetition" component={NewCompetition} />
           <Stack.Screen name="LiProfile" component={LiProfile} />
         </Stack.Navigator>
+        </NavigationContainer>
+
+        <NavigationContainer>
+        <Tab.Navigator > 
+          {/*Add screens below*/}
+          <Tab.Screen name="Feed" component={Feed} />
+          <Tab.Screen name="Camera" component={Camera} />
+          <Tab.Screen name="LiProfile" component={LiProfile} />
+        </Tab.Navigator>
       </NavigationContainer>
-    </>
-  );
-};
-
-
+</>   
+)
+}
 export default App;

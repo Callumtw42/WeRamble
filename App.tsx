@@ -15,7 +15,7 @@ import Profile from "./components/Profile"
 import ImageView from "./components/ImageView"
 import Competitions from './components/Competitions';
 import NewCompetition from './components/NewCompetion';
-
+//profile
 import LiProfile from './components/LiProfile';
 
 const App: () => React$Node = () => {

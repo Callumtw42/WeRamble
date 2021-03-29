@@ -19,7 +19,9 @@ export default function NewCompetion() {
     }
 
     function pickImage() {
-        launchImageLibrary({ mediaType: 'photo' }, (d) => { console.log(d) })
+        launchImageLibrary({ mediaType: 'photo', includeBase64: true }, (d) => {
+            post(route, { data: d.base64, uploader: global.username }, (d) => { console.log(d) })
+        })
     }
 
 

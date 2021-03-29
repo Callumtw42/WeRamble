@@ -55,7 +55,7 @@ export default function ImageGrid({ route, navigation }) {
     }, [refreshing])
 
     return (
-        <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} >
+        <ScrollView showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} >
             <View style={styles.gallery}>{gallery}</View>
         </ScrollView>
     )

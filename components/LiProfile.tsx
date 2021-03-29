@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     },
     topbar: {
         flexDirection: "row",
-        height: "10%",
+        height: 65,
         justifyContent: 'space-between'
     },
     usernames: {
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     },
     informbar: {
         flexDirection: "row",
-        height: "20%",
+        height: 150,
     },
     editpButton: {
 
@@ -124,13 +124,13 @@ const styles = StyleSheet.create({
     userpost1: {
         top: 1,
         flexDirection: "row",
-        height: "23%",
+        height: 200,
     },
     userpost: {
         top: 1,
         justifyContent: 'space-evenly',
         flexDirection: "row",
-        height: "50%",
+        height: 500,
     },
     userheadimage: {
         marginRight: 10,

@@ -15,7 +15,8 @@ export default function Login({ navigation }) {
   function login(data) {
     if (data) {
       global.username = username;
-      navigation.navigate("Feed");
+      console.log(username);
+      navigation.navigate("Home");
     }
     else { setError("Invalid Details") }
   }

@@ -4,7 +4,7 @@ import ImageGrid from './ImageGrid';
 import Posts from './Posts';
 import { host } from "../utils"
 import { ScrollView } from 'react-native-gesture-handler';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 const number = 0
@@ -12,29 +12,24 @@ const Signature = "hello word！！"
 const randomNumber1 = Math.random() * number
 const randomNumber2 = Math.random() * number
 const randomNumber3 = Math.random() * number
-const username = global.username; 
-const route = `${host}/api/user-images/${username}`;
 
 export default function LiProfile({ navigation }) {
+    const username = global.username;
+    const route = `${host}/api/user-images/${username}`;
     return (
 
         <SafeAreaView style={styles.background}>
             {/* <ScrollView showsVerticalScrollIndicator={false} style={{width:"100%", height:"100%"}}> */}
             <View style={styles.topbar}>
                 <Text style={styles.usernames}>{username} </Text>
-
-                <Image style={styles.camera}
-                    source={require("../assets/camera.png")} >
-                </Image>
-
-                {/* <TouchableOpacity  onPress={()=> {navigation.navigate("Camera")}}>
+                <TouchableOpacity onPress={() => { navigation.navigate("Camera") }}>
                     <Image style={styles.camera} source={require("../assets/camera.png")} />
-                </TouchableOpacity> */}
+                </TouchableOpacity>
             </View>
             <View style={styles.barline} />
             <View style={styles.informbar}>
                 <Image style={styles.userheadimage}
-                    source={{  uri: "https://picsum.photos/200/200" }} />
+                    source={{ uri: "https://picsum.photos/200/200" }} />
                 <View style={styles.container}>
                     <Text>{randomNumber1}</Text>
                     <Text style={{ fontWeight: 'bold' }}>Posts</Text>
@@ -97,6 +92,7 @@ const styles = StyleSheet.create({
     topbar: {
         flexDirection: "row",
         height: "10%",
+        justifyContent: 'space-between'
     },
     usernames: {
         textAlign: "left",
@@ -107,17 +103,15 @@ const styles = StyleSheet.create({
     },
 
     camera: {
-        top: 10,
+        margin: 10,
         height: 50,
         width: 50,
-        position: "absolute",
-        right: 10,
     },
     barline: {
         backgroundColor: '#bdbdbd',
         height: 1,
         width: "100%",
-        top:5,
+        top: 5,
     },
     informbar: {
         flexDirection: "row",
@@ -144,7 +138,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: 70,
         height: 70,
-        backgroundColor:'#f76260',
+        backgroundColor: '#f76260',
         borderRadius: 500,
         top: 20,
         left: 20,

@@ -19,7 +19,7 @@ export default function LiProfile({ navigation }) {
     return (
 
         <SafeAreaView style={styles.background}>
-            {/* <ScrollView showsVerticalScrollIndicator={false} style={{width:"100%", height:"100%"}}> */}
+            <ScrollView showsVerticalScrollIndicator={false} style={{width:"100%", height:"100%"}}>
             <View style={styles.topbar}>
                 <Text style={styles.usernames}>{username} </Text>
                 <TouchableOpacity onPress={() => { navigation.navigate("Camera") }}>
@@ -78,7 +78,7 @@ export default function LiProfile({ navigation }) {
             </View>
 
 
-            {/* </ScrollView> */}
+            </ScrollView>
         </SafeAreaView>
     );
 }
@@ -124,13 +124,13 @@ const styles = StyleSheet.create({
     userpost1: {
         top: 1,
         flexDirection: "row",
-        height: "28%",
+        height: "23%",
     },
     userpost: {
         top: 1,
         justifyContent: 'space-evenly',
         flexDirection: "row",
-        height: "30%",
+        height: "50%",
     },
     userheadimage: {
         marginRight: 10,

@@ -71,9 +71,9 @@ const App: () => React$Node = () => {
           <Stack.Screen name="ImagePreview" component={ImagePreview} />
           <Stack.Screen name="Profile" component={Profile} />
           <Stack.Screen name="ImageView" component={ImageView} />
-          <Stack.Screen name="Competitions" component={Competitions} />
+          {/* <Stack.Screen name="Competitions" component={Competitions} /> */}
           <Stack.Screen name="NewCompetition" component={NewCompetition} />
-          <Stack.Screen name="LiProfile" component={LiProfile} />
+          {/* <Stack.Screen name="LiProfile" component={LiProfile} /> */}
         </Stack.Navigator>
       </NavigationContainer>
 

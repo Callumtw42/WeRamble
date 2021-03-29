@@ -9,7 +9,8 @@
     "ios": "concurrently \"react-native start\" \"npx react-native run-ios\" \"npx react-native log-ios\"",
     "test": "jest",
     "lint": "eslint .",
-    "server": "cd server & npx nodemon ./server"
+    "server": "cd server & npx nodemon ./server",
+    "install-all": "yarn install & cd server & yarn install"
   },
   "dependencies": {
     "@azure/storage-blob": "^12.3.0",

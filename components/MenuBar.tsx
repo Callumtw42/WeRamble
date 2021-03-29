@@ -10,6 +10,7 @@ export default function MenuBar({ navigation }) {
                 <Button title="Camera" onPress={() => navigation.navigate("Camera")}></Button>
                 <Button title="Profile" onPress={() => navigation.navigate("Profile")}></Button>
                 <Button title="Competitions" onPress={() => navigation.navigate("Competitions")}></Button>
+                <Button title="LiProfile" onPress={() => navigation.navigate("LiProfile")}></Button>
             </View>
         </View>
     )

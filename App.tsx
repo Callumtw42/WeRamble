@@ -16,6 +16,8 @@ import ImageView from "./components/ImageView"
 import Competitions from './components/Competitions';
 import NewCompetition from './components/NewCompetion';
 
+import LiProfile from './components/LiProfile';
+
 const App: () => React$Node = () => {
   const Stack = createStackNavigator();
   return (
@@ -32,6 +34,7 @@ const App: () => React$Node = () => {
           <Stack.Screen name="ImageView" component={ImageView} />
           <Stack.Screen name="Competitions" component={Competitions} />
           <Stack.Screen name="NewCompetition" component={NewCompetition} />
+          <Stack.Screen name="LiProfile" component={LiProfile} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

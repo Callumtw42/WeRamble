@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, Image,StyleSheet, Text, TextInput, View } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { get, host } from '../utils';
 
@@ -45,10 +46,13 @@ export default function Login({ navigation }) {
       <Text style={styles.smallText}
         onPress={() => navigation.navigate('Registration')}
       >New User? Register here</Text>
-      <Button
+      {/* <Button 
         title="Login"
         onPress={() => authenticate()}
-      />
+      /> */}
+      <TouchableOpacity onPress={() => authenticate()}>
+    <Image style={styles.Logins} source={require("../assets/login.png")} />
+        </TouchableOpacity>
       <Text
         style={styles.sectionTitle}
       > {error}</Text>
@@ -74,7 +78,15 @@ const styles = StyleSheet.create({
     borderColor: Colors.black,
     borderWidth: 1,
     width: "80%",
-    alignSelf: 'center'
+    alignSelf: 'center',
+    borderRadius:18,
+    
+  },
+  Logins:{
+    borderRadius:18,
+    width:"60%",
+    height:35,
+    alignSelf: 'center',
   },
   container: {
     display: 'flex',

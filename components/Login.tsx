@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Image,StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, Image, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -27,7 +27,8 @@ export default function Login({ navigation }) {
     console.log(password)
     console.log(route)
     if (username.length > 0 && password.length > 0) {
-      get(route, (d) => login(d))
+      get(route,
+        (d) => login(d))
     }
   }
 
@@ -51,8 +52,8 @@ export default function Login({ navigation }) {
         onPress={() => authenticate()}
       /> */}
       <TouchableOpacity onPress={() => authenticate()}>
-    <Image style={styles.Logins} source={require("../assets/login.png")} />
-        </TouchableOpacity>
+        <Image style={styles.Logins} source={require("../assets/login.png")} />
+      </TouchableOpacity>
       <Text
         style={styles.sectionTitle}
       > {error}</Text>
@@ -79,13 +80,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: "80%",
     alignSelf: 'center',
-    borderRadius:18,
-    
+    borderRadius: 18,
+
   },
-  Logins:{
-    borderRadius:18,
-    width:"60%",
-    height:35,
+  Logins: {
+    borderRadius: 18,
+    width: "60%",
+    height: 35,
     alignSelf: 'center',
   },
   container: {

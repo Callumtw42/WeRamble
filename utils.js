@@ -1,7 +1,7 @@
 //set this to false if you want to use remote server
-const LOCAL = false;
+const LOCAL = true;
 //if your using local server, set this to your computer's ip address
-const ip = "100.81.175.8";
+const ip = "192.168.1.96";
 
 const localhost = `http://${ip}:8080`;
 const remotehost = "https://werambleserver.azurewebsites.net";

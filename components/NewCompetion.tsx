@@ -13,13 +13,33 @@ export default function NewCompetion() {
     const [description, setDescription] = useState("")
     const route = `${host}/api/post-competition`
 
-    function postCompetition() {
-        if (name && description)
-            post(route, { name: name, hostUser: global.username, image: dummyImage, description: description }, () => { })
+    function allFieldsFilled() {
+        if (name.length > 0
+            && description.length > 0
+            && image.length > 0)
+            return true
+        console.log("Fields not filled")
+        return false
+    }
+
+    function postCompetition(image) {
+        if (allFieldsFilled())
+            post(route, {
+                name: name,
+                hostUser: global.username,
+                image: image,
+                description: description
+            }, (d) => { console.log(d) })
     }
 
     function pickImage() {
-        launchImageLibrary({ mediaType: 'photo' }, (d) => { console.log(d) })
+        launchImageLibrary({
+            mediaType: 'photo',
+            includeBase64: true
+        },
+            (d) => {
+                setImage(d.base64)
+            })
     }
 
 

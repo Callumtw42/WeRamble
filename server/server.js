@@ -173,8 +173,8 @@ app.post('/api/upload', jsonParser, (req, res) => {
     let query = readFile("sql/upload.sql")
         .replace("${uri}", quote(uri))
         .replace("${uploader}", quote(uploader))
-    console.log(query)
     queryDatabase(req, res, query);
+    console.log(res)
 });
 
 //listen

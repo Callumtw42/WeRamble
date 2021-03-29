@@ -1,5 +1,5 @@
 //set this to false if you want to use remote server
-const LOCAL = false;
+const LOCAL = true;
 //if your using local server, set this to your computer's ip address
 const ip = "172.29.32.1";
 

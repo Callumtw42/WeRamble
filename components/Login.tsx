@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Dimensions, Button, StyleSheet, Text, TextInput, View, Image} from 'react-native';
+import { Dimensions, Button, StyleSheet, Text, TextInput, View, Image } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 import { get, host } from '../utils';
@@ -33,7 +33,7 @@ export default function Login({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Image 
+      <Image
         style={styles.logo}
         source={require("../assets/WeRamble.png")}
       />
@@ -71,8 +71,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   //tinylogo: {
-    //width: 250,
-    //height: 200,
+  //width: 250,
+  //height: 200,
   //},
   smallText: {
     textAlign: "center",

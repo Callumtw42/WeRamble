@@ -13,7 +13,8 @@ import Feed from "./components/Feed"
 import ImagePreview from "./components/ImagePreview"
 import Profile from "./components/Profile"
 import ImageView from "./components/ImageView"
-import Competition from './components/Competition';
+import Competitions from './components/Competitions';
+import NewCompetition from './components/NewCompetion';
 
 const App: () => React$Node = () => {
   const Stack = createStackNavigator();
@@ -29,7 +30,8 @@ const App: () => React$Node = () => {
           <Stack.Screen name="ImagePreview" component={ImagePreview} />
           <Stack.Screen name="Profile" component={Profile} />
           <Stack.Screen name="ImageView" component={ImageView} />
-          <Stack.Screen name="Competition" component={Competition}/>
+          <Stack.Screen name="Competitions" component={Competitions} />
+          <Stack.Screen name="NewCompetition" component={NewCompetition} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

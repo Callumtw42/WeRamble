@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View, Image} from 'react-native';
+import { Dimensions, Button, StyleSheet, Text, TextInput, View, Image} from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 import { get, host } from '../utils';
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 /** The entire login page */
 export default function Login({ navigation }) {
@@ -84,11 +86,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   container: {
-    paddingTop: 10,
+    //paddingTop: 10,
+    paddingBottom: 100,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: '#33ccff'
+    backgroundColor: '#33ccff',
+    height: windowHeight,
+    width: windowWidth
   },
   loginButton: {
     flexDirection: 'row',

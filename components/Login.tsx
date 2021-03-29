@@ -86,6 +86,8 @@ const styles = StyleSheet.create({
     width: "80%",
     alignSelf: 'center',
     borderRadius:18,
+    color: 'black',
+    backgroundColor: 'white'
     
   },
   Logins:{

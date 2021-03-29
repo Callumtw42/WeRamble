@@ -4,7 +4,9 @@ import ImageGrid from './ImageGrid';
 import Posts from './Posts';
 import { host } from "../utils"
 import { ScrollView } from 'react-native-gesture-handler';
-//use those vars to link datebase,
+import {TouchableOpacity} from 'react-native-gesture-handler';
+
+
 const number = 0
 const Signature = "hello word！！"
 const randomNumber1 = Math.random() * number
@@ -17,21 +19,22 @@ export default function LiProfile({ navigation }) {
     return (
 
         <SafeAreaView style={styles.background}>
-            <ScrollView showsVerticalScrollIndicator={false} style={{width:"100%", height:"100%"}}>
+            {/* <ScrollView showsVerticalScrollIndicator={false} style={{width:"100%", height:"100%"}}> */}
             <View style={styles.topbar}>
                 <Text style={styles.usernames}>{username} </Text>
 
                 <Image style={styles.camera}
-                    source={require("../assets/camera.png")}
-                  >
+                    source={require("../assets/camera.png")} >
                 </Image>
+
+                {/* <TouchableOpacity  onPress={()=> {navigation.navigate("Camera")}}>
+                    <Image style={styles.camera} source={require("../assets/camera.png")} />
+                </TouchableOpacity> */}
             </View>
             <View style={styles.barline} />
             <View style={styles.informbar}>
                 <Image style={styles.userheadimage}
-                    source={{
-                        uri: "https://picsum.photos/200/200"
-                    }} />
+                    source={{  uri: "https://picsum.photos/200/200" }} />
                 <View style={styles.container}>
                     <Text>{randomNumber1}</Text>
                     <Text style={{ fontWeight: 'bold' }}>Posts</Text>
@@ -80,7 +83,7 @@ export default function LiProfile({ navigation }) {
             </View>
 
 
-            </ScrollView>
+            {/* </ScrollView> */}
         </SafeAreaView>
     );
 }
@@ -93,7 +96,7 @@ const styles = StyleSheet.create({
     },
     topbar: {
         flexDirection: "row",
-        height: 70,
+        height: "10%",
     },
     usernames: {
         textAlign: "left",
@@ -118,21 +121,22 @@ const styles = StyleSheet.create({
     },
     informbar: {
         flexDirection: "row",
-        height: "15%",
+        height: "20%",
     },
     editpButton: {
 
+    },
+
+    userpost1: {
+        top: 1,
+        flexDirection: "row",
+        height: "28%",
     },
     userpost: {
         top: 1,
         justifyContent: 'space-evenly',
         flexDirection: "row",
-        height: "40%",
-    },
-    userpost1: {
-        top: 1,
-        flexDirection: "row",
-        height: "19%",
+        height: "30%",
     },
     userheadimage: {
         marginRight: 10,

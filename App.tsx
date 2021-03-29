@@ -17,7 +17,7 @@ import Profile from './components/Profile';
 import ImageView from './components/ImageView';
 import Competitions from './components/Competitions';
 import NewCompetition from './components/NewCompetion';
-import { Image } from 'react-native';
+import { Image, View } from 'react-native';
 
 //profile
 

@@ -17,6 +17,8 @@ import Profile from './components/Profile';
 import ImageView from './components/ImageView';
 import Competitions from './components/Competitions';
 import NewCompetition from './components/NewCompetion';
+
+
 import { Image, View } from 'react-native';
 
 //profile
@@ -38,12 +40,19 @@ function Home() {
               <Image  source={require('./assets/camera-wireless-outline.png')} />
           ),
       }}/>
+      <Tab.Screen name="Competitons" component={Competitions}
+        options={{
+          tabBarIcon: ({}) => (
+              <Image  source={require('./assets/trophy-outline.png')} />
+          ),
+      }} />
       <Tab.Screen name="Profile" component={LiProfile}
         options={{
           tabBarIcon: ({}) => (
               <Image  source={require('./assets/account-circle-outline.png')} />
           ),
       }} />
+
     </Tab.Navigator>
   )
 }
@@ -53,7 +62,7 @@ const App: () => React$Node = () => {
   const Stack = createStackNavigator();
   return (
     <>
-      <NavigationContainer>
+      <NavigationContainer >
         <Stack.Navigator initialRouteName="Login">
           {/*Add screens below*/}
           <Stack.Screen name="Login" component={Login} />

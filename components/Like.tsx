@@ -10,8 +10,8 @@ const windowHeight = Dimensions.get('window').height;
 export default function Like({ image }) {
     const [liked, setLiked] = useState(false);
     const [likes, setLikes] = useState(0);
-    const likeOn = <Image style={styles.icon} source={require("../assets/like-on.png")} ></Image>
-    const likeOff = <Image style={styles.icon} source={require("../assets/like-off.png")} ></Image>
+    const likeOn = <Image style={styles.icon} source={require("../assets/cards-heart.png")} ></Image>
+    const likeOff = <Image style={styles.icon} source={require("../assets/heart-outline.png")} ></Image>
     const likeRoute = `${host}/api/like`
     const getLikesRoute = `${host}/api/getlikes/${image.id}/${global.username}`
 

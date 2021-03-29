@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, StyleSheet,Image, Text, TextInput, View } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { host, post } from '../utils';
 
@@ -24,19 +25,23 @@ export default function Registration({ navigation }) {
 
     return (
         <View>
-            <Text>E-Mail</Text>
-            <TextInput
+            <Text style={styles.sectionTitle} >E-Mail</Text>
+            <TextInput style={styles.input}
                 onChangeText={(v) => setEmail(v)} />
-            <Text>Username</Text>
-            <TextInput
+            <Text style={styles.sectionTitle}>Username</Text>
+            <TextInput style={styles.input}
                 onChangeText={(v) => setUsername(v)} />
-            <Text>Pasword</Text>
-            <TextInput
+            <Text style={styles.sectionTitle}>Pasword</Text>
+            <TextInput style={styles.input}
                 onChangeText={(v) => setPassword(v)} />
-            <Button
+            {/* <Button
                 title="Register"
                 onPress={() => register()}
-            />
+            /> */}
+            
+        <TouchableOpacity  onPress={() => register()}>
+            <Image style={styles.register} source={require("../assets/sign-up.jpg")} />
+        </TouchableOpacity>
         </View>
     )
 }
@@ -45,5 +50,21 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: '600',
         color: Colors.black,
+        textAlign: "center",
+    },
+    input: {
+        borderColor: Colors.black,
+        borderWidth: 1,
+        width: "80%",
+        alignSelf: 'center',
+        borderRadius:18,
+        
+      },
+    register:{
+        top:15,
+        width:"60%",
+        height:"40%",
+        alignSelf: 'center',
+        borderRadius:18,
     },
 });

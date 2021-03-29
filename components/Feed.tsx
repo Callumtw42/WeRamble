@@ -13,6 +13,7 @@ const windowHeight = Dimensions.get('window').height;
 /**The main image feed*/
  export default function Feed({ navigation }) {
 
+    // const Tab = createBottomTabNavigator();
     return (
         <View style={styles.container} > 
           <MenuBar navigation={navigation} />

@@ -44,7 +44,7 @@ const slideList = Array.from({ length: 7 }).map((_, i) => {
   return {
     id: i,
     image: `https://picsum.photos/1640/2842?random=${i}`,
-    title: `Most liked${i + 1}`,
+    title: ``,
   };
 });
 

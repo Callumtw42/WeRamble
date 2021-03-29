@@ -5,7 +5,7 @@ import { get, host, post } from '../utils';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-//follow button to be used in profle page 
+/**the follow button */
 export default function Follow({ image }) {
 
     const [followed, setFollowed] = useState(false);
@@ -13,7 +13,7 @@ export default function Follow({ image }) {
     const followOn = <Image style={styles.icon} source={require("../assets/following.png")} ></Image>
     const followOff = <Image style={styles.icon} source={require("../assets/follow.png")} ></Image>
     const followRoute = `${host}/api/follow`
-    const getFollowsRoute = `${host}/api/getfollows/${global.username}`
+    const getFollowsRoute = `${host}/api/getfollows/${image.id}/${global.username}`
 
 
     useEffect(() => {
@@ -21,8 +21,10 @@ export default function Follow({ image }) {
         getFollows();
     }, [])
 
-    async function newFollow() {
+    async function postFollow() {
         post(followRoute, {
+
+            userFollowed: image.uploader,
             user: global.username,
             follow: !followed
         }, getFollows)
@@ -42,7 +44,7 @@ export default function Follow({ image }) {
 
     return (
         <View>
-            <TouchableOpacity style={styles.button} onPress={newFollow}>
+            <TouchableOpacity style={styles.button} onPress={postFollow}>
                 {followed ? followOn : followOff}
             </TouchableOpacity>
             <Text>{follows}</Text>

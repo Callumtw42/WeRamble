@@ -9,8 +9,7 @@ export default function CommentsList({ comments }) {
 
     const list = comments.map((comment, index) => {
         return (
-            <View key={index} style={styles.comment}>
-                
+            <View key={index} style={styles.comment}>    
                 <ImageBackground source={require("../assets/bubble.png")} style={styles.image}>
                     <Text style={styles.username}>{comment.uploader + ":"}</Text>
                     <Text  style={styles.commenttext}>{comment.comment}</Text>

@@ -38,11 +38,11 @@ export default function Like({ image }) {
     }
 
     return (
-        <View>
+        <View >
             <TouchableOpacity style={styles.button} onPress={postLike}>
                 {liked ? likeOn : likeOff}
             </TouchableOpacity>
-            <Text>{likes}</Text>
+            <Text style={styles.likes}>{likes}</Text>
         </View>
     )
 }
@@ -56,4 +56,8 @@ const styles = StyleSheet.create({
     button: {
         margin: 8
     },
+    likes:{
+        alignSelf:"center",
+    },
+
 })

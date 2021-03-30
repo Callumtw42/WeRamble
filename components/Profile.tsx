@@ -10,6 +10,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 const number = 0
 const randomNumber2 = Math.random() * number
 const randomNumber3 = Math.random() * number
+const styles = require('../components/StyleSheet');
 
 export default function Profile({ route, navigation }) {
     const username = route.params.username;
@@ -29,21 +30,21 @@ export default function Profile({ route, navigation }) {
                 <View style={styles.informbar}>
                     <Image style={styles.userheadimage}
                         source={{ uri: "https://picsum.photos/200/200" }} />
-                    <View style={styles.container}>
+                    <View style={styles.profileContainer}>
                         <Text>{posts}</Text>
                         <Text style={{ fontWeight: 'bold' }}>Posts</Text>
                     </View>
-                    <View style={styles.container}>
+                    <View style={styles.profileContainer}>
                         <Text>{randomNumber2}</Text>
                         <Text style={{ fontWeight: 'bold' }}>Followers</Text>
                     </View>
-                    <View style={styles.container}>
+                    <View style={styles.profileContainer}>
                         <Text>{randomNumber3}</Text>
                         <Text style={{ fontWeight: 'bold' }}>Following</Text>
                     </View>
 
                 </View>
-                <View style={styles.editpButton}>
+                <View style={styles.profileEditPButton}>
                     <TouchableOpacity onPress={() => Alert.alert('coming soon')}>
                         <Text>Edit Profile</Text>
                     </TouchableOpacity>
@@ -60,7 +61,7 @@ export default function Profile({ route, navigation }) {
     );
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
     background: {
         flex: 1,
         backgroundColor: "white",
@@ -94,7 +95,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         height: 150,
     },
-    editpButton: {
+    profileEditPButton: {
         alignItems: "center",
         borderColor: Colors.black,
         borderWidth: 1,
@@ -131,7 +132,7 @@ const styles = StyleSheet.create({
         bottom: 40,
         fontSize: 18,
     },
-    container: {
+    profileContainer: {
         width: "20%",
         height: "100%",
         margin: 10,
@@ -139,5 +140,5 @@ const styles = StyleSheet.create({
         justifyContent: "center",
 
     }
-})
+})*/
 

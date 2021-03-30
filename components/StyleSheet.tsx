@@ -111,6 +111,19 @@ module.exports = StyleSheet.create({
         marginLeft:5,
         marginRight:35,
     },
+    topbotton:{        
+        alignItems: "center",
+        borderColor: Colors.black,
+        borderWidth: 1,
+        width: "60%",
+        height:40,
+        borderRadius: 18, 
+        flexDirection: "row",
+        alignSelf: "center", 
+        justifyContent:"center",
+        margin: 10, 
+        backgroundColor:"#0099ff",
+    },
 
     //styles from newcompetition.tsx
     editpButton: {
@@ -143,6 +156,17 @@ module.exports = StyleSheet.create({
         height: windowHeight * (1 / 16),
         margin: 2
     },
+    postername: {
+        alignItems: "center",
+        borderWidth: 0,
+        width: "98%",
+        borderRadius: 8,
+        backgroundColor: '#31a8bd',
+        // left:5,
+        marginHorizontal:5,
+        marginVertical:2,
+        // top:5,
+    },
 
     //styles from liprofile.tsx
     background: {
@@ -152,7 +176,7 @@ module.exports = StyleSheet.create({
     topbar: {
         flexDirection: "row",
         height: 65,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
     usernames: {
         textAlign: "left",

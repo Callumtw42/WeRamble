@@ -38,7 +38,7 @@ export default function Follow({ user }) {
     }
 
     return (
-        <View>
+        <View style={{alignItems:"center"}}>
             <TouchableOpacity style={styles.button} onPress={postFollow}>
                 {followed ? followOn : followOff}
             </TouchableOpacity>
@@ -51,9 +51,11 @@ const styles = StyleSheet.create({
     icon: {
         width: windowWidth * (1 / 4),
         height: windowHeight * (1 / 22),
-        margin: 2
+        margin: 2,
+        borderRadius:15,
     },
     button: {
-        margin: 8
+        margin: 8,
+        
     },
 })

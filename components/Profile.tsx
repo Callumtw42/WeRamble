@@ -12,6 +12,7 @@ import Follow from './Follow';
 const number = 0
 const randomNumber2 = Math.random() * number
 const randomNumber3 = Math.random() * number
+// const styles = require('../components/StyleSheet');
 
 export default function Profile({ route, navigation }) {
     const username = route.params.username;
@@ -49,15 +50,15 @@ export default function Profile({ route, navigation }) {
                             source={{ uri: profilePicture }} />
                     </TouchableOpacity>
                     <Follow user={username} />
-                    <View style={styles.container}>
+                    <View style={styles.profileContainer}>
                         <Text>{posts}</Text>
                         <Text style={{ fontWeight: 'bold' }}>Posts</Text>
                     </View>
-                    <View style={styles.container}>
+                    <View style={styles.profileContainer}>
                         <Text>{randomNumber2}</Text>
                         <Text style={{ fontWeight: 'bold' }}>Followers</Text>
                     </View>
-                    <View style={styles.container}>
+                    <View style={styles.profileContainer}>
                         <Text>{randomNumber3}</Text>
                         <Text style={{ fontWeight: 'bold' }}>Following</Text>
                     </View>
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         height: 150,
     },
-    editpButton: {
+    profileEditPButton: {
         alignItems: "center",
         borderColor: Colors.black,
         borderWidth: 1,
@@ -144,7 +145,7 @@ const styles = StyleSheet.create({
         bottom: 40,
         fontSize: 18,
     },
-    container: {
+    profileContainer: {
         width: "20%",
         height: "100%",
         margin: 10,

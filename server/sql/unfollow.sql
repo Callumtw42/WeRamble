@@ -1,0 +1,1 @@
+delete from weramble.follows where username = ${username} and post = ${post};

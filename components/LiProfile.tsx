@@ -5,6 +5,8 @@ import Posts from './Posts';
 import { host } from "../utils"
 import { ScrollView } from 'react-native-gesture-handler';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+
 
 
 const number = 0
@@ -48,10 +50,13 @@ export default function LiProfile({ navigation }) {
             <Text style={styles.username}>{username}</Text>
             <Text style={styles.username}>{Signature}</Text>
             <View style={styles.editpButton}>
-                <Button
+                {/* <Button
                     onPress={() => Alert.alert('coming soon')}
                     title="Edit Profile"
-                    color="#a6a7a9" />
+                    color="#a6a7a9" /> */}
+        <TouchableOpacity onPress={() => Alert.alert('coming soon')}>
+             <Text>Edit Profile</Text>
+        </TouchableOpacity>
             </View>
 
             <View style={styles.barline} />
@@ -118,7 +123,12 @@ const styles = StyleSheet.create({
         height: 150,
     },
     editpButton: {
-
+        alignItems:"center",
+        borderColor: Colors.black,
+        borderWidth: 1,
+        width: "80%",
+        alignSelf: 'center',
+        borderRadius:18,
     },
 
     userpost1: {

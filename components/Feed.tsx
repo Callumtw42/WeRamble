@@ -24,7 +24,8 @@ export default function Feed({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        backgroundColor: '#a8e6ff'
     },
 })
 

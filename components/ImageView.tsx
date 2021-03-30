@@ -14,7 +14,7 @@ export default function ImageView({ navigation, route }) {
     return (
         <ScrollView style={styles.imageViewContainer} showsVerticalScrollIndicator={false}>
             <TouchableOpacity style={styles.postername} onPress={() => navigation.navigate("Profile", { username: image.uploader })}>
-                <Text style={{fontSize:20,fontStyle:"italic",fontWeight:"bold",}}>{"by: " + image.uploader}</Text>
+                <Text style={{fontSize:20,fontStyle:"italic",fontWeight:"bold",}}>{"Posted by: " + image.uploader}</Text>
             </TouchableOpacity>
             < Image source={{ uri: image.uri }} style={styles.imageViewImage} />
             <CommentSection image={image} />

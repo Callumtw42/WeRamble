@@ -12,7 +12,7 @@ import Follow from './Follow';
 const number = 0
 const randomNumber2 = Math.random() * number
 const randomNumber3 = Math.random() * number
-// const styles = require('../components/StyleSheet');
+const styles = require('../components/StyleSheet');
 
 export default function Profile({ route, navigation }) {
     const username = route.params.username;
@@ -37,11 +37,13 @@ export default function Profile({ route, navigation }) {
             <ScrollView showsVerticalScrollIndicator={false} style={{ width: "100%", height: "100%" }}>
                 <View style={styles.topbar}>
                     <Text style={styles.usernames}>{username} </Text>
-                    <Image style={styles.camera} source={require("../assets/camera.png")} />
+                    <TouchableOpacity onPress={() => { navigation.navigate("Camera") }}>
+                        <Image style={styles.camera} source={require("../assets/camera.png")} />
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.barline} />
                 <View style={styles.informbar}>
-                    <TouchableOpacity style={{ height: 150, width: 100 }} onPress={
+                    <TouchableOpacity style={{ height: 150, width: 90 }} onPress={
                         () => {
                             if (username == global.username)
                                 navigation.navigate("ImagePicker", { callback: uploadProfilePic })
@@ -49,7 +51,6 @@ export default function Profile({ route, navigation }) {
                         <Image style={styles.userheadimage}
                             source={{ uri: profilePicture }} />
                     </TouchableOpacity>
-                    <Follow user={username} />
                     <View style={styles.profileContainer}>
                         <Text>{posts}</Text>
                         <Text style={{ fontWeight: 'bold' }}>Posts</Text>
@@ -62,9 +63,9 @@ export default function Profile({ route, navigation }) {
                         <Text>{randomNumber3}</Text>
                         <Text style={{ fontWeight: 'bold' }}>Following</Text>
                     </View>
-
                 </View>
-                <Text>Posts</Text>
+                <Follow user={username} />
+                <Text style={{ fontWeight: 'bold', fontSize: 20, textAlign: 'center'}}>Posts</Text>
                 <View style={styles.userpost}>
                     <ImageGrid navigation={navigation} route={imagesRoute} callback={(i) => { setPosts(i) }}></ImageGrid>
                 </View>
@@ -73,7 +74,7 @@ export default function Profile({ route, navigation }) {
     );
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
     background: {
         flex: 1,
         backgroundColor: "white",
@@ -153,5 +154,5 @@ const styles = StyleSheet.create({
         justifyContent: "center",
 
     }
-})
+})*/
 

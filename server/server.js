@@ -107,6 +107,21 @@ app.post('/api/like', (req, res) => {
     queryDatabase(req, res, query);
 });
 
+//follow
+app.post('/api/follow', (req, res) => {
+    console.log("follow: " + req.body.like)
+    const { imageid, user, like } = req.body
+    query = like
+        ? readFile("sql/like.sql")
+            .replace("${user}", quote(user))
+            .replace("${post}", quote(imageid))
+        : readFile("sql/unlike.sql")
+            .replace("${username}", quote(user))
+            .replace("${post}", quote(imageid))
+    console.log(query);
+    queryDatabase(req, res, query);
+});
+
 //competitions
 app.get('/api/competitions', (req, res) => {
     const dummy = {

@@ -18,8 +18,12 @@ export default function Profile({ route, navigation }) {
     const username = route.params.username;
     const imagesRoute = `${host}/api/user-images/${username}`;
     const [posts, setPosts] = useState(0);
+    const [followers, setFollowers] = useState(0);
+    const [following, setFollowing] = useState(0);
     const [profilePicture, setProfilePicture] = useState("https://weramble.blob.core.windows.net/images/empty-user.png");
     const getProfilePicRoute = `${host}/api/get-profile-pic/${username}`;
+    const getFollowersRoute = `${host}/api/get-followers/${username}`
+    const getFollowingRoute = `${host}/api/get-following/${username}`
 
     function uploadProfilePic(img) {
         const postProfilePicRoute = `${host}/api/post-profile-pic`;
@@ -28,38 +32,49 @@ export default function Profile({ route, navigation }) {
 
     useEffect(() => {
         get(getProfilePicRoute, (d) => {
+            console.log(d)
             setProfilePicture(d[0].profilepic)
+            getFollows();
         })
     }, [])
+
+    function getFollows() {
+        get(getFollowersRoute, (d) => {
+            console.log(d)
+            setFollowers(d[0].followers);
+            get(getFollowingRoute, (d) => {
+                console.log(d)
+                setFollowing(d[0].following)
+            })
+        })
+    }
 
     return (
         <SafeAreaView style={styles.background}>
             <ScrollView showsVerticalScrollIndicator={false} style={{ width: "100%", height: "100%" }}>
-                <View style={styles.topbar}>
-                    <Text style={styles.usernames}>{username} </Text>
-                    <Image style={styles.camera} source={require("../assets/camera.png")} />
-                </View>
-                <View style={styles.barline} />
+                <Text style={styles.usernames}>{username} </Text>
                 <View style={styles.informbar}>
-                    <TouchableOpacity style={{ height: 150, width: 100 }} onPress={
-                        () => {
-                            if (username == global.username)
-                                navigation.navigate("ImagePicker", { callback: uploadProfilePic })
-                        }}>
-                        <Image style={styles.userheadimage}
-                            source={{ uri: profilePicture }} />
-                    </TouchableOpacity>
-                    <Follow user={username} />
+                    <View style={styles.iconContainer}>
+                        <TouchableOpacity style={{ height: 75, width: 100 }} onPress={
+                            () => {
+                                if (username == global.username)
+                                    navigation.navigate("ImagePicker", { callback: uploadProfilePic })
+                            }}>
+                            <Image style={styles.userheadimage}
+                                source={{ uri: profilePicture }} />
+                        </TouchableOpacity>
+                        <Follow user={username} callback={getFollows} />
+                    </View>
                     <View style={styles.profileContainer}>
                         <Text>{posts}</Text>
                         <Text style={{ fontWeight: 'bold' }}>Posts</Text>
                     </View>
                     <View style={styles.profileContainer}>
-                        <Text>{randomNumber2}</Text>
+                        <Text>{followers}</Text>
                         <Text style={{ fontWeight: 'bold' }}>Followers</Text>
                     </View>
                     <View style={styles.profileContainer}>
-                        <Text>{randomNumber3}</Text>
+                        <Text>{following}</Text>
                         <Text style={{ fontWeight: 'bold' }}>Following</Text>
                     </View>
 
@@ -76,8 +91,12 @@ export default function Profile({ route, navigation }) {
 const styles = StyleSheet.create({
     background: {
         flex: 1,
-        backgroundColor: "white",
+        backgroundColor: "#a8e6ff"
 
+    },
+    iconContainer: {
+
+        flexDirection: "column",
     },
     topbar: {
         flexDirection: "row",
@@ -87,9 +106,9 @@ const styles = StyleSheet.create({
     usernames: {
         textAlign: "left",
         justifyContent: "flex-start",
-        top: 10,
-        left: 10,
-        fontSize: 25,
+        // top: 10,
+        left: 20,
+        fontSize: 20,
     },
 
     camera: {
@@ -106,6 +125,7 @@ const styles = StyleSheet.create({
     informbar: {
         flexDirection: "row",
         height: 150,
+        justifyContent: "space-between"
     },
     profileEditPButton: {
         alignItems: "center",
@@ -128,15 +148,15 @@ const styles = StyleSheet.create({
         height: 500,
     },
     userheadimage: {
-        marginRight: 10,
+        // marginRight: 10,
         alignItems: 'center',
         justifyContent: 'center',
-        width: 70,
-        height: 70,
+        width: 75,
+        height: 75,
         // backgroundColor: '#f76260',
         borderRadius: 500,
-        top: 20,
-        left: 20,
+        // top: 20,
+        left: 10,
         resizeMode: 'contain'
     },
     username: {
@@ -147,10 +167,11 @@ const styles = StyleSheet.create({
     },
     profileContainer: {
         width: "20%",
-        height: "100%",
-        margin: 10,
+        // height: "100%",
+        margin: 5,
         alignItems: "center",
         justifyContent: "center",
+        top: 20
 
     }
 })

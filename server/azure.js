@@ -49,7 +49,7 @@ module.exports = {
                         chunk[key] = value;
                     });
                     results.push(chunk);
-                    console.log(chunk)
+                    // console.log(chunk)
                 });
 
                 request.on("requestCompleted", columns => {

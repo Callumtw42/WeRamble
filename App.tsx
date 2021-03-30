@@ -68,7 +68,7 @@ const App: () => React$Node = () => {
         <Stack.Navigator initialRouteName="Login">
           {/*Add screens below*/}
           <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Home" options={{ headerShown: false }} component={Home} />
           <Stack.Screen name="Registration" component={Registration} />
           <Stack.Screen name="ImagePreview" component={ImagePreview} />
           <Stack.Screen name="ImageView" component={ImageView} />

@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column'
     },
     image:{
-        margin: 2
+        margin: 2,
+        backgroundColor: "white"
     }
 })

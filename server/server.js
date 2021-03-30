@@ -128,28 +128,59 @@ app.post('/api/like', (req, res) => {
 
 //follow
 app.post('/api/follow', (req, res) => {
-    console.log("follow: " + req.body.like)
+    console.log(req.body)
     const { followed, follower, following } = req.body
-    query = followed
-        ? readFile("sql/follow.sql")
+    if (followed) {
+        const query = readFile("sql/follow.sql")
             .replace("${follower}", quote(follower))
-            .replace("${following}", quote(imageid))
-        : readFile("sql/unfollow.sql")
-            .replace("${follower}", quote(imageid))
-            .replace("${following}", quote(following))
+            .replace("${follows}", quote(following))
+        console.log(query);
+        queryDatabase(req, res, query, () => { res.json([{ followed: true }]) });
+    }
+    else {
+        const query = readFile("sql/unfollow.sql")
+            .replace("${follower}", quote(follower))
+            .replace("${follows}", quote(following))
+        console.log(query);
+        queryDatabase(req, res, query, () => { res.json([{ followed: false }]) });
+    }
+});
+
+//followers
+app.get('/api/get-followers/:user', (req, res) => {
+    console.log(req.params);
+    const { user } = req.params;
+    const query = readFile("./sql/get-follows.sql")
+        .replace("${username}", quote(user))
+    console.log(query);
+    queryDatabase(req, res, query)
+});
+
+//following
+app.get('/api/get-following/:user', (req, res) => {
+    console.log(req.params);
+    const { user } = req.params;
+    const query = readFile("./sql/get-following.sql")
+        .replace("${username}", quote(user))
+    console.log(query);
+    queryDatabase(req, res, query)
+});
+
+//followed
+app.get('/api/followed/:follower/:following', (req, res) => {
+    console.log(req.params);
+    const { follower, following } = req.params;
+    const query = readFile("./sql/followed.sql")
+        .replace("${follower}", quote(follower))
+        .replace("${following}", quote(following))
     console.log(query);
     queryDatabase(req, res, query);
+
 });
+
 
 //competitions
 app.get('/api/competitions', (req, res) => {
-    const dummy = {
-        image: 'https://weramble.blob.core.windows.net/images/bird.jpg',
-        host: "CALLUM",
-        name: "Bird Hunt",
-        description: "Find the rare bird",
-    }
-    const dummyArr = [dummy, dummy, dummy]
     const query = readFile('sql/get-competitions.sql')
     queryDatabase(req, res, query);
 });

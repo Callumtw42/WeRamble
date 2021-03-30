@@ -16,18 +16,18 @@ export default function Follow({ image }) {
     const getLikesRoute = `${host}/api/getlikes/${image.id}/${global.username}`
 
     useEffect(() => {
-        getLikes();
+        getFollows();
     }, [])
 
-    async function postLike() {
+    async function postFollow() {
         post(likeRoute, {
             imageid: image.id,
             user: global.username,
             like: !followed
-        }, getLikes)
+        }, getFollows)
     }
 
-    async function getLikes() {
+    async function getFollows() {
         get(getLikesRoute, (d) => {
             if (d.length > 0) {
                 const data = d[0];
@@ -39,7 +39,7 @@ export default function Follow({ image }) {
 
     return (
         <View>
-            <TouchableOpacity style={styles.button} onPress={postLike}>
+            <TouchableOpacity style={styles.button} onPress={postFollow}>
                 {followed ? followOn : followOff}
             </TouchableOpacity>
             <Text>{follows}</Text>

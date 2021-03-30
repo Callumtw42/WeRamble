@@ -17,8 +17,6 @@ export default function Feed({ navigation }) {
     return (
         <View style={styles.container} >
             <ImageGrid navigation={navigation} route={route} />
-
-
         </View>
     )
 }

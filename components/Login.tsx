@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: '#75d9eb',
+    backgroundColor: '#a8e6ff',
     height: windowHeight,
     width: windowWidth
   },

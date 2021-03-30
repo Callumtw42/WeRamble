@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, SafeAreaView, Image, Button, Alert } from 'react-native';
 import ImageGrid from './ImageGrid';
 import Posts from './Posts';
-import { host } from "../utils"
+import { get, host, post } from "../utils"
 import { ScrollView } from 'react-native-gesture-handler';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import ImagePicker from './ImagePicker';
 
 const number = 0
 const randomNumber2 = Math.random() * number
@@ -13,23 +14,38 @@ const randomNumber3 = Math.random() * number
 
 export default function Profile({ route, navigation }) {
     const username = route.params.username;
-    const apiRoute = `${host}/api/user-images/${username}`;
+    const imagesRoute = `${host}/api/user-images/${username}`;
     const [posts, setPosts] = useState(0);
-    return (
+    const [profilePicture, setProfilePicture] = useState("https://weramble.blob.core.windows.net/images/empty-user.png");
+    const getProfilePicRoute = `${host}/api/get-profile-pic/${username}`;
 
+    function uploadProfilePic(img) {
+        const postProfilePicRoute = `${host}/api/post-profile-pic`;
+        post(postProfilePicRoute, { username: username, image: img }, () => { })
+    }
+
+    useEffect(() => {
+        get(getProfilePicRoute, (d) => {
+            setProfilePicture(d[0].profilepic)
+        })
+    }, [])
+
+    return (
         <SafeAreaView style={styles.background}>
             <ScrollView showsVerticalScrollIndicator={false} style={{ width: "100%", height: "100%" }}>
                 <View style={styles.topbar}>
                     <Text style={styles.usernames}>{username} </Text>
-                    <TouchableOpacity onPress={() => { navigation.navigate("Camera") }}>
-                        <Image style={styles.camera} source={require("../assets/camera.png")} />
-                    </TouchableOpacity>
+                    <Image style={styles.camera} source={require("../assets/camera.png")} />
                 </View>
                 <View style={styles.barline} />
                 <View style={styles.informbar}>
-                    <TouchableOpacity>
+                    <TouchableOpacity style={{ height: 150, width: 100 }} onPress={
+                        () => {
+                            if (username == global.username)
+                                navigation.navigate("ImagePicker", { callback: uploadProfilePic })
+                        }}>
                         <Image style={styles.userheadimage}
-                            source={{ uri: "https://picsum.photos/200/200" }} />
+                            source={{ uri: profilePicture }} />
                     </TouchableOpacity>
                     <View style={styles.container}>
                         <Text>{posts}</Text>
@@ -45,20 +61,21 @@ export default function Profile({ route, navigation }) {
                     </View>
 
                 </View>
-                <View style={styles.editpButton}>
+                <Text>Posts</Text>
+                {/* <View style={styles.editpButton}>
                     <TouchableOpacity onPress={() => Alert.alert('coming soon')}>
                         <Text>Edit Profile</Text>
                     </TouchableOpacity>
-                </View>
-                <View style={styles.barline} />
+                </View> */}
+                {/* <View style={styles.barline} />
                 <View style={styles.userpost1}>
                     <Posts></Posts>
-                </View>
+                </View> */}
                 <View style={styles.userpost}>
-                    <ImageGrid navigation={navigation} route={apiRoute} callback={(i) => { setPosts(i) }}></ImageGrid>
+                    <ImageGrid navigation={navigation} route={imagesRoute} callback={(i) => { setPosts(i) }}></ImageGrid>
                 </View>
             </ScrollView>
-        </SafeAreaView>
+        </SafeAreaView >
     );
 }
 
@@ -122,10 +139,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: 70,
         height: 70,
-        backgroundColor: '#f76260',
+        // backgroundColor: '#f76260',
         borderRadius: 500,
         top: 20,
         left: 20,
+        resizeMode: 'contain'
     },
     username: {
         //top:1,

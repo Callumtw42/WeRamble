@@ -1,0 +1,1 @@
+update weramble.users set profilepic = ${uri} where username = ${username};

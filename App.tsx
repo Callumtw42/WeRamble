@@ -21,6 +21,7 @@ import Submit from './components/competition/Submit';
 
 
 import { Image, View } from 'react-native';
+import ImagePicker from './components/ImagePicker';
 
 //profile
 
@@ -75,6 +76,7 @@ const App: () => React$Node = () => {
           <Stack.Screen name="NewCompetition" component={NewCompetition} />
           <Stack.Screen name="Competition" component={Competition} />
           <Stack.Screen name="Submit" component={Submit} />
+          <Stack.Screen name="ImagePicker" component={ImagePicker} />
         </Stack.Navigator>
       </NavigationContainer>
 

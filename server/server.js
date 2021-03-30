@@ -108,29 +108,18 @@ app.post('/api/like', (req, res) => {
 
 //follow
 app.post('/api/follow', (req, res) => {
-    console.log("follow: " + req.bosy.follow)
-    const { userFollowed, user, follow} = req.body
-    query = follow
-        ? readFile("sql/follow.sql")
+    console.log("follow: " + req.body.like)
+    const { imageid, user, like } = req.body
+    query = like
+        ? readFile("sql/like.sql")
             .replace("${user}", quote(user))
-            .replace("${post}", quote(userFollowed))
-        : readFile("sql/unfollow.sql")
+            .replace("${post}", quote(imageid))
+        : readFile("sql/unlike.sql")
             .replace("${username}", quote(user))
-            .replace("${post}", quote(userFollowed))
+            .replace("${post}", quote(imageid))
     console.log(query);
     queryDatabase(req, res, query);
 });
-
-// //getfollows
-// app.get('/api/getlikes/:imageid/:user', (req, res) => {
-//     const { userFollowed, user } = req.params;
-//     console.log("getLikes: " + imageid);
-//     let query = readFile("sql/get-likes.sql")
-//         .replace("${post}", quote(userFollowed))
-//         .replace("${post}", quote(userFollowed))
-//         .replace("${username}", quote(user))
-//     queryDatabase(req, res, query);
-// });
 
 //competitions
 app.get('/api/competitions', (req, res) => {

@@ -9,6 +9,7 @@ import { launchImageLibrary } from 'react-native-image-picker'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const dummyImage = 'https://weramble.blob.core.windows.net/images/bird.jpg'
+const styles = require('../components/StyleSheet');
 
 
 export default function NewCompetion() {
@@ -31,13 +32,13 @@ export default function NewCompetion() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.Title}>Competition Name</Text>
+            <Text style={styles.title}>Competition Name</Text>
             <View>
                 <TextInput
                     style={styles.input}
                     onChangeText={(v) => { setName(v) }}></TextInput>
             </View>
-            <Text style={styles.Title}>Description</Text>
+            <Text style={styles.title}>Description</Text>
             <View >
                 <TextInput style={styles.input} onChangeText={(v) => { setDescription(v) }}></TextInput>
             </View>
@@ -58,7 +59,7 @@ export default function NewCompetion() {
         </View>
     )
 }
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
     container: {
         //paddingTop: 10,
         paddingBottom: 100,
@@ -98,4 +99,4 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-evenly"
     },
-})
+})*/

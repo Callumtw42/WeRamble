@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { KeyboardAvoidingView, Dimensions, Button, Image, StyleSheet, Text, TextInput, View } from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { get, host } from '../utils';
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+const styles = require('../components/StyleSheet');
 
 /** The entire login page */
 export default function Login({ navigation }) {
@@ -41,23 +39,18 @@ export default function Login({ navigation }) {
         style={styles.logo}
         source={require("../assets/WeRamble.png")}
       />
-      <Text style={styles.sectionTitle} >Username</Text>
+      <Text style={styles.sectionTitle}> Username </Text>
       <TextInput
         style={styles.input}
         defaultValue={"demo"}
         onChangeText={(v) => setUsername(v)} />
-      <Text style={styles.sectionTitle} > Password</Text>
+      <Text style={styles.sectionTitle}> Password </Text>
       <TextInput
         style={styles.input}
         defaultValue={"demo"}
         onChangeText={(v) => setPassword(v)} />
       <Text style={styles.smallText}
-        onPress={() => navigation.navigate('Registration')}
-      >New User? Register here</Text>
-      {/* <Button 
-        title="Login"
-        onPress={() => authenticate()}
-      /> */}
+        onPress={() => navigation.navigate('Registration')}> New User? Register here </Text>
       <TouchableOpacity onPress={() => authenticate()}>
         <Image style={styles.Logins} source={require("../assets/login.png")} />
       </TouchableOpacity>
@@ -68,19 +61,18 @@ export default function Login({ navigation }) {
   )
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
   sectionTitle: {
+    paddingTop: 20,
     fontSize: 24,
     fontWeight: '600',
     color: Colors.black,
     textAlign: "center",
   },
-  //tinylogo: {
-  //width: 250,
-  //height: 200,
-  //},
   smallText: {
-    textAlign: "center",
+    paddingTop: 10,
+    paddingBottom: 10,
+    textAlign: "center"
   },
   input: {
     borderColor: Colors.black,
@@ -99,7 +91,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   container: {
-    //paddingTop: 10,
     paddingBottom: 100,
     display: 'flex',
     flexDirection: 'column',
@@ -118,4 +109,4 @@ const styles = StyleSheet.create({
     width: 300,
     height: 200
   }
-});
+});*/

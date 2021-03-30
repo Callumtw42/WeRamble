@@ -4,8 +4,7 @@ import { Dimensions, StyleSheet, Image, ScrollView, TouchableOpacity } from 'rea
 import { get, host } from '../../utils';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+const styles = require('../components/StyleSheet');
 
 const dummy = [
     {
@@ -82,7 +81,7 @@ export default function Competitions({ navigation }) {
     }
 
     return (
-        <View  style={{backgroundColor:"white"}}>
+        <View  style={{backgroundColor:"#a8e6ff"}}>
             <TouchableOpacity style={styles.topbotton
               
             } onPress={() => navigation.navigate("NewCompetition")}>
@@ -97,7 +96,7 @@ export default function Competitions({ navigation }) {
     )
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
     image:
     {
         width: windowWidth / 3,
@@ -175,4 +174,4 @@ const styles = StyleSheet.create({
         backgroundColor:"#a8e6ff",
 
     },
-})
+})*/

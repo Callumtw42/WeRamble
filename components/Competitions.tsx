@@ -10,7 +10,8 @@ const dummy = [
     {
         name: "Competition Name",
         hostUser: "User Name",
-        description: "Here is a description of the competition",
+        //we need Limit the number of words better within 18-20
+        description: "Here is a description of the competition,i write longer for test the func.maybe need loo0000000000000000000000000000000000000oooooooooooooooonger",
         image: "https://weramble.blob.core.windows.net/images/tiger.jpg"
     },
 
@@ -56,11 +57,17 @@ export default function Competitions({ navigation }) {
                 const { name, hostUser, image, description } = competition;
                 return (
                     <View style={styles.borderbox} key={index}>
-                        <TouchableOpacity >
-                            <Text>{name}</Text>
-                            <Text>{"by " + hostUser}</Text>
-                            <Text>{description}</Text>
-                            <Image source={{ uri: image }} style={styles.image} />
+                        <TouchableOpacity style={styles.competition} >
+                            <View style={styles.istView}>
+                                <Text style={styles.name}>{name}</Text>
+                                <Text style={{color:'#324200'}}>{"by " + hostUser}</Text>
+                            </View>
+                            <View style={styles.secView}>
+                                <Image source={{ uri: image }} style={styles.image} />
+                                <View style={{width:"74%"}}>
+                                <Text style={styles.description}>{description}</Text>
+                                </View>   
+                            </View>
                         </TouchableOpacity>
                     </View>
                 )
@@ -70,12 +77,13 @@ export default function Competitions({ navigation }) {
     }
 
     return (
-        <View>
-            <TouchableOpacity onPress={() => navigation.navigate("NewCompetition")}>
-                <Text>New Competition</Text>
+        <View >
+            <TouchableOpacity style={{flexDirection:"row",alignSelf:"center",margin:20,}} onPress={() => navigation.navigate("NewCompetition")}>
+                <Text style={styles.title}>New Competition  </Text>
                 <Image source={require("../assets/plus.png")} style={styles.icon}></Image>
             </TouchableOpacity>
-            <ScrollView>
+
+            <ScrollView style={styles.competitions} showsVerticalScrollIndicator={false} >
                 {competitions}
             </ScrollView>
         </View>
@@ -87,6 +95,8 @@ const styles = StyleSheet.create({
     {
         width: windowWidth / 3,
         height: windowHeight / 6,
+        borderRadius: 18,
+        margin:2,
     },
     icon:
     {
@@ -97,6 +107,39 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: 'black',
-        margin: 4
-    }
+        margin: 4,
+        borderRadius: 18,
+        backgroundColor:"#bfcde3",
+    },
+    title: {
+
+        fontSize:18,
+        fontWeight: '600',
+        textAlign: "center",
+      },
+      competitions:{
+        margin:8,
+      },
+      name:{
+          margin:5,
+          alignSelf:"center",
+          color:"#001a40"
+      },
+      istView:{
+        marginLeft:20,
+        marginBottom:5,
+        
+      },
+      secView:{
+        flexDirection:"row",
+      },
+      description:{
+        color:"#575757",
+        top:10,
+        justifyContent:"center",
+        fontSize:18,
+        marginTop:5,
+        marginLeft:5,
+        marginRight:35,
+      },
 })

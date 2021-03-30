@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View, StyleSheet, SafeAreaView, Image, Button, Alert } from 'react-native';
 import ImageGrid from './ImageGrid';
 import Posts from './Posts';
@@ -7,17 +7,14 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-
-
 const number = 0
-const Signature = "hello word！！"
-const randomNumber1 = Math.random() * number
 const randomNumber2 = Math.random() * number
 const randomNumber3 = Math.random() * number
 
 export default function Profile({ route, navigation }) {
     const username = route.params.username;
     const apiRoute = `${host}/api/user-images/${username}`;
+    const [posts, setPosts] = useState(0);
     return (
 
         <SafeAreaView style={styles.background}>
@@ -33,7 +30,7 @@ export default function Profile({ route, navigation }) {
                     <Image style={styles.userheadimage}
                         source={{ uri: "https://picsum.photos/200/200" }} />
                     <View style={styles.container}>
-                        <Text>{randomNumber1}</Text>
+                        <Text>{posts}</Text>
                         <Text style={{ fontWeight: 'bold' }}>Posts</Text>
                     </View>
                     <View style={styles.container}>
@@ -46,43 +43,18 @@ export default function Profile({ route, navigation }) {
                     </View>
 
                 </View>
-
-                <Text style={styles.username}>{username}</Text>
-                <Text style={styles.username}>{Signature}</Text>
                 <View style={styles.editpButton}>
-                    {/* <Button
-                    onPress={() => Alert.alert('coming soon')}
-                    title="Edit Profile"
-                    color="#a6a7a9" /> */}
                     <TouchableOpacity onPress={() => Alert.alert('coming soon')}>
                         <Text>Edit Profile</Text>
                     </TouchableOpacity>
                 </View>
-
                 <View style={styles.barline} />
                 <View style={styles.userpost1}>
                     <Posts></Posts>
                 </View>
                 <View style={styles.userpost}>
-                    {/* <Image source={{
-                    width: "31%",
-                    height: "100%",
-                    uri: "https://picsum.photos/200/100"
-                }} />
-                <Image source={{
-                    width: "31%",
-                    height: "100%",
-                    uri: "https://picsum.photos/200/300"
-                }} />
-                <Image source={{
-                    width: "31%",
-                    height: "100%",
-                    uri: "https://picsum.photos/500/500"
-                }} /> */}
-                    <ImageGrid navigation={navigation} route={apiRoute} ></ImageGrid>
+                    <ImageGrid navigation={navigation} route={apiRoute} callback={(i) => { setPosts(i) }}></ImageGrid>
                 </View>
-
-
             </ScrollView>
         </SafeAreaView>
     );

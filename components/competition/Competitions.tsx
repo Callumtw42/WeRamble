@@ -81,7 +81,7 @@ export default function Competitions({ navigation }) {
     }
 
     return (
-        <View >
+        <View  style={{backgroundColor:"#a8e6ff"}}>
             <TouchableOpacity style={
                 { flexDirection: "row", alignSelf: "center", margin: 20, }
             } onPress={() => navigation.navigate("NewCompetition")}>

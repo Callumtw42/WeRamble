@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        backgroundColor: '#f7def7',
+        backgroundColor: '#a8e6ff',
         flex: 1,
     },
     Title: {

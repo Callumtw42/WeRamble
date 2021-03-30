@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, Button } from 'react-native'
+import { View, Text, Button,StyleSheet } from 'react-native'
 import { host, post } from '../../utils'
 import ImagePicker from '../ImagePicker'
 
@@ -25,9 +25,15 @@ export default function Submit({ route, navigation }) {
     }
 
     return (
-        <View>
+        <View style={styles.container}>
             <ImagePicker callback={setImage} />
             <Button onPress={() => submit(image)} title={"Submit"} />
         </View>
     )
 }
+const styles = StyleSheet.create({
+    container:{
+        backgroundColor:"#a8e6ff",
+        flex:1,
+    },
+})

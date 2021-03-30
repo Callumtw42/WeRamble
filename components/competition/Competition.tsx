@@ -27,6 +27,8 @@ export default function Competition({ route, navigation }) {
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        backgroundColor:"#a8e6ff",
+        flex:1,
     },
 })

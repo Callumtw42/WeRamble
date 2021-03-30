@@ -27,8 +27,10 @@ export default function Profile({ route, navigation }) {
                 </View>
                 <View style={styles.barline} />
                 <View style={styles.informbar}>
-                    <Image style={styles.userheadimage}
-                        source={{ uri: "https://picsum.photos/200/200" }} />
+                    <TouchableOpacity>
+                        <Image style={styles.userheadimage}
+                            source={{ uri: "https://picsum.photos/200/200" }} />
+                    </TouchableOpacity>
                     <View style={styles.container}>
                         <Text>{posts}</Text>
                         <Text style={{ fontWeight: 'bold' }}>Posts</Text>

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { View, Text, Button,StyleSheet } from 'react-native'
 import { host, post } from '../../utils'
 import ImagePicker from '../ImagePicker'
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function Submit({ route, navigation }) {
     const postEntryRoute = `${host}/api/post-competition-entry`
@@ -27,7 +29,12 @@ export default function Submit({ route, navigation }) {
     return (
         <View style={styles.container}>
             <ImagePicker callback={setImage} />
-            <Button onPress={() => submit(image)} title={"Submit"} />
+            {/* <Button onPress={() => submit(image)} title={"Submit"} /> */}
+            <View style={styles.editpButton}>
+                    <TouchableOpacity onPress={() => submit(image)}>
+                        <Text>Post Competition</Text>
+                    </TouchableOpacity>
+            </View>
         </View>
     )
 }
@@ -35,5 +42,15 @@ const styles = StyleSheet.create({
     container:{
         backgroundColor:"#a8e6ff",
         flex:1,
+        justifyContent:"center",
+    },
+    editpButton: {
+        alignItems: "center",
+        borderColor: Colors.black,
+        borderWidth: 1,
+        width: "40%",
+        alignSelf: 'center',
+        borderRadius: 18,
+        backgroundColor: '#31a8bd'
     },
 })

@@ -12,11 +12,7 @@ export default function MenuBar ({ navigation }) {
     return (
         <View>
             <View style={styles.buttons}>
-                <Button title="Feed" onPress={() => navigation.navigate("Feed")}></Button>
-                <Button title="Camera" onPress={() => navigation.navigate("Camera")}></Button>
-                <Button title="Profile" onPress={() => navigation.navigate("Profile")}></Button>
                 <Button title="Competitions" onPress={() => navigation.navigate("Competitions")}></Button>
-                <Button title="LiProfile" onPress={() => navigation.navigate("LiProfile")}></Button>
             </View>
         </View>
     )

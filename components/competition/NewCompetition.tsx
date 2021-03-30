@@ -2,15 +2,16 @@ import { ThemeProvider } from '@react-navigation/native'
 import React, { useState } from 'react'
 import { View, Image, Text, Button } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
-import { theme } from '../theme'
-import { host, post } from '../utils'
+import { theme } from '../../theme'
+import { host, post } from '../../utils'
 import { launchImageLibrary } from 'react-native-image-picker'
+import ImagePicker from '../ImagePicker'
 
-export default function NewCompetion() {
+
+export default function NewCompetition({ navigation }) {
     const [name, setName] = useState("")
-    const [base64, setBase64] = useState("")
-    const [uri, setUri] = useState("");
     const [description, setDescription] = useState("")
+    const [base64, setBase64] = useState("")
     const postCompetitionRoute = `${host}/api/post-competition`
     const imageUploadRoute = `${host}/api/upload`
 
@@ -23,7 +24,7 @@ export default function NewCompetion() {
         return false
     }
 
-    function postCompetition() {
+    function postCompetition(uri) {
         if (allFieldsFilled())
             post(postCompetitionRoute, {
                 name: name,
@@ -32,6 +33,7 @@ export default function NewCompetion() {
                 description: description
             }, (d) => {
                 console.log(d)
+                navigation.goBack();
             })
     }
 
@@ -39,27 +41,11 @@ export default function NewCompetion() {
         post(imageUploadRoute, { data: { base64: base64 }, uploader: global.username }, (d) => {
             const uri = d[0].uri;
             if (typeof uri === 'string')
-                postCompetition()
+                postCompetition(uri)
             else (console.error("Competition image not a valid uri. Got: " + uri))
         })
     }
 
-    function pickImage() {
-        launchImageLibrary({
-            mediaType: 'photo',
-            includeBase64: true
-        },
-            (d) => {
-                setUri(d.uri)
-                setBase64(d.base64)
-            })
-    }
-
-    function ImageHolder() {
-        return (uri.length > 0)
-            ? <Image source={{ uri: uri }} style={theme.image}></Image>
-            : <Text>Image Here</Text>
-    }
 
     return (
         <View>
@@ -71,10 +57,7 @@ export default function NewCompetion() {
             <View style={theme.borderbox}>
                 <TextInput onChangeText={(v) => { setDescription(v) }}></TextInput>
             </View>
-            <View style={theme.borderbox}>
-                <ImageHolder></ImageHolder>
-            </View>
-            <Button onPress={pickImage} title={"Pick Image"}></Button>
+            <ImagePicker callback={(img) => { setBase64(img.base64) }} />
             <Button onPress={createCompetition} title={"Post Competition"}></Button>
         </View>
     )

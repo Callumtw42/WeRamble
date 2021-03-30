@@ -3,13 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "concurrently \"react-native start\" \"npx react-native run-android\" \"npx react-native log-android\"",
-    "android-log": "concurrently \"npx react-native run-android\" \"npx react-native log-android\"",
+    "android": "concurrently \"react-native start\" \"npx react-native run-android\"",
     "start": "react-native start",
     "ios": "concurrently \"react-native start\" \"npx react-native run-ios\" \"npx react-native log-ios\"",
     "test": "jest",
     "lint": "eslint .",
-    "server": "cd server & npx nodemon ./server"
+    "server": "cd server & npx nodemon ./server",
+    "install-all": "yarn install & cd server & yarn install",
+    "release": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "@azure/storage-blob": "^12.3.0",

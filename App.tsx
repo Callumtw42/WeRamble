@@ -13,8 +13,10 @@ import Login from './components/Login';
 import ImagePreview from './components/ImagePreview';
 import Profile from './components/Profile';
 import ImageView from './components/ImageView';
-import Competitions from './components/Competitions';
-import NewCompetition from './components/NewCompetion';
+import Competitions from './components/competition/Competitions';
+import NewCompetition from './components/competition/NewCompetition';
+import Competition from './components/competition/Competition';
+import Submit from './components/competition/Submit';
 
 //profile
 
@@ -42,11 +44,11 @@ const App: () => React$Node = () => {
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Registration" component={Registration} />
           <Stack.Screen name="ImagePreview" component={ImagePreview} />
-          <Stack.Screen name="Profile" component={Profile} />
           <Stack.Screen name="ImageView" component={ImageView} />
           <Stack.Screen name="Competitions" component={Competitions} />
           <Stack.Screen name="NewCompetition" component={NewCompetition} />
-          <Stack.Screen name="LiProfile" component={LiProfile} />
+          <Stack.Screen name="Competition" component={Competition} />
+          <Stack.Screen name="Submit" component={Submit} />
         </Stack.Navigator>
       </NavigationContainer>
 

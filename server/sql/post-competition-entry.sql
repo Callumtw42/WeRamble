@@ -1,0 +1,1 @@
+insert into weramble.[competition-entries] values (${uri}, ${name}, ${uploader});

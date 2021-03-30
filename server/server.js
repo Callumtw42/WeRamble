@@ -122,15 +122,37 @@ app.get('/api/competitions', (req, res) => {
 
 //post competition
 app.post('/api/post-competition', (req, res) => {
-    console.log("POSTING COMPETITION")
     const { name, hostUser, description, image } = req.body;
+    console.log(req.body)
     const query = readFile('sql/post-competition.sql')
         .replace('${hostUser}', quote(hostUser))
         .replace('${name}', quote(name))
         .replace('${description}', quote(description))
         .replace('${image}', quote(image))
     console.log(query);
-    queryDatabase(req, res, query, (res.json("SUCCESS")));
+    queryDatabase(req, res, query, () => (res.json("SUCCESS")));
+});
+
+//competition-entries
+app.get('/api/get-competition-entries/:competition', (req, res) => {
+    const { competition } = req.params;
+    const dummy = [{
+        uri: "https://weramble.blob.core.windows.net/images/download (7).jpg"
+    }]
+    const query = readFile('sql/get-competition-entries.sql')
+        .replace('${competition}', quote(competition))
+    queryDatabase(req, res, query, () => (res.json("SUCCESS")));
+});
+
+//post-competition-entry
+app.post('/api/post-competition-entry', (req, res) => {
+    console.log(req.body);
+    const { name, image, uploader } = req.body;
+    const query = readFile('sql/post-competition-entry.sql')
+        .replace('${name}', quote(name))
+        .replace('${uri}', quote(image))
+        .replace('${uploader}', quote(uploader))
+    queryDatabase(req, res, query, () => (res.json("SUCCESS")));
 });
 
 //upload

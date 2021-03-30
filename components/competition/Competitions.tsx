@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
 import { Dimensions, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native'
-import { get, host } from '../utils';
+import { get, host } from '../../utils';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -11,7 +11,6 @@ export default function Competitions({ navigation }) {
     const route = `${host}/api/competitions`
 
     useEffect(() => {
-        console.log(route)
         get(route, renderCompetitions)
     }, [])
 
@@ -21,7 +20,10 @@ export default function Competitions({ navigation }) {
                 const { name, hostUser, image, description } = competition;
                 return (
                     <View style={styles.borderbox} key={index}>
-                        <TouchableOpacity >
+                        <TouchableOpacity onPress={() => {
+                            navigation.navigate("Competition",
+                                { name: name, image: image })
+                        }}>
                             <Text>{name}</Text>
                             <Text>{"by " + hostUser}</Text>
                             <Text>{description}</Text>

@@ -1,7 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
-import { get, host, post } from '../utils';
+import {get, host, post} from '../utils';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -10,8 +18,8 @@ const windowHeight = Dimensions.get('window').height;
 export default function Like({ image }) {
     const [liked, setLiked] = useState(false);
     const [likes, setLikes] = useState(0);
-    const likeOn = <Image style={styles.icon} source={require("../assets/like-on.png")} ></Image>
-    const likeOff = <Image style={styles.icon} source={require("../assets/like-off.png")} ></Image>
+    const likeOn = <Image style={styles.icon} source={require("../assets/cards-heart.png")} ></Image>
+    const likeOff = <Image style={styles.icon} source={require("../assets/heart-outline.png")} ></Image>
     const likeRoute = `${host}/api/like`
     const getLikesRoute = `${host}/api/getlikes/${image.id}/${global.username}`
 
@@ -38,22 +46,26 @@ export default function Like({ image }) {
     }
 
     return (
-        <View>
+        <View >
             <TouchableOpacity style={styles.button} onPress={postLike}>
                 {liked ? likeOn : likeOff}
             </TouchableOpacity>
-            <Text>{likes}</Text>
+            <Text style={styles.likes}>{likes}</Text>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     icon: {
-        width: windowWidth * (1 / 10),
+        width: windowWidth * (1 / 9),
         height: windowHeight * (1 / 22),
         margin: 2
     },
     button: {
         margin: 8
     },
+    likes:{
+        alignSelf:"center",
+    },
+
 })

@@ -5,21 +5,21 @@ const { Connection, Request } = require("tedious");
 const config = {
     authentication: {
         options: {
-            userName: "callum", // update me
-            password: "0089fxcy?" // update me
+            userName: "callum",
+            password: "0089fxcy?"
         },
         type: "default"
     },
-    server: "weramble.database.windows.net", // update me
+    server: "weramble.database.windows.net",
     options: {
-        database: "weramble", //update me
+        database: "weramble",
         encrypt: true
     }
 };
 
 module.exports = {
 
-    queryDatabase: (req, res, query) => {
+    queryDatabase: (req, res, query, callback) => {
         const conn = new Connection(config);
 
         // Attempt to connect and execute queries if connection goes through
@@ -55,7 +55,8 @@ module.exports = {
                 request.on("requestCompleted", columns => {
                     if (results.length > 0)
                         res.json(results);
-                    else res.json([]);
+                    else if (callback) callback();
+                    else res.json([])
                     conn.close();
                 });
 

@@ -9,6 +9,7 @@ var bodyParser = require('body-parser')
 var ReadableData = require('stream').Readable;
 const readFile = (file) => { return fs.readFileSync(path.resolve(__dirname, file), { encoding: "UTF-8" }) };
 const { sendEmail } = require('./sendEmail')
+var https = require('https')
 
 const app = express();
 app.use(bodyParser({ limit: '50mb' }));
@@ -23,7 +24,7 @@ const quote = (string) => {
 //test
 app.get('/api/test', (req, res) => {
     let query = `select * from weramble.test`;
-    queryDatabase(req, res, query); 
+    queryDatabase(req, res, query);
 });
 
 //register
@@ -51,8 +52,8 @@ app.get('/api/login/:username/:password', (req, res) => {
         .replace("${email}", quote(username))
         .replace("${password}", quote(password))
     queryDatabase(req, res, query);
-}); 
- 
+});
+
 //load user's images 
 app.get('/api/user-images/:uploader', (req, res) => {
     const { uploader } = req.params;
@@ -134,16 +135,39 @@ app.get('/api/competitions', (req, res) => {
     queryDatabase(req, res, query);
 });
 
+//post competition
 app.post('/api/post-competition', (req, res) => {
-    console.log("POSTING COMPETITION")
     const { name, hostUser, description, image } = req.body;
+    console.log(req.body)
     const query = readFile('sql/post-competition.sql')
         .replace('${hostUser}', quote(hostUser))
         .replace('${name}', quote(name))
         .replace('${description}', quote(description))
         .replace('${image}', quote(image))
     console.log(query);
-    queryDatabase(req, res, query);
+    queryDatabase(req, res, query, () => (res.json("SUCCESS")));
+});
+
+//competition-entries
+app.get('/api/get-competition-entries/:competition', (req, res) => {
+    const { competition } = req.params;
+    const dummy = [{
+        uri: "https://weramble.blob.core.windows.net/images/download (7).jpg"
+    }]
+    const query = readFile('sql/get-competition-entries.sql')
+        .replace('${competition}', quote(competition))
+    queryDatabase(req, res, query, () => (res.json("SUCCESS")));
+});
+
+//post-competition-entry
+app.post('/api/post-competition-entry', (req, res) => {
+    console.log(req.body);
+    const { name, image, uploader } = req.body;
+    const query = readFile('sql/post-competition-entry.sql')
+        .replace('${name}', quote(name))
+        .replace('${uri}', quote(image))
+        .replace('${uploader}', quote(uploader))
+    queryDatabase(req, res, query, () => (res.json("SUCCESS")));
 });
 
 //upload
@@ -188,12 +212,16 @@ app.post('/api/upload', jsonParser, (req, res) => {
     let query = readFile("sql/upload.sql")
         .replace("${uri}", quote(uri))
         .replace("${uploader}", quote(uploader))
-    console.log(query)
-    queryDatabase(req, res, query);
+    queryDatabase(req, res, query, () => { res.json([{ uri: uri }]) });
+    console.log(res)
 });
 
 //listen
-app.listen(8080, (err) => {
+// https.createServer({
+//     key: fs.readFileSync('./ssl/server.key'),
+//     cert: fs.readFileSync('./ssl/server.cert')
+// }, app)
+app.listen(8080, '0.0.0.0', (err) => {
     if (err) throw err;
     else {
         console.log(`Server started on port 8080`);

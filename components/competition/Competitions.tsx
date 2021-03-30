@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
-import { KeyboardAvoidingView, Dimensions, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native'
-import { get, host } from '../utils';
+import { Dimensions, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native'
+import { get, host } from '../../utils';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const styles = require('../components/StyleSheet');
 
@@ -46,26 +47,30 @@ export default function Competitions({ navigation }) {
     const route = `${host}/api/competitions`
 
     useEffect(() => {
-        console.log(route)
         get(route, renderCompetitions)
     }, [])
 
     function renderCompetitions(data) {
         setCompetitions(
-            dummy.map((competition, index) => {
+            data.map((competition, index) => {
                 const { name, hostUser, image, description } = competition;
                 return (
                     <View style={styles.borderbox} key={index}>
-                        <TouchableOpacity style={styles.competition} >
+                        <TouchableOpacity style={styles.competition}
+                            onPress={() => {
+                                navigation.navigate("Competition",
+                                    { name: name, image: image })
+                            }}
+                        >
                             <View style={styles.istView}>
                                 <Text style={styles.name}>{name}</Text>
-                                <Text style={{color:'#324200'}}>{"by " + hostUser}</Text>
+                                <Text style={{ color: '#324200' }}>{"by " + hostUser}</Text>
                             </View>
                             <View style={styles.secView}>
                                 <Image source={{ uri: image }} style={styles.image} />
-                                <View style={{width:"74%"}}>
-                                <Text style={styles.description}>{description}</Text>
-                                </View>   
+                                <View style={{ width: "74%" }}>
+                                    <Text style={styles.description}>{description}</Text>
+                                </View>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -76,9 +81,10 @@ export default function Competitions({ navigation }) {
     }
 
     return (
-        <View >
-            <KeyboardAvoidingView style={styles.container} behavior="padding" >
-            <TouchableOpacity style={{flexDirection:"row",alignSelf:"center",margin:20,}} onPress={() => navigation.navigate("NewCompetition")}>
+        <View  style={{backgroundColor:"#a8e6ff"}}>
+            <TouchableOpacity style={styles.topbotton
+              
+            } onPress={() => navigation.navigate("NewCompetition")}>
                 <Text style={styles.title}>New Competition  </Text>
                 <Image source={require("../assets/plus.png")} style={styles.icon}></Image>
             </TouchableOpacity>
@@ -86,7 +92,6 @@ export default function Competitions({ navigation }) {
             <ScrollView style={styles.competitions} showsVerticalScrollIndicator={false} >
                 {competitions}
             </ScrollView>
-            </KeyboardAvoidingView>
         </View>
     )
 }
@@ -97,7 +102,7 @@ export default function Competitions({ navigation }) {
         width: windowWidth / 3,
         height: windowHeight / 6,
         borderRadius: 18,
-        margin:2,
+        margin: 2,
     },
     icon:
     {
@@ -110,37 +115,63 @@ export default function Competitions({ navigation }) {
         borderColor: 'black',
         margin: 4,
         borderRadius: 18,
-        backgroundColor:"#bfcde3",
+        backgroundColor: "#bfcde3",
     },
     title: {
 
-        fontSize:18,
+        fontSize: 18,
         fontWeight: '600',
         textAlign: "center",
-      },
-      competitions:{
-        margin:8,
-      },
-      name:{
-          margin:5,
-          alignSelf:"center",
-          color:"#001a40"
-      },
-      istView:{
-        marginLeft:20,
-        marginBottom:5,
-        
-      },
-      secView:{
-        flexDirection:"row",
-      },
-      description:{
-        color:"#575757",
-        top:10,
+    },
+    competition: {
+
+    },
+    competitions: {
+        margin: 3,
+    },
+    name: {
+        margin: 5,
+        alignSelf: "center",
+        color: "#001a40"
+    },
+    istView: {
+        marginLeft: 20,
+        marginBottom: 5,
+
+    },
+    secView: {
+        flexDirection: "row",
+    },
+    description: {
+        color: "#575757",
+        top: 10,
+        justifyContent: "center",
+        fontSize: 18,
+        marginTop: 5,
+        marginLeft: 5,
+        marginRight: 35,
+    },
+    editpButton: {
+        alignItems: "center",
+        borderColor: Colors.black,
+        borderWidth: 1,
+        width: "40%",
+        alignSelf: 'center',
+        borderRadius: 18,
+        backgroundColor: '#31a8bd'
+    },
+    topbotton:{        
+        alignItems: "center",
+        borderColor: Colors.black,
+        borderWidth: 1,
+        width: "60%",
+        height:40,
+        borderRadius: 18, 
+        flexDirection: "row",
+        alignSelf: "center", 
         justifyContent:"center",
-        fontSize:18,
-        marginTop:5,
-        marginLeft:5,
-        marginRight:35,
-      },
+        margin: 10, 
+        backgroundColor:"#a8e6ff",
+
+    },
 })*/

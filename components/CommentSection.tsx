@@ -4,6 +4,7 @@ import { Dimensions, Image, StyleSheet, TextInput, TouchableOpacity, View } from
 import { get, host, post } from '../utils';
 import CommentsList from './CommentsList';
 import Like from './Like';
+import Follow from "./Follow";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -34,7 +35,7 @@ function CommentBox({ commenting, image, getComments: getComments, setCommenting
     return commenting ? <View style={styles.row}>{[box, sendButton]}</View> : <View></View>
 }
 
-/**Contains the comments list, likes and comment button*/
+/**Contains the comments list, likes, follows and comment button*/
 export default function CommentSection({ image }) {
 
     const [commenting, setCommenting] = useState(false);
@@ -54,6 +55,7 @@ export default function CommentSection({ image }) {
                     <Image style={styles.commentIcon} source={require('../assets/comment.png')}></Image>
                 </TouchableOpacity>
                 <Like image={image} />
+                <Follow image={image} />
             </View>
             <CommentBox commenting={commenting} image={image} getComments={getComments} setCommenting={setCommenting} />
             <CommentsList comments={comments} />

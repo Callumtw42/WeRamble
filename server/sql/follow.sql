@@ -1,0 +1,1 @@
+insert into weramble.follows(username, post) values (${user}, ${post});

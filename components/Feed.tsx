@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
-
 import { host } from '../utils';
 import ImageGrid from './ImageGrid';
 import MenuBar from './MenuBar';
+import NavTab from './NavTab';
+
 
 const route = `${host}/api/feed`
 const windowWidth = Dimensions.get('window').width;
@@ -15,7 +16,6 @@ export default function Feed({ navigation }) {
     // const Tab = createBottomTabNavigator();
     return (
         <View style={styles.container} >
-{/* <MenuBar navigation={navigation} /> */}
             <ImageGrid navigation={navigation} route={route} />
         </View>
     )
@@ -27,3 +27,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column'
     },
 })
+
+/*
+  <MenuBar navigation={navigation} />
+*/

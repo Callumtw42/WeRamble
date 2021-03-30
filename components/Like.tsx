@@ -1,7 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
-import { get, host, post } from '../utils';
+import {get, host, post} from '../utils';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;

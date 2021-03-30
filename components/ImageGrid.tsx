@@ -12,8 +12,8 @@ const wait = (timeout) => {
     });
 }
 
-/**retrieves images from the database and displays them in a grid */
-export default function ImageGrid({ route, navigation }) {
+/**retrieves images from the database and displays them in a grid callback contains number of images*/
+export default function ImageGrid({ route, navigation, callback = (i) => { } }) {
 
     const [gallery, setGallery] = useState([])
     const [refreshing, setRefreshing] = React.useState(false);
@@ -51,7 +51,10 @@ export default function ImageGrid({ route, navigation }) {
     }
 
     useEffect(() => {
-        get(route, displayImages)
+        get(route, (d) => {
+            callback(d.length);
+            displayImages(d);
+        })
     }, [refreshing])
 
     return (

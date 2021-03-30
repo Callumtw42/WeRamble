@@ -10,7 +10,7 @@ export default function ImagePreview({ route }) {
     const { photo } = route.params
 
     async function upload() {
-        post(apiRoute, { data: photo, uploader: global.username }, () => { })
+        post(apiRoute, { data: photo, uploader: global.username }, (d) => { console.log(d) })
     }
 
     return (

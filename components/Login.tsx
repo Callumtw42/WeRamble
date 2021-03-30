@@ -5,8 +5,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { get, host } from '../utils';
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+//const windowWidth = Dimensions.get('window').width;
+//const windowHeight = Dimensions.get('window').height;
+const styles = require('../components/StyleSheet');
 
 /** The entire login page */
 export default function Login({ navigation }) {
@@ -66,19 +67,18 @@ export default function Login({ navigation }) {
   )
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
   sectionTitle: {
+    paddingTop: 20,
     fontSize: 24,
     fontWeight: '600',
     color: Colors.black,
     textAlign: "center",
   },
-  //tinylogo: {
-  //width: 250,
-  //height: 200,
-  //},
   smallText: {
-    textAlign: "center",
+    paddingTop: 10,
+    paddingBottom: 10,
+    textAlign: "center"
   },
   input: {
     borderColor: Colors.black,
@@ -97,12 +97,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   container: {
-    //paddingTop: 10,
     paddingBottom: 100,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: '#33ccff',
+    backgroundColor: '#a8e6ff',
     height: windowHeight,
     width: windowWidth
   },
@@ -116,4 +115,4 @@ const styles = StyleSheet.create({
     width: 300,
     height: 200
   }
-});
+});*/

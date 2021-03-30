@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet,Image, Text, TextInput, View } from 'react-native';
+import { Dimensions, Button, StyleSheet,Image, Text, TextInput, View } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { host, post } from '../utils';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 /** Entire registration page for adding new accounts*/
 export default function Registration({ navigation }) {

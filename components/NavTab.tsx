@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import Feed from './Feed';
 import Camera from './Camera';
-import LiProfile from './LiProfile';
+import LiProfile from './Profile';
 
 
 export default function NavTab(){

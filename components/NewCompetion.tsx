@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@react-navigation/native'
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import React, { useState } from 'react'
-import { View, Text, Button,StyleSheet } from 'react-native'
+import { View, Text, Button, StyleSheet } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import { theme } from '../theme'
 import { host, post } from '../utils'
@@ -32,29 +32,29 @@ export default function NewCompetion() {
     return (
         <View style={styles.container}>
             <Text style={styles.Title}>Competition Name</Text>
-            <View style={theme.borderbox}>
-                <TextInput 
-                style={styles.input} 
-                onChangeText={(v) => { setName(v) }}></TextInput>
+            <View>
+                <TextInput
+                    style={styles.input}
+                    onChangeText={(v) => { setName(v) }}></TextInput>
             </View>
             <Text style={styles.Title}>Description</Text>
-            <View style={theme.borderbox}>
+            <View >
                 <TextInput style={styles.input} onChangeText={(v) => { setDescription(v) }}></TextInput>
             </View>
             {/* <Button onPress={pickImage} title={"Pick Image"}></Button>
             <Button onPress={postCompetition} title={"Post Competition"}></Button> */}
-        <View style={styles.buttonsty}>
+            <View style={styles.buttonsty}>
                 <View style={styles.editpButton}>
                     <TouchableOpacity onPress={pickImage}>
-                    <Text>Pick Image</Text>
+                        <Text>Pick Image</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.editpButton}>
                     <TouchableOpacity onPress={postCompetition}>
-                    <Text>Post Competition</Text>
+                        <Text>Post Competition</Text>
                     </TouchableOpacity>
-                    </View>
                 </View>
+            </View>
         </View>
     )
 }
@@ -66,36 +66,36 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         backgroundColor: '#f7def7',
-        flex:1,         
-      },
-      Title: {
+        flex: 1,
+    },
+    Title: {
         fontSize: 24,
         fontWeight: '600',
         color: Colors.black,
         textAlign: "center",
-      },
-      input: {
-        borderColor: Colors.black,
-        borderWidth: 1,
+    },
+    input: {
+        // borderColor: Colors.black,
+        // borderWidth: 1,
         width: "80%",
         alignSelf: 'center',
         borderRadius: 18,
         color: 'black',
         backgroundColor: 'white'
-    
-      },
-      editpButton: {
-        alignItems:"center",
+
+    },
+    editpButton: {
+        alignItems: "center",
         borderColor: Colors.black,
         borderWidth: 1,
         width: "40%",
         alignSelf: 'center',
-        borderRadius:18,
-        backgroundColor:'#f0a6f0'
+        borderRadius: 18,
+        backgroundColor: '#f0a6f0'
     },
-    buttonsty:{
-        top:10,
-        flexDirection:"row",
-       justifyContent:"space-evenly"
+    buttonsty: {
+        top: 10,
+        flexDirection: "row",
+        justifyContent: "space-evenly"
     },
 })

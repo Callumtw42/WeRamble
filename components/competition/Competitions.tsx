@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
         alignSelf: "center", 
         justifyContent:"center",
         margin: 10, 
-        backgroundColor:"#64c1d1",
+        backgroundColor:"#a8e6ff",
 
     },
 })

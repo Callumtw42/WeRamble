@@ -7,6 +7,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import ImagePicker from './ImagePicker';
+import Follow from './Follow';
 
 const number = 0
 const randomNumber2 = Math.random() * number
@@ -47,6 +48,7 @@ export default function Profile({ route, navigation }) {
                         <Image style={styles.userheadimage}
                             source={{ uri: profilePicture }} />
                     </TouchableOpacity>
+                    <Follow user={username} />
                     <View style={styles.container}>
                         <Text>{posts}</Text>
                         <Text style={{ fontWeight: 'bold' }}>Posts</Text>
@@ -62,15 +64,6 @@ export default function Profile({ route, navigation }) {
 
                 </View>
                 <Text>Posts</Text>
-                {/* <View style={styles.editpButton}>
-                    <TouchableOpacity onPress={() => Alert.alert('coming soon')}>
-                        <Text>Edit Profile</Text>
-                    </TouchableOpacity>
-                </View> */}
-                {/* <View style={styles.barline} />
-                <View style={styles.userpost1}>
-                    <Posts></Posts>
-                </View> */}
                 <View style={styles.userpost}>
                     <ImageGrid navigation={navigation} route={imagesRoute} callback={(i) => { setPosts(i) }}></ImageGrid>
                 </View>

@@ -37,7 +37,7 @@ export default function ImageGrid({ route, navigation, callback = (i) => { } }) 
                 let image = data[++i];
                 if (image) {
                     images.push(
-                        <TouchableOpacity key={key++} onPress={viewImage.bind(this, image)}>
+                        <TouchableOpacity style = {styles.image} key={key++} onPress={viewImage.bind(this, image)}>
                             <Image source={{ uri: image.uri }} style={styles.thumbnail} />
                         </TouchableOpacity>
                     )
@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
     thumbnail: {
         width: windowWidth / 3,
         height: windowHeight / 6,
-
     },
     galleryRow: {
         display: 'flex',
@@ -77,5 +76,8 @@ const styles = StyleSheet.create({
     gallery: {
         display: 'flex',
         flexDirection: 'column'
+    },
+    image:{
+        margin: 2
     }
 })

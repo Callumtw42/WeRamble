@@ -7,23 +7,23 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 /**The follow button */
-export default function Follow({ image }) {
+export default function Follow({ user }) {
     const [followed, setFollowed] = useState(false);
     const [follows, setFollows] = useState(0);
     const followOn = <Image style={styles.icon} source={require("../assets/following.png")} ></Image>
     const followOff = <Image style={styles.icon} source={require("../assets/follow.png")} ></Image>
-    const likeRoute = `${host}/api/follow`
-    const getLikesRoute = `${host}/api/getlikes/${image.id}/${global.username}`
+    const followRoute = `${host}/api/follow`
+    const getLikesRoute = `${host}/api/getFollows/${user}`
 
-    useEffect(() => {
-        getFollows();
-    }, [])
+    // useEffect(() => {
+    //     getFollows();
+    // }, [])
 
     async function postFollow() {
-        post(likeRoute, {
-            imageid: image.id,
-            user: global.username,
-            like: !followed
+        post(followRoute, {
+            follower: global.username,
+            following: user,
+            followed: !followed
         }, getFollows)
     }
 

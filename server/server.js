@@ -18,6 +18,7 @@ var jsonParser = bodyParser.json()
 const quote = (string) => {
     return `'${string}'`
 }
+
 //test
 app.get('/api/test', (req, res) => {
     let query = `select * from weramble.test`;
@@ -128,14 +129,14 @@ app.post('/api/like', (req, res) => {
 //follow
 app.post('/api/follow', (req, res) => {
     console.log("follow: " + req.body.like)
-    const { imageid, user, like } = req.body
-    query = like
-        ? readFile("sql/like.sql")
-            .replace("${user}", quote(user))
-            .replace("${post}", quote(imageid))
-        : readFile("sql/unlike.sql")
-            .replace("${username}", quote(user))
-            .replace("${post}", quote(imageid))
+    const { followed, follower, following } = req.body
+    query = followed
+        ? readFile("sql/follow.sql")
+            .replace("${follower}", quote(follower))
+            .replace("${following}", quote(imageid))
+        : readFile("sql/unfollow.sql")
+            .replace("${follower}", quote(imageid))
+            .replace("${following}", quote(following))
     console.log(query);
     queryDatabase(req, res, query);
 });

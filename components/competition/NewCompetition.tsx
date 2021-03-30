@@ -7,6 +7,7 @@ import { theme } from '../../theme'
 import { host, post } from '../../utils'
 import { launchImageLibrary } from 'react-native-image-picker'
 import ImagePicker from '../ImagePicker'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 export default function NewCompetition({ navigation }) {
@@ -61,7 +62,12 @@ export default function NewCompetition({ navigation }) {
                 <TextInput style={styles.input} onChangeText={(v) => { setDescription(v) }}></TextInput>
             </View>
             <ImagePicker callback={(img) => { setBase64(img.base64) }} />
-            <Button onPress={createCompetition} title={"Post Competition"}></Button>
+            {/* <Button onPress={createCompetition} title={"Post Competition"}></Button> */}
+                <View style={styles.editpButton}>
+                    <TouchableOpacity onPress={createCompetition}>
+                        <Text>Post Competition</Text>
+                    </TouchableOpacity>
+                    </View>
         </View>
     )
 }
@@ -80,6 +86,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         color: Colors.black,
         textAlign: "center",
+        
     },
     input: {
         borderColor: Colors.black,
@@ -88,8 +95,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         borderRadius: 18,
         color: 'black',
-        backgroundColor: 'white'
-
+        backgroundColor: 'white',
+        marginBottom:20,
     },
     editpButton: {
         alignItems: "center",
@@ -98,7 +105,7 @@ const styles = StyleSheet.create({
         width: "40%",
         alignSelf: 'center',
         borderRadius: 18,
-        backgroundColor: '#f0a6f0'
+        backgroundColor: '#31a8bd'
     },
     buttonsty: {
         top: 10,

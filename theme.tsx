@@ -3,6 +3,10 @@ import { StyleSheet, Dimensions } from 'react-native'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+//const imageHeight = Dimensions.get('image').height;
+//const imageWidth = Dimensions.get('image').width;
+//the size for border should suit with the image.or border should Slight bigger than image
+
 export const theme = StyleSheet.create({
     image:
     {
@@ -15,9 +19,13 @@ export const theme = StyleSheet.create({
         height: windowHeight / 24,
     },
     borderbox: {
-        borderWidth: 1,
+        borderWidth: 2,
         borderStyle: 'solid',
         borderColor: 'black',
-        margin: 4
+        justifyContent:"flex-end",
+        borderRadius:18,
+        height:"55%",
+        margin:4,
+        backgroundColor:"#7be4f7",
     }
 })

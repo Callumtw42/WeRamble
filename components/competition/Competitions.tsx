@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
 import { Dimensions, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native'
 import { get, host } from '../../utils';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -81,9 +82,9 @@ export default function Competitions({ navigation }) {
     }
 
     return (
-        <View  style={{backgroundColor:"#a8e6ff"}}>
-            <TouchableOpacity style={
-                { flexDirection: "row", alignSelf: "center", margin: 20, }
+        <View  style={{backgroundColor:"white"}}>
+            <TouchableOpacity style={styles.topbotton
+              
             } onPress={() => navigation.navigate("NewCompetition")}>
                 <Text style={styles.title}>New Competition  </Text>
                 <Image source={require("../assets/plus.png")} style={styles.icon}></Image>
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
 
     },
     competitions: {
-        margin: 8,
+        margin: 3,
     },
     name: {
         margin: 5,
@@ -150,5 +151,28 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginLeft: 5,
         marginRight: 35,
+    },
+    editpButton: {
+        alignItems: "center",
+        borderColor: Colors.black,
+        borderWidth: 1,
+        width: "40%",
+        alignSelf: 'center',
+        borderRadius: 18,
+        backgroundColor: '#31a8bd'
+    },
+    topbotton:{        
+        alignItems: "center",
+        borderColor: Colors.black,
+        borderWidth: 1,
+        width: "60%",
+        height:40,
+        borderRadius: 18, 
+        flexDirection: "row",
+        alignSelf: "center", 
+        justifyContent:"center",
+        margin: 10, 
+        backgroundColor:"#a8e6ff",
+
     },
 })

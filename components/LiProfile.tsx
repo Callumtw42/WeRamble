@@ -7,7 +7,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-
+const styles = require('../components/StyleSheet');
 
 const number = 0
 const Signature = "hello word！！"
@@ -32,15 +32,15 @@ export default function LiProfile({ navigation }) {
             <View style={styles.informbar}>
                 <Image style={styles.userheadimage}
                     source={{ uri: "https://picsum.photos/200/200" }} />
-                <View style={styles.container}>
+                <View style={styles.profileContainer}>
                     <Text>{randomNumber1}</Text>
                     <Text style={{ fontWeight: 'bold' }}>Posts</Text>
                 </View>
-                <View style={styles.container}>
+                <View style={styles.profileContainer}>
                     <Text>{randomNumber2}</Text>
                     <Text style={{ fontWeight: 'bold' }}>Followers</Text>
                 </View>
-                <View style={styles.container}>
+                <View style={styles.profileContainer}>
                     <Text>{randomNumber3}</Text>
                     <Text style={{ fontWeight: 'bold' }}>Following</Text>
                 </View>
@@ -49,7 +49,7 @@ export default function LiProfile({ navigation }) {
 
             <Text style={styles.username}>{username}</Text>
             <Text style={styles.username}>{Signature}</Text>
-            <View style={styles.editpButton}>
+            <View style={styles.profileEditPButton}>
                 {/* <Button
                     onPress={() => Alert.alert('coming soon')}
                     title="Edit Profile"
@@ -88,10 +88,10 @@ export default function LiProfile({ navigation }) {
     );
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
     background: {
         flex: 1,
-        backgroundColor: "white",
+        backgroundColor: "#a8e6ff",
 
     },
     topbar: {
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         height: 150,
     },
-    editpButton: {
+    profileEditPButton: {
         alignItems:"center",
         borderColor: Colors.black,
         borderWidth: 1,
@@ -159,13 +159,12 @@ const styles = StyleSheet.create({
         bottom: 40,
         fontSize: 18,
     },
-    container: {
+    profileContainer: {
         width: "20%",
         height: "100%",
         margin: 10,
         alignItems: "center",
-        justifyContent: "center",
-
+        justifyContent: "center"
     }
-})
+})*/
 

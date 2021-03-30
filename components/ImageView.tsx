@@ -3,33 +3,33 @@ import { Dimensions, Image, ScrollView, StyleSheet } from 'react-native';
 
 import CommentSection from './CommentSection';
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+const styles = require('../components/StyleSheet');
 
 /** Displays a single image post in a large format */
 export default function ImageView({ route }) {
     const image = route.params;
     return (
-        <ScrollView style={styles.container}>
-            <Image source={{ uri: image.uri }} style={styles.image} />
+        <ScrollView style={styles.imageViewContainer}>
+            <Image source={{ uri: image.uri }} style={styles.imageViewImage} />
             <CommentSection image={image} />
         </ScrollView >
     )
 }
 
 
-const styles = StyleSheet.create({
-    image: {
+/*const styles = StyleSheet.create({
+    imageViewImage: {
         width: windowWidth,
         height: windowHeight * (2 / 3),
     },
-    container: {
+    imageViewContainer: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        backgroundColor: '#a8e6ff'
     },
-    icon: {
+    imageViewIcon: {
         width: windowWidth * (1 / 12),
         height: windowHeight * (1 / 16),
         margin: 2
     },
-})
+})*/

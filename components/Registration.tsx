@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Dimensions, Button, StyleSheet,Image, Text, TextInput, View } from 'react-native';
+import { KeyboardAvoidingView, Dimensions, Button, StyleSheet, Image, Text, TextInput, View } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { host, post } from '../utils';
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+const styles = require('../components/StyleSheet');
 
 /** Entire registration page for adding new accounts*/
 export default function Registration({ navigation }) {
@@ -28,27 +27,24 @@ export default function Registration({ navigation }) {
 
     return (
         <View>
-            <Text style={styles.sectionTitle} >E-Mail</Text>
-            <TextInput style={styles.input}
-                onChangeText={(v) => setEmail(v)} />
-            <Text style={styles.sectionTitle}>Username</Text>
-            <TextInput style={styles.input}
-                onChangeText={(v) => setUsername(v)} />
-            <Text style={styles.sectionTitle}>Pasword</Text>
-            <TextInput style={styles.input}
-                onChangeText={(v) => setPassword(v)} />
-            {/* <Button
-                title="Register"
-                onPress={() => register()}
-            /> */}
-            
-        <TouchableOpacity  onPress={() => register()}>
-            <Image style={styles.register} source={require("../assets/sign-up.jpg")} />
-        </TouchableOpacity>
+            <KeyboardAvoidingView style={styles.container} behavior="padding" >
+                <Text style={styles.sectionTitle} >E-Mail</Text>
+                <TextInput style={styles.input}
+                    onChangeText={(v) => setEmail(v)} />
+                <Text style={styles.sectionTitle}>Username</Text>
+                <TextInput style={styles.input}
+                    onChangeText={(v) => setUsername(v)} />
+                <Text style={styles.sectionTitle}>Pasword</Text>
+                <TextInput style={styles.input}
+                    onChangeText={(v) => setPassword(v)} />
+                <TouchableOpacity  onPress={() => register()}>
+                    <Image style={styles.register} source={require("../assets/sign-up.jpg")} />
+                </TouchableOpacity>
+            </KeyboardAvoidingView>
         </View>
     )
 }
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
     sectionTitle: {
         fontSize: 24,
         fontWeight: '600',
@@ -70,4 +66,4 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         borderRadius:18,
     },
-});
+});*/

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
-import { Dimensions, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native'
+import { KeyboardAvoidingView, Dimensions, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native'
 import { get, host } from '../utils';
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+const styles = require('../components/StyleSheet');
 
 const dummy = [
     {
@@ -78,6 +77,7 @@ export default function Competitions({ navigation }) {
 
     return (
         <View >
+            <KeyboardAvoidingView style={styles.container} behavior="padding" >
             <TouchableOpacity style={{flexDirection:"row",alignSelf:"center",margin:20,}} onPress={() => navigation.navigate("NewCompetition")}>
                 <Text style={styles.title}>New Competition  </Text>
                 <Image source={require("../assets/plus.png")} style={styles.icon}></Image>
@@ -86,11 +86,12 @@ export default function Competitions({ navigation }) {
             <ScrollView style={styles.competitions} showsVerticalScrollIndicator={false} >
                 {competitions}
             </ScrollView>
+            </KeyboardAvoidingView>
         </View>
     )
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
     image:
     {
         width: windowWidth / 3,
@@ -142,4 +143,4 @@ const styles = StyleSheet.create({
         marginLeft:5,
         marginRight:35,
       },
-})
+})*/

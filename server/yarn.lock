@@ -91,13 +91,11 @@
   integrity sha512-dG76W7ElfLi+fbTjnZVGj+M9e0BIEJmRxU6fHaUQ12bZBe8EJKYb2GV50YWNaP2uJiVQ5+7nXEVj1VN1UQtaEw==
 
 "@azure/ms-rest-js@^2.0.4":
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/@azure/ms-rest-js/-/ms-rest-js-2.2.3.tgz#8f0085f7768c69f17b3cdb20ce95728b452dc304"
-  integrity sha512-sXOhOu/37Tr8428f32Jwuwga975Xw64pYg1UeUwOBMhkNgtn5vUuNRa3fhmem+I6f8EKoi6hOsYDFlaHeZ52jA==
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@azure/ms-rest-js/-/ms-rest-js-2.3.0.tgz#035bdd2b0f64de2f1b5f9d42ac146d4afdf54434"
+  integrity sha512-8NOnHgovi61NpcUld53zRkY/IcQJBBO48VeMntNTUtaPo8yYYTnu1hWRvp6b6vpBnur7HGmuj692J9li5Kx6/Q==
   dependencies:
     "@azure/core-auth" "^1.1.4"
-    "@types/node-fetch" "^2.3.7"
-    "@types/tunnel" "0.0.1"
     abort-controller "^3.0.0"
     form-data "^2.5.0"
     node-fetch "^2.6.0"
@@ -191,7 +189,7 @@
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.4.tgz#f0ec25dbf2f0e4b18647313ac031134ca5b24b21"
   integrity sha512-1z8k4wzFnNjVK/tlxvrWuK5WMt6mydWWP7+zvH5eFep4oj+UkrfiJTRtjCeBXNpwaA/FYqqtb4/QS4ianFpIRA==
 
-"@types/node-fetch@^2.3.7", "@types/node-fetch@^2.5.0":
+"@types/node-fetch@^2.5.0":
   version "2.5.8"
   resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.5.8.tgz#e199c835d234c7eb0846f6618012e558544ee2fb"
   integrity sha512-fbjI6ja0N5ZA8TV53RUqzsKNkl9fv8Oj3T7zxW7FGv1GSH7gwJaNF8dzCjrqKaxKeUpTz4yT1DaJFq/omNpGfw==
@@ -221,7 +219,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/tunnel@0.0.1", "@types/tunnel@^0.0.1":
+"@types/tunnel@^0.0.1":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@types/tunnel/-/tunnel-0.0.1.tgz#0d72774768b73df26f25df9184273a42da72b19c"
   integrity sha512-AOqu6bQu5MSWwYvehMXLukFHnupHrpZ8nvgae5Ggie9UwzDR1CCwoXgSSWNZJuyOlCdfdsWMA5F2LlmvyoTv8A==

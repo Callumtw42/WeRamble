@@ -71,16 +71,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     commentIcon: {
-        width: windowWidth * (1 / 12),
-        height: windowHeight * (1 / 16),
-        margin: 2
+        width: windowWidth * (1 / 10),
+        height: windowHeight * (1 / 18),
+        margin: 8,
     },
     sendIcon: {
         width: windowWidth * (1 / 10),
         height: windowHeight * (1 / 20),
     },
     button: {
-        width: windowWidth * (1 / 12),
+        width: windowWidth * (1 / 9),
     },
     row: {
         display: 'flex',

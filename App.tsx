@@ -4,8 +4,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
-import Registration from './components/Registration'
 
+
+
+import Registration from './components/Registration'
 import Camera from './components/Camera';
 import Feed from './components/Feed';
 import LiProfile from './components/LiProfile';
@@ -18,6 +20,9 @@ import NewCompetition from './components/competition/NewCompetition';
 import Competition from './components/competition/Competition';
 import Submit from './components/competition/Submit';
 
+
+import { Image, View } from 'react-native';
+
 //profile
 
 
@@ -25,9 +30,31 @@ function Home() {
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator >
-      <Tab.Screen name="Feed" component={Feed} />
-      <Tab.Screen name="Camera" component={Camera} />
-      <Tab.Screen name="LiProfile" component={LiProfile} />
+      <Tab.Screen name="Feed" component={Feed}
+                    options={{
+                        tabBarIcon: ({}) => (
+                            <Image  source={require('./assets/home-variant-outline.png')} />
+                        ),
+                    }} />
+      <Tab.Screen name="Camera" component={Camera} 
+        options={{
+          tabBarIcon: ({}) => (
+              <Image  source={require('./assets/camera-wireless-outline.png')} />
+          ),
+      }}/>
+      <Tab.Screen name="Competitons" component={Competitions}
+        options={{
+          tabBarIcon: ({}) => (
+              <Image  source={require('./assets/trophy-outline.png')} />
+          ),
+      }} />
+      <Tab.Screen name="Profile" component={LiProfile}
+        options={{
+          tabBarIcon: ({}) => (
+              <Image  source={require('./assets/account-circle-outline.png')} />
+          ),
+      }} />
+
     </Tab.Navigator>
   )
 }
@@ -37,7 +64,7 @@ const App: () => React$Node = () => {
   const Stack = createStackNavigator();
   return (
     <>
-      <NavigationContainer>
+      <NavigationContainer >
         <Stack.Navigator initialRouteName="Login">
           {/*Add screens below*/}
           <Stack.Screen name="Login" component={Login} />

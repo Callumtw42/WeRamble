@@ -11,22 +11,17 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 /**The main image feed*/
- export default function Feed({ navigation }) {
+export default function Feed({ navigation }) {
 
     // const Tab = createBottomTabNavigator();
     return (
-        <View style={styles.container} > 
-          <MenuBar navigation={navigation} />
-             { <ImageGrid navigation={navigation} route={route} />  }
+        <View style={styles.container} >
+            <ImageGrid navigation={navigation} route={route} />
 
 
         </View>
     )
 }
-
-
-
-
 
 const styles = StyleSheet.create({
     container: {

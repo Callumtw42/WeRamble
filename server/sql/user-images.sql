@@ -1,1 +1,1 @@
-select * from weramble.images where uploader = ${uploader};
+select * from weramble.images where uploader = ${uploader} order by date desc ;

@@ -61,13 +61,15 @@ export default function NewCompetition({ navigation }) {
             <View >
                 <TextInput style={styles.input} onChangeText={(v) => { setDescription(v) }}></TextInput>
             </View>
-            <ImagePicker callback={(img) => { setBase64(img.base64) }} />
-            {/* <Button onPress={createCompetition} title={"Post Competition"}></Button> */}
-                <View style={styles.editpButton}>
-                    <TouchableOpacity onPress={createCompetition}>
-                        <Text>Post Competition</Text>
-                    </TouchableOpacity>
-                    </View>
+            {/* <ImagePicker callback={(img) => { setBase64(img.base64) }} /> */}
+            <TouchableOpacity style={styles.editpButton} onPress={() => navigation.navigate("ImagePicker", setBase64)}>
+                <Text>Upload Image</Text>
+            </TouchableOpacity>
+            <View style={styles.editpButton}>
+                <TouchableOpacity onPress={createCompetition}>
+                    <Text>Post Competition</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         color: Colors.black,
         textAlign: "center",
-        
+
     },
     input: {
         borderColor: Colors.black,
@@ -96,16 +98,18 @@ const styles = StyleSheet.create({
         borderRadius: 18,
         color: 'black',
         backgroundColor: 'white',
-        marginBottom:20,
+        marginBottom: 20,
     },
     editpButton: {
         alignItems: "center",
         borderColor: Colors.black,
         borderWidth: 1,
         width: "40%",
+        height: 30,
         alignSelf: 'center',
         borderRadius: 18,
-        backgroundColor: '#31a8bd'
+        backgroundColor: '#31a8bd',
+        margin: 10,
     },
     buttonsty: {
         top: 10,

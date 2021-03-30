@@ -1,12 +1,10 @@
 const { queryDatabase } = require("./azure.js");
+const { uploadBlob } = require("./blob");
 // const { sendVerificationEmail } = require("./emailer.js")
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const { BlobServiceClient, ContainerClient } = require('@azure/storage-blob');
-const { v1: uuid } = require('uuid');
 var bodyParser = require('body-parser')
-var ReadableData = require('stream').Readable;
 const readFile = (file) => { return fs.readFileSync(path.resolve(__dirname, file), { encoding: "UTF-8" }) };
 const { sendEmail } = require('./sendEmail')
 var https = require('https')
@@ -16,14 +14,35 @@ app.use(bodyParser({ limit: '50mb' }));
 
 var jsonParser = bodyParser.json()
 
-const AZURE_STORAGE_CONNECTION_STRING = 'DefaultEndpointsProtocol=https;AccountName=weramble;AccountKey=vTiBSla5pbWA0zxj3YTbAhjtDQcs2SPJ/XgKB44TjMPnKmBbW1CcX853ZGzduApqU58TjIAy9WKDbQ5HyBrgMA==;EndpointSuffix=core.windows.net'
 
 const quote = (string) => {
     return `'${string}'`
 }
+
 //test
 app.get('/api/test', (req, res) => {
     let query = `select * from weramble.test`;
+    queryDatabase(req, res, query);
+});
+
+//get-profile-pic
+app.get('/api/get-profile-pic/:username', (req, res) => {
+    console.log(req.params)
+    const { username } = req.params;
+    let query = readFile("./sql/get-profile-pic.sql")
+        .replace("${username}", quote(username))
+    queryDatabase(req, res, query);
+})
+
+//post-profile-pic
+app.post('/api/post-profile-pic', (req, res) => {
+    console.log(req.body)
+    const { image, username } = req.body;
+    const uri = uploadBlob(image);
+
+    let query = readFile("./sql/post-profile-pic.sql")
+        .replace("${uri}", quote(uri))
+        .replace("${username}", quote(username))
     queryDatabase(req, res, query);
 });
 
@@ -110,14 +129,14 @@ app.post('/api/like', (req, res) => {
 //follow
 app.post('/api/follow', (req, res) => {
     console.log("follow: " + req.body.like)
-    const { imageid, user, like } = req.body
-    query = like
-        ? readFile("sql/like.sql")
-            .replace("${user}", quote(user))
-            .replace("${post}", quote(imageid))
-        : readFile("sql/unlike.sql")
-            .replace("${username}", quote(user))
-            .replace("${post}", quote(imageid))
+    const { followed, follower, following } = req.body
+    query = followed
+        ? readFile("sql/follow.sql")
+            .replace("${follower}", quote(follower))
+            .replace("${following}", quote(imageid))
+        : readFile("sql/unfollow.sql")
+            .replace("${follower}", quote(imageid))
+            .replace("${following}", quote(following))
     console.log(query);
     queryDatabase(req, res, query);
 });
@@ -174,41 +193,7 @@ app.post('/api/post-competition-entry', (req, res) => {
 app.post('/api/upload', jsonParser, (req, res) => {
     const { data, uploader } = req.body
     const base64 = data.base64;
-    const imageBufferData = Buffer.from(base64, 'base64');
-
-    // Create a unique name for the blob
-    const blobName = Date.now().toString() + '.jpg';
-
-    var streamObj = new ReadableData();
-
-    streamObj.push(imageBufferData);
-    streamObj.push(null);
-    streamObj.pipe(fs.createWriteStream(blobName));
-    console.log(streamObj);
-
-    // Create the BlobServiceClient object which will be used to create a container client
-    const blobServiceClient = BlobServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTION_STRING);
-
-    // Create a unique name for the container
-    const containerName = 'images';
-
-    console.log('\nCreating container...');
-    console.log('\t', containerName);
-
-    // Get a reference to a container
-    const containerClient = blobServiceClient.getContainerClient(containerName);
-
-    // Get a block blob client
-    const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-
-    console.log('\nUploading to Azure storage as blob:\n\t', blobName);
-
-    // Upload data to the blob
-    const uploadBlobResponse = blockBlobClient.upload(imageBufferData, imageBufferData.length);
-    console.log("Blob was uploaded successfully. requestId: ", uploadBlobResponse.requestId);
-
-    console.log(Date.now().toString());
-    const uri = `https://weramble.blob.core.windows.net/images/${blobName}`
+    const uri = uploadBlob(base64);
     let query = readFile("sql/upload.sql")
         .replace("${uri}", quote(uri))
         .replace("${uploader}", quote(uploader))

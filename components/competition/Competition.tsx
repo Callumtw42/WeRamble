@@ -17,13 +17,11 @@ export default function Competition({ route, navigation }) {
     const { name, image } = route.params;
     const getEntriesRoute = `${host}/api/get-competition-entries/${name}`
 
-
     return (
         <View style={styles.container} >
-            {/* <Button onPress={() => navigation.navigate("Submit", { name: name })} title={"Submit An Entry"} /> */}
             <View style={styles.editpButton}>
                     <TouchableOpacity onPress={() => navigation.navigate("Submit", { name: name })}>
-                        <Text style={{fontSize:20,}} >Submit An Entry</Text>
+                        <Text style={{fontSize:20}} >Submit An Entry</Text>
                     </TouchableOpacity>
             </View>
             <ImageGrid navigation={navigation} route={getEntriesRoute} />

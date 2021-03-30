@@ -55,7 +55,6 @@ export default function CommentSection({ image }) {
                     <Image style={styles.commentIcon} source={require('../assets/comment.png')}></Image>
                 </TouchableOpacity>
                 <Like image={image} />
-                <Follow image={image} />
             </View>
             <CommentBox commenting={commenting} image={image} getComments={getComments} setCommenting={setCommenting} />
             <CommentsList comments={comments} />

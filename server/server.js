@@ -7,7 +7,8 @@ const fs = require('fs');
 var bodyParser = require('body-parser')
 const readFile = (file) => { return fs.readFileSync(path.resolve(__dirname, file), { encoding: "UTF-8" }) };
 const { sendEmail } = require('./sendEmail')
-var https = require('https')
+var https = require('https');
+const { get, post, host } = require("../utils.js");
 
 const app = express();
 app.use(bodyParser({ limit: '50mb' }));
@@ -163,7 +164,7 @@ app.get('/api/get-following/:user', (req, res) => {
     const query = readFile("./sql/get-following.sql")
         .replace("${username}", quote(user))
     console.log(query);
-    queryDatabase(req, res, query)
+    queryDatabase(req, res, query) / get
 });
 
 //followed
@@ -187,13 +188,14 @@ app.get('/api/competitions', (req, res) => {
 
 //post competition
 app.post('/api/post-competition', (req, res) => {
-    const { name, hostUser, description, image } = req.body;
+    const { name, hostUser, description, image, buyin } = req.body;
     console.log(req.body)
     const query = readFile('sql/post-competition.sql')
         .replace('${hostUser}', quote(hostUser))
         .replace('${name}', quote(name))
         .replace('${description}', quote(description))
         .replace('${image}', quote(image))
+        .replace('${buyin}', quote(buyin))
     console.log(query);
     queryDatabase(req, res, query, () => (res.json("SUCCESS")));
 });
@@ -217,8 +219,18 @@ app.post('/api/post-competition-entry', (req, res) => {
         .replace('${name}', quote(name))
         .replace('${uri}', quote(image))
         .replace('${uploader}', quote(uploader))
-    queryDatabase(req, res, query, () => (res.json("SUCCESS")));
-});
+    queryDatabase(req, res, query);
+})
+
+//update prize pool
+app.post('/api/update-prize-pool', (req, res) => {
+    console.log(req.body);
+    const { name, uploader } = req.body;
+    const query = readFile('sql/update-prize-pool.sql')
+        .replace('${name}', quote(name))
+        .replace('${uploader}', quote(uploader))
+    queryDatabase(req, res, query);
+})
 
 //upload
 app.post('/api/upload', jsonParser, (req, res) => {

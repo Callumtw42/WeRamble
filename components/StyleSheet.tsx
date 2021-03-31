@@ -106,7 +106,7 @@ module.exports = StyleSheet.create({
         color:"#575757",
         top:10,
         justifyContent:"center",
-        fontSize:18,
+        fontSize:15,
         marginTop:5,
         marginLeft:5,
         marginRight:35,

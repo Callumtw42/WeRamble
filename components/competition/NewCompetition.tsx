@@ -14,7 +14,7 @@ export default function NewCompetition({ navigation }) {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [base64, setBase64] = useState("")
-    const [buyin, setBuyin] = useState(0);
+    const [buyin, setBuyin] = useState(1);
     const postCompetitionRoute = `${host}/api/post-competition`
     const imageUploadRoute = `${host}/api/upload`
 
@@ -72,7 +72,7 @@ export default function NewCompetition({ navigation }) {
                     </TouchableOpacity>
                     <Text style={styles.Title}>{buyin}</Text>
                     <TouchableOpacity style={styles.increment} onPress={() => {
-                        if (buyin > 0)
+                        if (buyin > 1)
                             setBuyin(buyin - 1)
                     }}><Text style={styles.Title}>-</Text>
                     </TouchableOpacity>

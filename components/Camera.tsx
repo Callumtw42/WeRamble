@@ -23,7 +23,7 @@ export default function Camera({ navigation }) {
         const options = { quality: 0.5, base64: true };
         const photo = await camera.takePictureAsync(options);
         //  eslint-disable-next-line
-        navigation.navigate('ImagePreview', { photo: photo })
+        navigation.navigate('ImagePreview',{ photo: photo })
     };
 
     return (

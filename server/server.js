@@ -209,7 +209,7 @@ app.get('/api/get-competition-entries/:competition', (req, res) => {
     }]
     const query = readFile('sql/get-competition-entries.sql')
         .replace('${competition}', quote(competition))
-    queryDatabase(req, res, query, () => { (res.json("SUCCESS")) });
+    queryDatabase(req, res, query);
 });
 
 //post-competition-entry

@@ -6,11 +6,12 @@ import { host, post } from '../utils';
 const apiRoute = `${host}/api/upload`
 
 /**Displays the image captured immediately after taking a picture */
-export default function ImagePreview({ route }) {
+export default function ImagePreview({ navigation, route }) {
     const { photo } = route.params
 
     async function upload() {
         post(apiRoute, { data: photo, uploader: global.username }, (d) => { console.log(d) })
+        navigation.goBack();
     }
 
     return (

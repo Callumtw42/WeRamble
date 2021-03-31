@@ -28,8 +28,6 @@ export default function Submit({ route, navigation }) {
 
     return (
         <View style={styles.container}>
-            {/* <ImagePicker callback={setImage} /> */}
-            {/* <Button onPress={() => submit(image)} title={"Submit"} /> */}
             <View style={styles.editpButton}>
                 <TouchableOpacity onPress={
                     navigation.navigate(

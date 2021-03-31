@@ -77,7 +77,7 @@ const App: () => React$Node = () => {
           <Stack.Screen name="ImagePreview" component={ImagePreview} />
           <Stack.Screen name="ImageView" component={ImageView} />
           <Stack.Screen name="Competitions" component={Competitions} />
-          <Stack.Screen name="NewCompetition" component={NewCompetition} />
+          <Stack.Screen name="NewCompetition" options={{}} component={NewCompetition} />
           <Stack.Screen name="Competition" component={Competition} />
           <Stack.Screen name="Submit" component={Submit} />
           <Stack.Screen name="ImagePicker" component={ImagePicker} />

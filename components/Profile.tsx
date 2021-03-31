@@ -52,7 +52,10 @@ export default function Profile({ route, navigation }) {
     return (
         <SafeAreaView style={styles.background}>
             <ScrollView showsVerticalScrollIndicator={false} style={{ width: "100%", height: "100%" }}>
-                <Text style={styles.usernames}>{username} </Text>
+                <View style={styles.karma}>
+                    <Image style={{ height: 50, width: 50 }} source={require("../assets/karma.png")} />
+                    <Text style={{ margin: 15,  }}>10</Text>
+                </View>
                 <View style={styles.informbar}>
                     <View style={styles.iconContainer}>
                         <TouchableOpacity style={{ height: 75, width: 100 }} onPress={
@@ -79,7 +82,6 @@ export default function Profile({ route, navigation }) {
                     </View>
 
                 </View>
-                <Text>Posts</Text>
                 <View style={styles.userpost}>
                     <ImageGrid navigation={navigation} route={imagesRoute} callback={(i) => { setPosts(i) }}></ImageGrid>
                 </View>
@@ -94,8 +96,15 @@ const styles = StyleSheet.create({
         backgroundColor: "#a8e6ff"
 
     },
+    karma: {
+        position: "absolute",
+        left: "36%",
+        top: 15, 
+        height: 50,
+        width: 50,
+        flexDirection: "row"
+    },
     iconContainer: {
-
         flexDirection: "column",
     },
     topbar: {
@@ -156,7 +165,7 @@ const styles = StyleSheet.create({
         // backgroundColor: '#f76260',
         borderRadius: 500,
         // top: 20,
-        left: 10,
+        margin: 5,
         resizeMode: 'contain'
     },
     username: {

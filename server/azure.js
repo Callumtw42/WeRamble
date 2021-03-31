@@ -53,9 +53,9 @@ module.exports = {
                 });
 
                 request.on("requestCompleted", columns => {
-                    if (results.length > 0)
+                    if (callback) callback();
+                    else if (results.length > 0)
                         res.json(results);
-                    else if (callback) callback();
                     else res.json([])
                     conn.close();
                 });

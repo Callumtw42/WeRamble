@@ -6,42 +6,6 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const styles = require('../components/StyleSheet');
 
-const dummy = [
-    {
-        name: "Competition Name",
-        hostUser: "User Name",
-        //we need Limit the number of words better within 18-20
-        description: "Here is a description of the competition,i write longer for test the func.maybe need loo0000000000000000000000000000000000000oooooooooooooooonger",
-        image: "https://weramble.blob.core.windows.net/images/tiger.jpg"
-    },
-
-    {
-        name: "Competition Name",
-        hostUser: "User Name",
-        description: "Here is a description of the competition",
-        image: "https://weramble.blob.core.windows.net/images/tiger.jpg"
-    },
-
-    {
-        name: "Competition Name",
-        hostUser: "User Name",
-        description: "Here is a description of the competition",
-        image: "https://weramble.blob.core.windows.net/images/tiger.jpg"
-    },
-    {
-        name: "Competition Name",
-        hostUser: "User Name",
-        description: "Here is a description of the competition",
-        image: "https://weramble.blob.core.windows.net/images/tiger.jpg"
-    },
-    {
-        name: "Competition Name",
-        hostUser: "User Name",
-        description: "Here is a description of the competition",
-        image: "https://weramble.blob.core.windows.net/images/tiger.jpg"
-    }
-]
-
 export default function Competitions({ navigation }) {
     const [competitions, setCompetitions] = useState([]);
     const route = `${host}/api/competitions`

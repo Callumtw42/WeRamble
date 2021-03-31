@@ -1,0 +1,1 @@
+select uploader, prizepool, uri, competitions.id as compId from weramble.[competition-entries] join weramble.competitions on competition = name where [competition-entries].id = ${id};

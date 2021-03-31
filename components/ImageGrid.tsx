@@ -13,7 +13,7 @@ const wait = (timeout) => {
 }
 
 /**retrieves images from the database and displays them in a grid callback contains number of images*/
-export default function ImageGrid({ route, navigation, callback = (i) => { } }) {
+export default function ImageGrid({ route, navigation, onPress, callback = (i) => { } }) {
 
     const [gallery, setGallery] = useState([])
     const [refreshing, setRefreshing] = React.useState(false);
@@ -23,9 +23,9 @@ export default function ImageGrid({ route, navigation, callback = (i) => { } }) 
         wait(2000).then(() => setRefreshing(false));
     }, []);
 
-    function viewImage(image) {
-        navigation.navigate("ImageView", image);
-    }
+    // function viewImage(image) {
+    //     navigation.navigate("ImageView", image);
+    // }
 
     function displayImages(data) {
         const rows = [];
@@ -37,7 +37,7 @@ export default function ImageGrid({ route, navigation, callback = (i) => { } }) 
                 let image = data[++i];
                 if (image) {
                     images.push(
-                        <TouchableOpacity style = {styles.image} key={key++} onPress={viewImage.bind(this, image)}>
+                        <TouchableOpacity style={styles.image} key={key++} onPress={() => { onPress(image) }}>
                             <Image source={{ uri: image.uri }} style={styles.thumbnail} />
                         </TouchableOpacity>
                     )
@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column'
     },
-    image:{
-        margin: 2
+    image: {
+        margin: 2,
+        backgroundColor: "white"
     }
 })

@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@react-navigation/native'
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import React, { useState } from 'react'
-import { View, Text, Button, StyleSheet } from 'react-native'
+import { View, Text, Button, StyleSheet, ScrollView, KeyboardAvoidingView } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import { theme } from '../../theme'
 import { host, post } from '../../utils'
@@ -14,13 +14,15 @@ export default function NewCompetition({ navigation }) {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [base64, setBase64] = useState("")
+    const [buyin, setBuyin] = useState(0);
     const postCompetitionRoute = `${host}/api/post-competition`
     const imageUploadRoute = `${host}/api/upload`
 
     function allFieldsFilled() {
         if (name.length > 0
             && description.length > 0
-            && base64.length > 0)
+            && base64.length > 0
+            && buyin > 0)
             return true
         console.log("Fields not filled")
         return false
@@ -32,7 +34,8 @@ export default function NewCompetition({ navigation }) {
                 name: name,
                 hostUser: global.username,
                 image: uri,
-                description: description
+                description: description,
+                buyin: buyin
             }, (d) => {
                 console.log(d)
                 navigation.goBack();
@@ -50,7 +53,7 @@ export default function NewCompetition({ navigation }) {
 
 
     return (
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={{ backgroundColor: '#a8e6ff' }}>
             <Text style={styles.Title}>Competition Name</Text>
             <View >
                 <TextInput
@@ -61,27 +64,53 @@ export default function NewCompetition({ navigation }) {
             <View >
                 <TextInput style={styles.input} onChangeText={(v) => { setDescription(v) }}></TextInput>
             </View>
+            <View style={styles.buyinContainer}>
+                <Text style={styles.Title}>Buy In</Text>
+                <View style={{ flexDirection: "row" }} >
+                    <TouchableOpacity style={styles.increment} onPress={() => setBuyin(buyin + 1)}>
+                        <Text style={styles.Title}>+</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.Title}>{buyin}</Text>
+                    <TouchableOpacity style={styles.increment} onPress={() => {
+                        if (buyin > 0)
+                            setBuyin(buyin - 1)
+                    }}><Text style={styles.Title}>-</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
             {/* <ImagePicker callback={(img) => { setBase64(img.base64) }} /> */}
-            <TouchableOpacity style={styles.editpButton} onPress={() => navigation.navigate("ImagePicker", setBase64)}>
-                <Text>Upload Image</Text>
-            </TouchableOpacity>
-            <View style={styles.editpButton}>
-                <TouchableOpacity onPress={createCompetition}>
+            <View >
+                <TouchableOpacity style={styles.editpButton} onPress={() => { navigation.navigate("ImagePicker", { callback: setBase64 }) }}>
+                    <Text >Upload Image</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.editpButton} onPress={createCompetition}>
                     <Text>Post Competition</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 const styles = StyleSheet.create({
+    buyinContainer: {
+        // justifyContent: 'center',
+        alignSelf: 'center',
+    },
+    increment: {
+        alignItems: "center",
+        borderColor: Colors.black,
+        borderWidth: 1,
+        width: 50,
+        height: 30,
+        alignSelf: 'center',
+        borderRadius: 18,
+        backgroundColor: '#31a8bd',
+        margin: 10,
+    },
+    buttons: {
+        width: 50
+    },
     container: {
-        //paddingTop: 10,
-        paddingBottom: 100,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
         backgroundColor: '#a8e6ff',
-        flex: 1,
     },
     Title: {
         fontSize: 24,

@@ -1,5 +1,7 @@
 const { queryDatabase } = require("./azure.js");
 const { uploadBlob } = require("./blob");
+const { get, post } = require("./fetch.js")
+const { host } = require("../utils.js")
 // const { sendVerificationEmail } = require("./emailer.js")
 const express = require('express');
 const path = require('path');
@@ -7,7 +9,7 @@ const fs = require('fs');
 var bodyParser = require('body-parser')
 const readFile = (file) => { return fs.readFileSync(path.resolve(__dirname, file), { encoding: "UTF-8" }) };
 const { sendEmail } = require('./sendEmail')
-var https = require('https')
+var https = require('https');
 
 const app = express();
 app.use(bodyParser({ limit: '50mb' }));
@@ -21,7 +23,7 @@ const quote = (string) => {
 
 //test
 app.get('/api/test', (req, res) => {
-    let query = `select * from weramble.test`;
+    let query = `select * from weramble.users`;
     queryDatabase(req, res, query);
 });
 
@@ -128,41 +130,100 @@ app.post('/api/like', (req, res) => {
 
 //follow
 app.post('/api/follow', (req, res) => {
-    console.log("follow: " + req.body.like)
+    console.log(req.body)
     const { followed, follower, following } = req.body
-    query = followed
-        ? readFile("sql/follow.sql")
+    if (followed) {
+        const query = readFile("sql/follow.sql")
             .replace("${follower}", quote(follower))
-            .replace("${following}", quote(imageid))
-        : readFile("sql/unfollow.sql")
-            .replace("${follower}", quote(imageid))
-            .replace("${following}", quote(following))
+            .replace("${follows}", quote(following))
+        console.log(query);
+        queryDatabase(req, res, query, () => { res.json([{ followed: true }]) });
+    }
+    else {
+        const query = readFile("sql/unfollow.sql")
+            .replace("${follower}", quote(follower))
+            .replace("${follows}", quote(following))
+        console.log(query);
+        queryDatabase(req, res, query, () => { res.json([{ followed: false }]) });
+    }
+});
+
+//post-winner
+app.post('/api/post-winner', (req, res) => {
+    console.log(req.body);
+    const { id } = req.body;
+    const query = readFile("./sql/get-entry.sql")
+        .replace("${id}", id)
+    queryDatabase(req, res, query, (results) => {
+        console.log(results)
+        const { uploader, prizepool, uri, compId } = results[0]
+        const query = readFile("./sql/add-karma.sql")
+            .replace("${karma}", prizepool)
+            .replace("${username}", quote(uploader))
+        console.log(query)
+        queryDatabase(req, res, query, () => {
+            const query = readFile("sql/close-competition.sql")
+                .replace("${id}", compId)
+                .replace("${uri}", quote(uri))
+                .replace("${winninguser}", quote(uploader));
+            console.log(query)
+            queryDatabase(req, res, query, () => {
+                res.json([{ uploader: uploader, uri: uri }])
+            })
+        })
+    })
+
+});
+
+//followers
+app.get('/api/get-followers/:user', (req, res) => {
+    console.log(req.params);
+    const { user } = req.params;
+    const query = readFile("./sql/get-follows.sql")
+        .replace("${username}", quote(user))
+    console.log(query);
+    queryDatabase(req, res, query)
+});
+
+//following
+app.get('/api/get-following/:user', (req, res) => {
+    console.log(req.params);
+    const { user } = req.params;
+    const query = readFile("./sql/get-following.sql")
+        .replace("${username}", quote(user))
+    console.log(query);
+    queryDatabase(req, res, query)
+});
+
+//followed
+app.get('/api/followed/:follower/:following', (req, res) => {
+    console.log(req.params);
+    const { follower, following } = req.params;
+    const query = readFile("./sql/followed.sql")
+        .replace("${follower}", quote(follower))
+        .replace("${following}", quote(following))
     console.log(query);
     queryDatabase(req, res, query);
+
 });
+
 
 //competitions
 app.get('/api/competitions', (req, res) => {
-    const dummy = {
-        image: 'https://weramble.blob.core.windows.net/images/bird.jpg',
-        host: "CALLUM",
-        name: "Bird Hunt",
-        description: "Find the rare bird",
-    }
-    const dummyArr = [dummy, dummy, dummy]
     const query = readFile('sql/get-competitions.sql')
     queryDatabase(req, res, query);
 });
 
 //post competition
 app.post('/api/post-competition', (req, res) => {
-    const { name, hostUser, description, image } = req.body;
+    const { name, hostUser, description, image, buyin } = req.body;
     console.log(req.body)
     const query = readFile('sql/post-competition.sql')
         .replace('${hostUser}', quote(hostUser))
         .replace('${name}', quote(name))
         .replace('${description}', quote(description))
         .replace('${image}', quote(image))
+        .replace('${buyin}', quote(buyin))
     console.log(query);
     queryDatabase(req, res, query, () => (res.json("SUCCESS")));
 });
@@ -175,7 +236,7 @@ app.get('/api/get-competition-entries/:competition', (req, res) => {
     }]
     const query = readFile('sql/get-competition-entries.sql')
         .replace('${competition}', quote(competition))
-    queryDatabase(req, res, query, () => (res.json("SUCCESS")));
+    queryDatabase(req, res, query);
 });
 
 //post-competition-entry
@@ -186,8 +247,49 @@ app.post('/api/post-competition-entry', (req, res) => {
         .replace('${name}', quote(name))
         .replace('${uri}', quote(image))
         .replace('${uploader}', quote(uploader))
-    queryDatabase(req, res, query, () => (res.json("SUCCESS")));
-});
+    console.log(query);
+    queryDatabase(req, res, query, () => {
+        const query = readFile("sql/get-buyin.sql")
+            .replace("${name}", quote(name));
+        console.log(query);
+        queryDatabase(req, res, query, (results) => {
+            console.log(results);
+            const amt = results[0].buyin;
+            const query = readFile("sql/spend-karma.sql")
+                .replace("${uploader}", quote(uploader))
+                .replace("${amt}", amt)
+            console.log(query);
+            queryDatabase(req, res, query, () => {
+                const query = readFile("sql/update-prize-pool.sql")
+                    .replace("${amt}", amt)
+                    .replace("${name}", quote(name))
+                queryDatabase(req, res, query, () => {
+                    res.json("SUCCESS")
+                })
+            })
+        });
+    });
+})
+
+//get-karma
+app.get('/api/get-karma/:username', (req, res) => {
+    console.log(req.params);
+    const { username } = req.params;
+    const query = readFile("sql/get-karma.sql")
+        .replace("${username}", quote(username));
+    queryDatabase(req, res, query)
+})
+
+
+//update prize pool
+app.post('/api/update-prize-pool', (req, res) => {
+    console.log(req.body);
+    const { name, uploader } = req.body;
+    const query = readFile('sql/update-prize-pool.sql')
+        .replace('${name}', quote(name))
+        .replace('${uploader}', quote(uploader))
+    queryDatabase(req, res, query);
+})
 
 //upload
 app.post('/api/upload', jsonParser, (req, res) => {

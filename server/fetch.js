@@ -1,21 +1,5 @@
-//set this to false if you want to use remote server
-const LOCAL = true;
-//if your using local server, set this to your computer's ip address
-const ip = "192.168.1.96";
-
-const localhost = `http://${ip}:8080`;
-const remotehost = "https://werambleserver.azurewebsites.net";
-const hostSelection = LOCAL ? localhost : remotehost;
-
+const fetch = require("node-fetch");
 module.exports = {
-    //Global Variables
-    port: "8080",
-    host: `${hostSelection}`,
-
-    //Useful functions
-    quote: (string) => {
-        return `'${string}'`
-    },
     post: (url, body, callback) => {
         fetch(url, {
             method: 'POST',
@@ -37,5 +21,5 @@ module.exports = {
             .catch(error => {
                 console.error(error);
             });
-    },
+    }
 }

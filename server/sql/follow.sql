@@ -1,1 +1,1 @@
-insert into weramble.follows(username, post) values (${user}, ${post});
+insert into weramble.follows(follower, follows) values (${follower}, ${follows});

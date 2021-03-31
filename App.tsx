@@ -33,24 +33,28 @@ function Home() {
     <Tab.Navigator >
       <Tab.Screen name="Feed" component={Feed}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({ }) => (
             <Image source={require('./assets/home-variant-outline.png')} />
           ),
         }} />
       <Tab.Screen name="Camera" component={Camera}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({ }) => (
             <Image source={require('./assets/camera-wireless-outline.png')} />
           ),
         }} />
       <Tab.Screen name="Competitons" component={Competitions}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({ }) => (
             <Image source={require('./assets/trophy-outline.png')} />
           ),
         }} />
       <Tab.Screen name="Profile" component={Profile} initialParams={{ username: global.username }}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({ }) => (
             <Image source={require('./assets/account-circle-outline.png')} />
           ),
@@ -69,12 +73,12 @@ const App: () => React$Node = () => {
         <Stack.Navigator initialRouteName="Login">
           {/*Add screens below*/}
           <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Home" options={{ headerShown: false }} component={Home} />
           <Stack.Screen name="Registration" component={Registration} />
           <Stack.Screen name="ImagePreview" component={ImagePreview} />
           <Stack.Screen name="ImageView" component={ImageView} />
           <Stack.Screen name="Competitions" component={Competitions} />
-          <Stack.Screen name="NewCompetition" component={NewCompetition} />
+          <Stack.Screen name="NewCompetition" options={{}} component={NewCompetition} />
           <Stack.Screen name="Competition" component={Competition} />
           <Stack.Screen name="Submit" component={Submit} />
           <Stack.Screen name="ImagePicker" component={ImagePicker} />

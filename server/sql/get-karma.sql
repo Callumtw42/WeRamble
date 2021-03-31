@@ -1,0 +1,1 @@
+select karma from weramble.users where username = ${username};

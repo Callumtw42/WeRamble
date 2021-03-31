@@ -6,48 +6,15 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const styles = require('../components/StyleSheet');
 
-const dummy = [
-    {
-        name: "Competition Name",
-        hostUser: "User Name",
-        //we need Limit the number of words better within 18-20
-        description: "Here is a description of the competition,i write longer for test the func.maybe need loo0000000000000000000000000000000000000oooooooooooooooonger",
-        image: "https://weramble.blob.core.windows.net/images/tiger.jpg"
-    },
-
-    {
-        name: "Competition Name",
-        hostUser: "User Name",
-        description: "Here is a description of the competition",
-        image: "https://weramble.blob.core.windows.net/images/tiger.jpg"
-    },
-
-    {
-        name: "Competition Name",
-        hostUser: "User Name",
-        description: "Here is a description of the competition",
-        image: "https://weramble.blob.core.windows.net/images/tiger.jpg"
-    },
-    {
-        name: "Competition Name",
-        hostUser: "User Name",
-        description: "Here is a description of the competition",
-        image: "https://weramble.blob.core.windows.net/images/tiger.jpg"
-    },
-    {
-        name: "Competition Name",
-        hostUser: "User Name",
-        description: "Here is a description of the competition",
-        image: "https://weramble.blob.core.windows.net/images/tiger.jpg"
-    }
-]
-
 export default function Competitions({ navigation }) {
     const [competitions, setCompetitions] = useState([]);
     const route = `${host}/api/competitions`
 
     useEffect(() => {
-        get(route, renderCompetitions)
+        const unsubscribe = navigation.addListener('focus', () => {
+            get(route, renderCompetitions)
+        });
+        return unsubscribe;
     }, [])
 
     function renderCompetitions(data) {
@@ -59,7 +26,9 @@ export default function Competitions({ navigation }) {
                         <TouchableOpacity style={styles.competition}
                             onPress={() => {
                                 navigation.navigate("Competition",
-                                    { name: name, image: image })
+                                    {
+                                        competition: competition
+                                    })
                             }}
                         >
                             <View style={styles.istView}>
@@ -81,9 +50,9 @@ export default function Competitions({ navigation }) {
     }
 
     return (
-        <View  style={{backgroundColor:"#a8e6ff"}}>
+        <View style={{ backgroundColor: "#a8e6ff" }}>
             <TouchableOpacity style={styles.topbotton
-              
+
             } onPress={() => navigation.navigate("NewCompetition")}>
                 <Text style={styles.title}>New Competition  </Text>
                 <Image source={require("../assets/plus.png")} style={styles.icon}></Image>
@@ -160,17 +129,17 @@ export default function Competitions({ navigation }) {
         borderRadius: 18,
         backgroundColor: '#31a8bd'
     },
-    topbotton:{        
+    topbotton:{
         alignItems: "center",
         borderColor: Colors.black,
         borderWidth: 1,
         width: "60%",
         height:40,
-        borderRadius: 18, 
+        borderRadius: 18,
         flexDirection: "row",
-        alignSelf: "center", 
+        alignSelf: "center",
         justifyContent:"center",
-        margin: 10, 
+        margin: 10,
         backgroundColor:"#a8e6ff",
 
     },

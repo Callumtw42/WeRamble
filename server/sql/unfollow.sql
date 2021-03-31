@@ -1,1 +1,1 @@
-delete from weramble.follows where username = ${username} and post = ${post};
+delete from weramble.follows where follower = ${follower} and follows = ${follows};

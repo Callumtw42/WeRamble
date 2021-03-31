@@ -49,13 +49,13 @@ module.exports = {
                         chunk[key] = value;
                     });
                     results.push(chunk);
-                    console.log(chunk)
+                    // console.log(chunk)
                 });
 
                 request.on("requestCompleted", columns => {
-                    if (results.length > 0)
+                    if (callback) callback(results);
+                    else if (results.length > 0)
                         res.json(results);
-                    else if (callback) callback();
                     else res.json([])
                     conn.close();
                 });

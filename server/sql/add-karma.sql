@@ -1,0 +1,1 @@
+update weramble.users set karma = karma + ${karma} where username = ${username};

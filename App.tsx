@@ -25,6 +25,7 @@ import ImagePicker from './components/ImagePicker';
 
 //profile
 
+const styles = require('../components/StyleSheet');
 
 function Home() {
   const Tab = createBottomTabNavigator();

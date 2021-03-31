@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
     container: {
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#a8e6ff'
+        backgroundColor: '#a8e6ff',
+        height: windowHeight
     },
 })
 

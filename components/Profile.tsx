@@ -12,7 +12,6 @@ import Follow from './Follow';
 const number = 0
 const randomNumber2 = Math.random() * number
 const randomNumber3 = Math.random() * number
-const styles = require('../components/StyleSheet');
 
 export default function Profile({ route, navigation }) {
     const username = route.params.username;
@@ -99,7 +98,7 @@ export default function Profile({ route, navigation }) {
     );
 }
 
-/*const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     background: {
         flex: 1,
         backgroundColor: "#a8e6ff"
@@ -193,5 +192,5 @@ export default function Profile({ route, navigation }) {
         top: 20
 
     }
-})*/
+})
 

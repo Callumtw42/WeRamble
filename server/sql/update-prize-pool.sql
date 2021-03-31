@@ -1,0 +1,1 @@
+update weramble.competitions set prizepool = 

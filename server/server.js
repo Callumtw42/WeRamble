@@ -1,5 +1,7 @@
 const { queryDatabase } = require("./azure.js");
 const { uploadBlob } = require("./blob");
+const { get, post } = require("./fetch.js")
+const { host } = require("../utils.js")
 // const { sendVerificationEmail } = require("./emailer.js")
 const express = require('express');
 const path = require('path');
@@ -8,7 +10,6 @@ var bodyParser = require('body-parser')
 const readFile = (file) => { return fs.readFileSync(path.resolve(__dirname, file), { encoding: "UTF-8" }) };
 const { sendEmail } = require('./sendEmail')
 var https = require('https');
-const { get, post, host } = require("../utils.js");
 
 const app = express();
 app.use(bodyParser({ limit: '50mb' }));
@@ -22,7 +23,7 @@ const quote = (string) => {
 
 //test
 app.get('/api/test', (req, res) => {
-    let query = `select * from weramble.test`;
+    let query = `select * from weramble.users`;
     queryDatabase(req, res, query);
 });
 
@@ -164,7 +165,7 @@ app.get('/api/get-following/:user', (req, res) => {
     const query = readFile("./sql/get-following.sql")
         .replace("${username}", quote(user))
     console.log(query);
-    queryDatabase(req, res, query) / get
+    queryDatabase(req, res, query)
 });
 
 //followed
@@ -208,7 +209,7 @@ app.get('/api/get-competition-entries/:competition', (req, res) => {
     }]
     const query = readFile('sql/get-competition-entries.sql')
         .replace('${competition}', quote(competition))
-    queryDatabase(req, res, query, () => (res.json("SUCCESS")));
+    queryDatabase(req, res, query, () => { (res.json("SUCCESS")) });
 });
 
 //post-competition-entry
@@ -219,7 +220,9 @@ app.post('/api/post-competition-entry', (req, res) => {
         .replace('${name}', quote(name))
         .replace('${uri}', quote(image))
         .replace('${uploader}', quote(uploader))
-    queryDatabase(req, res, query);
+    queryDatabase(req, res, query, () => {
+        
+    });
 })
 
 //update prize pool

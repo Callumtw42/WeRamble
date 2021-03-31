@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { KeyboardAvoidingView, Dimensions, Button, Image, StyleSheet, Text, TextInput, View } from 'react-native';
+import { KeyboardAvoidingView, Dimensions, Button, Image, StyleSheet, Text, TextInput, View, ScrollView } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { get, host } from '../utils';
@@ -34,30 +34,32 @@ export default function Login({ navigation }) {
   }
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding" >
-      <Image
-        style={styles.logo}
-        source={require("../assets/WeRamble.png")}
-      />
-      <Text style={styles.sectionTitle}> Username </Text>
-      <TextInput
-        style={styles.input}
-        defaultValue={"demo"}
-        onChangeText={(v) => setUsername(v)} />
-      <Text style={styles.sectionTitle}> Password </Text>
-      <TextInput
-        style={styles.input}
-        defaultValue={"demo"}
-        onChangeText={(v) => setPassword(v)} />
-      <Text style={styles.smallText}
-        onPress={() => navigation.navigate('Registration')}> New User? Register here </Text>
-      <TouchableOpacity onPress={() => authenticate()}>
-        <Image style={styles.Logins} source={require("../assets/login.png")} />
-      </TouchableOpacity>
-      <Text
-        style={styles.sectionTitle}
-      > {error}</Text>
-    </KeyboardAvoidingView>
+    <ScrollView>
+      <KeyboardAvoidingView style={styles.container} behavior="padding" >
+        <Image
+          style={styles.logo}
+          source={require("../assets/WeRamble.png")}
+        />
+        <Text style={styles.sectionTitle}> Username </Text>
+        <TextInput
+          style={styles.input}
+          // defaultValue={"demo"}
+          onChangeText={(v) => setUsername(v)} />
+        <Text style={styles.sectionTitle}> Password </Text>
+        <TextInput
+          style={styles.input}
+          // defaultValue={"demo"}
+          onChangeText={(v) => setPassword(v)} />
+        <Text style={styles.smallText}
+          onPress={() => navigation.navigate('Registration')}> New User? Register here </Text>
+        <TouchableOpacity onPress={() => authenticate()}>
+          <Image style={styles.Logins} source={require("../assets/login.png")} />
+        </TouchableOpacity>
+        <Text
+          style={styles.sectionTitle}
+        > {error}</Text>
+      </KeyboardAvoidingView>
+    </ScrollView>
   )
 }
 

@@ -30,7 +30,7 @@ function PickWinner({ callback, hostUser, pickingWinner }) {
 function NormalGrid({ navigation, image, apiRoute }) {
     return (
         <ImageGrid navigation={navigation} onPress={(img) => {
-            navigation.navigate("ImageView", image);
+            navigation.navigate("ImageView", img);
         }} route={apiRoute} />
     )
 }

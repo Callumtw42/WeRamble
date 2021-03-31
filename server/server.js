@@ -1,7 +1,7 @@
 const { queryDatabase } = require("./azure.js");
 const { uploadBlob } = require("./blob");
 const { get, post } = require("./fetch.js")
-const { host } = require("../utils.js")
+const { host } = require("./utils.js")
 // const { sendVerificationEmail } = require("./emailer.js")
 const express = require('express');
 const path = require('path');

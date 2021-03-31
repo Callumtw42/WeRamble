@@ -27,10 +27,7 @@ export default function Competitions({ navigation }) {
                             onPress={() => {
                                 navigation.navigate("Competition",
                                     {
-                                        name: name,
-                                        image: image,
-                                        hostUser: hostUser,
-                                        description: description
+                                        competition: competition
                                     })
                             }}
                         >

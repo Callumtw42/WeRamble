@@ -91,7 +91,9 @@ export default function Profile({ route, navigation }) {
 
                 </View>
                 <View style={styles.userpost}>
-                    <ImageGrid navigation={navigation} route={imagesRoute} callback={(i) => { setPosts(i) }}></ImageGrid>
+                    <ImageGrid navigation={navigation} route={imagesRoute} onPress={(image) => {
+                        navigation.navigate("ImageView", image);
+                    }} callback={(i) => { setPosts(i) }}></ImageGrid>
                 </View>
             </ScrollView>
         </SafeAreaView >

@@ -148,6 +148,33 @@ app.post('/api/follow', (req, res) => {
     }
 });
 
+//post-winner
+app.post('/api/post-winner', (req, res) => {
+    console.log(req.body);
+    const { id } = req.body;
+    const query = readFile("./sql/get-entry.sql")
+        .replace("${id}", id)
+    queryDatabase(req, res, query, (results) => {
+        console.log(results)
+        const { uploader, prizepool, uri, compId } = results[0]
+        const query = readFile("./sql/add-karma.sql")
+            .replace("${karma}", prizepool)
+            .replace("${username}", quote(uploader))
+        console.log(query)
+        queryDatabase(req, res, query, () => {
+            const query = readFile("sql/close-competition.sql")
+                .replace("${id}", compId)
+                .replace("${uri}", quote(uri))
+                .replace("${winninguser}", quote(uploader));
+            console.log(query)
+            queryDatabase(req, res, query, () => {
+                res.json([{ uploader: uploader, uri: uri }])
+            })
+        })
+    })
+
+});
+
 //followers
 app.get('/api/get-followers/:user', (req, res) => {
     console.log(req.params);

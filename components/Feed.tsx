@@ -16,7 +16,9 @@ export default function Feed({ navigation }) {
     // const Tab = createBottomTabNavigator();
     return (
         <View style={styles.container} >
-            <ImageGrid navigation={navigation} route={route} />
+            <ImageGrid navigation={navigation} onPress={(image) => {
+                navigation.navigate("ImageView", image);
+            }} route={route} />
         </View>
     )
 }

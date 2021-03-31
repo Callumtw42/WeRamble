@@ -1,0 +1,1 @@
+select buyin from weramble.competitions where name = ${name};

@@ -20,10 +20,12 @@ export default function Profile({ route, navigation }) {
     const [posts, setPosts] = useState(0);
     const [followers, setFollowers] = useState(0);
     const [following, setFollowing] = useState(0);
+    const [karma, setKarma] = useState(0);
     const [profilePicture, setProfilePicture] = useState("https://weramble.blob.core.windows.net/images/empty-user.png");
     const getProfilePicRoute = `${host}/api/get-profile-pic/${username}`;
     const getFollowersRoute = `${host}/api/get-followers/${username}`
     const getFollowingRoute = `${host}/api/get-following/${username}`
+    const getKarmaRoute = `${host}/api/get-karma/${username}`
 
     function uploadProfilePic(img) {
         const postProfilePicRoute = `${host}/api/post-profile-pic`;
@@ -45,6 +47,10 @@ export default function Profile({ route, navigation }) {
             get(getFollowingRoute, (d) => {
                 console.log(d)
                 setFollowing(d[0].following)
+                get(getKarmaRoute, (d) => {
+                    console.log(d);
+                    setKarma(d[0].karma)
+                });
             })
         })
     }
@@ -53,9 +59,11 @@ export default function Profile({ route, navigation }) {
         <SafeAreaView style={styles.background}>
             <ScrollView showsVerticalScrollIndicator={false} style={{ width: "100%", height: "100%" }}>
                 <View style={styles.karma}>
-                    <Image style={{ height: 50, width: 50 }} source={require("../assets/karma.png")} />
-                    <Text style={{ margin: 15,  }}>10</Text>
+                    <Image style={{ height: 50, width: 50 }}
+                        source={require("../assets/karma.png")} />
+                    <Text style={{ margin: 15, }}>{karma}</Text>
                 </View>
+                <Text style={styles.usernames}>{username}</Text>
                 <View style={styles.informbar}>
                     <View style={styles.iconContainer}>
                         <TouchableOpacity style={{ height: 75, width: 100 }} onPress={
@@ -98,8 +106,8 @@ const styles = StyleSheet.create({
     },
     karma: {
         position: "absolute",
-        left: "36%",
-        top: 15, 
+        left: "71%",
+        top: 15,
         height: 50,
         width: 50,
         flexDirection: "row"
@@ -113,10 +121,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     usernames: {
+        position: "absolute",
         textAlign: "left",
         justifyContent: "flex-start",
-        // top: 10,
-        left: 20,
+        left: "25%",
+        top: 25,
         fontSize: 20,
     },
 

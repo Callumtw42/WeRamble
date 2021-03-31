@@ -32,24 +32,28 @@ function Home() {
     <Tab.Navigator >
       <Tab.Screen name="Feed" component={Feed}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({ }) => (
             <Image source={require('./assets/home-variant-outline.png')} />
           ),
         }} />
       <Tab.Screen name="Camera" component={Camera}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({ }) => (
             <Image source={require('./assets/camera-wireless-outline.png')} />
           ),
         }} />
       <Tab.Screen name="Competitons" component={Competitions}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({ }) => (
             <Image source={require('./assets/trophy-outline.png')} />
           ),
         }} />
       <Tab.Screen name="Profile" component={Profile} initialParams={{ username: global.username }}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({ }) => (
             <Image source={require('./assets/account-circle-outline.png')} />
           ),

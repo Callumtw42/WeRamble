@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, Button,StyleSheet } from 'react-native'
+import { View, Text, Button, StyleSheet } from 'react-native'
 import { host, post } from '../../utils'
 import ImagePicker from '../ImagePicker'
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -31,18 +31,23 @@ export default function Submit({ route, navigation }) {
             {/* <ImagePicker callback={setImage} /> */}
             {/* <Button onPress={() => submit(image)} title={"Submit"} /> */}
             <View style={styles.editpButton}>
-                    <TouchableOpacity onPress={() => submit(image)}>
-                        <Text>Post Competition</Text>
-                    </TouchableOpacity>
+                <TouchableOpacity onPress={
+                    navigation.navigate(
+                        "ImagePicker",
+                        { callback: () => { submit(image) } }
+                    )
+                }>
+                    <Text>Post Competition</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
 }
 const styles = StyleSheet.create({
-    container:{
-        backgroundColor:"#a8e6ff",
-        flex:1,
-        justifyContent:"center",
+    container: {
+        backgroundColor: "#a8e6ff",
+        flex: 1,
+        justifyContent: "center",
     },
     editpButton: {
         alignItems: "center",

@@ -53,7 +53,7 @@ module.exports = {
                 });
 
                 request.on("requestCompleted", columns => {
-                    if (callback) callback();
+                    if (callback) callback(results);
                     else if (results.length > 0)
                         res.json(results);
                     else res.json([])

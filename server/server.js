@@ -220,10 +220,39 @@ app.post('/api/post-competition-entry', (req, res) => {
         .replace('${name}', quote(name))
         .replace('${uri}', quote(image))
         .replace('${uploader}', quote(uploader))
+    console.log(query);
     queryDatabase(req, res, query, () => {
-        
+        const query = readFile("sql/get-buyin.sql")
+            .replace("${name}", quote(name));
+        console.log(query);
+        queryDatabase(req, res, query, (results) => {
+            console.log(results);
+            const amt = results[0].buyin;
+            const query = readFile("sql/spend-karma.sql")
+                .replace("${uploader}", quote(uploader))
+                .replace("${amt}", amt)
+            console.log(query);
+            queryDatabase(req, res, query, () => {
+                const query = readFile("sql/update-prize-pool.sql")
+                    .replace("${amt}", amt)
+                    .replace("${name}", quote(name))
+                queryDatabase(req, res, query, () => {
+                    res.json("SUCCESS")
+                })
+            })
+        });
     });
 })
+
+//get-karma
+app.get('/api/get-karma/:username', (req, res) => {
+    console.log(req.params);
+    const { username } = req.params;
+    const query = readFile("sql/get-karma.sql")
+        .replace("${username}", quote(username));
+    queryDatabase(req, res, query)
+})
+
 
 //update prize pool
 app.post('/api/update-prize-pool', (req, res) => {
